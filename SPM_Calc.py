@@ -15,9 +15,7 @@ window = tk.Tk()
 window.title("Login form")
 
 #utk dapatkan size screen
-width = window.winfo_screenwidth()
-height = window.winfo_screenheight()
-window.geometry("%dx%d" % (width,height))
+window.state("zoomed")
 window.configure(bg='#333333')
 
 def login(): #ni nanti kena connect dgn database sql kot
