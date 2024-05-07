@@ -13,10 +13,14 @@ from tkinter import messagebox
 #test
 window = tk.Tk()
 window.title("Login form")
-window.geometry('340x440')
+
+#utk dapatkan size screen
+width = window.winfo_screenwidth()
+height = window.winfo_screenheight()
+window.geometry("%dx%d" % (width,height))
 window.configure(bg='#333333')
 
-def login():
+def login(): #ni nanti kena connect dgn database sql kot
     username = "test"
     password = "test"
     if username_entry.get()==username and password_entry.get()==password:
