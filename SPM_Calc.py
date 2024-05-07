@@ -9,6 +9,7 @@
 '''
 import math
 import tkinter as tk
+from tkinter import messagebox
 #test
 window = tk.Tk()
 window.title("Login form")
@@ -16,8 +17,8 @@ window.geometry('340x440')
 window.configure(bg='#333333')
 
 def login():
-    username = "johnsmith"
-    password = "12345"
+    username = "test"
+    password = "test"
     if username_entry.get()==username and password_entry.get()==password:
         messagebox.showinfo(title="Login Success", message="You successfully logged in.")
     else:
