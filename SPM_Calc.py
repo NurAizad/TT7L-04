@@ -29,12 +29,12 @@ def login(): #ni nanti kena connect dgn database sql kot
 frame = tk.Frame(bg='#333333')
 
 # Creating widgets
-login_label = tk.Label(frame, text="Login", bg='#333333', fg="#FF3399", font=("Arial", 30))
-username_label = tk.Label(frame, text="Username", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
-username_entry = tk.Entry(frame, font=("Arial", 16))
-password_entry = tk.Entry(frame, show="*", font=("Arial", 16))
-password_label = tk.Label(frame, text="Password", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
-login_button = tk.Button(frame, text="Login", bg="#FF3399", fg="#FFFFFF", font=("Arial", 16), command=login)
+login_label = tk.Label(frame, text="Login", bg='#333333', fg="#FF3399", font=("Helvetica", 30))
+username_label = tk.Label(frame, text="Username", bg='#333333', fg="#FFFFFF", font=("Helvetica", 16))
+username_entry = tk.Entry(frame, font=("Helvetica", 16))
+password_entry = tk.Entry(frame, show="*", font=("Helvetica", 16))
+password_label = tk.Label(frame, text="Password", bg='#333333', fg="#FFFFFF", font=("Helvetica", 16))
+login_button = tk.Button(frame, text="Login", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=login)
 
 # Placing widgets on the screen
 login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
