@@ -8,9 +8,9 @@
 4. Kalau nak merge dgn main code, buat branch baru sbb takut tk jadi . so apa apa boleh pergi balik branch asal
 '''
 import math
-from tkinter import *
+import tkinter as tk
 #test
-window = tkinter.Tk()
+window = tk.Tk()
 window.title("Login form")
 window.geometry('340x440')
 window.configure(bg='#333333')
@@ -23,18 +23,18 @@ def login():
     else:
         messagebox.showerror(title="Error", message="Invalid login.")
 
-frame = tkinter.Frame(bg='#333333')
+frame = tk.Frame(bg='#333333')
 
 # Creating widgets
-login_label = tkinter.Label(
+login_label = tk.Label(
     frame, text="Login", bg='#333333', fg="#FF3399", font=("Arial", 30))
-username_label = tkinter.Label(
+username_label = tk.Label(
     frame, text="Username", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
-username_entry = tkinter.Entry(frame, font=("Arial", 16))
-password_entry = tkinter.Entry(frame, show="*", font=("Arial", 16))
-password_label = tkinter.Label(
+username_entry = tk.Entry(frame, font=("Arial", 16))
+password_entry = tk.Entry(frame, show="*", font=("Arial", 16))
+password_label = tk.Label(
     frame, text="Password", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
-login_button = tkinter.Button(
+login_button = tk.Button(
     frame, text="Login", bg="#FF3399", fg="#FFFFFF", font=("Arial", 16), command=login)
 
 # Placing widgets on the screen
