@@ -26,13 +26,19 @@ def login(): #ni nanti kena connect dgn database sql kot
     else:
         messagebox.showerror(title="Error", message="Account can't be found")
 
-def register():
+def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
+
     frame.pack_forget()
+
     register_frame.pack()
-    print ("register")
-    
+    backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
+
+def backbutton(forgetSurface, packSurface):
+    forgetSurface.pack_forget()
+    packSurface.pack()
+
 frame = tk.Frame(bg='#333333')
 register_frame=tk.Frame(bg="#333333")
 
@@ -45,6 +51,7 @@ password_label = tk.Label(frame, text="Password", bg='#333333', fg="#FFFFFF", fo
 login_button = tk.Button(frame, text="Login", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=login)
 register_button = tk.Button(frame, text="Register", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=register)
 
+backRegister_button = tk.Button(register_frame, text="Back", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command =backbutton(register_frame,frame))
 # Placing widgets on the screen
 login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
 username_label.grid(row=1, column=0)
@@ -53,6 +60,8 @@ password_label.grid(row=2, column=0)
 password_entry.grid(row=2, column=1, pady=20)
 login_button.grid(row=3, column=0,columnspan=2,pady=5 )
 register_button.grid(row=4,column=0,columnspan=2,pady=5 )
+
+#backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
 
 frame.pack()
 
