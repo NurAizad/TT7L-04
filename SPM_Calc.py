@@ -24,11 +24,17 @@ def login(): #ni nanti kena connect dgn database sql kot
     if username_entry.get()==username and password_entry.get()==password:
         messagebox.showinfo(title="Login Success", message="You successfully logged in.")
     else:
-        messagebox.showerror(title="Error", message="Invalid login.")
+        messagebox.showerror(title="Error", message="Account can't be found")
 
 def register():
+    global frame
+    global register_frame
+    frame.pack_forget()
+    register_frame.pack()
     print ("register")
+    
 frame = tk.Frame(bg='#333333')
+register_frame=tk.Frame(bg="#333333")
 
 # Creating widgets
 login_label = tk.Label(frame, text="Login", bg='#333333', fg="#FF3399", font=("Helvetica", 30))
@@ -45,8 +51,8 @@ username_label.grid(row=1, column=0)
 username_entry.grid(row=1, column=1, pady=20)
 password_label.grid(row=2, column=0)
 password_entry.grid(row=2, column=1, pady=20)
-login_button.grid(row=3, column=0,columnspan=2,pady=5 )#columnspan=2', pady=30)
-register_button.grid(row=4,column=0,columnspan=2,pady=5 )#columnspan=2,)
+login_button.grid(row=3, column=0,columnspan=2,pady=5 )
+register_button.grid(row=4,column=0,columnspan=2,pady=5 )
 
 frame.pack()
 
