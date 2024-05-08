@@ -37,17 +37,11 @@ def register(): #function utk kalau click register keluar page register
     register_frame.pack()
 
 def backbutton(forgetSurface,packSurface):
-    global frame
-    global register_frame
-    #register_frame.pack_forget()
-    #frame.pack()
-
     forgetSurface.pack_forget()
     packSurface.pack()
 
 frame = tk.Frame(bg='#333333')
 register_frame=tk.Frame(bg="#333333")
-#backButtonGlobal=backbutton
 
 # Creating widgets
 login_label = tk.Label(frame, text="Login", bg='#333333', fg="#FF3399", font=("Helvetica", 30))
@@ -68,7 +62,6 @@ password_entry.grid(row=2, column=1, pady=20)
 login_button.grid(row=3, column=0,columnspan=2,pady=5 )
 register_button.grid(row=4,column=0,columnspan=2,pady=5 )
 
-#backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
 
 frame.pack()
 
