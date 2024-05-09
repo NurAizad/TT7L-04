@@ -13,6 +13,7 @@ import tkinter
 if __name__ == '__main__':
      subjects=tkinter.Tk()
      subjects.title("SPM Formula Calculator")
+     subjects.geometry("900x700")
 
 
     
