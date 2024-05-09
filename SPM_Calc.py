@@ -7,5 +7,10 @@
 3. Make sure edit dkt branch bukan dkt main code
 4. Kalau nak merge dgn main code, buat branch baru sbb takut tk jadi . so apa apa boleh pergi balik branch asal
 '''
-import math
-from tkinter import *
+
+import tkinter
+
+if __name__ == '__main__':
+    apple=tkinter.Tk()
+
+    apple.mainloop()
