@@ -11,8 +11,12 @@
 import tkinter
 
 if __name__ == '__main__':
-    apple=tkinter.Tk()
+     subjects=tkinter.Tk()
+     subjects.title("SPM Formula Calculator")
 
-    apple.mainloop()
 
-    print("Hi")
+    
+    
+     subjects.mainloop()
+
+     print("Hi")
