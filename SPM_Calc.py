@@ -18,7 +18,9 @@ if __name__ == '__main__':
 
 
      label = tkinter.Label(subjects, text = "Choose your subjects")
-
+     label.pack()
+     button = tkinter.Button(subjects, text = "Submit")
+     button.pack()
 
     
     
