@@ -14,3 +14,5 @@ if __name__ == '__main__':
     apple=tkinter.Tk()
 
     apple.mainloop()
+
+    print("Hi")
