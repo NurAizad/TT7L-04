@@ -12,6 +12,8 @@ from tkinter import *
 #test
 root = Tk()
 
-myLabel = Label(root, text='testing')
-myLabel.pack()
+myLabel1 = Label(root, text='spm formula calculator')
+myLabel2 = Label(root, text='Subjects')
+myLabel1.grid (row = 0,column=0)
+myLabel2.grid (row = 0,column=1)
 root.mainloop()
