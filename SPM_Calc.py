@@ -37,9 +37,20 @@ def register(): #function utk kalau click register keluar page register
     student_info_frame=tk.LabelFrame(register_frame, text="Student information")
     student_info_frame.grid(row=0,column=0,padx=20,pady=20)
 
-    name_label=tk.Label(student_info_frame,text="Username")
-    name_label.grid(row=1,column=0,padx=20,pady=20)
-    
+    username_label_register=tk.Label(student_info_frame,text="Username")
+    username_label_register.grid(row=0,column=0,padx=20,pady=20)
+    password_label_register=tk.Label(student_info_frame,text="Password")
+    password_label_register.grid(row=0,column=1)
+    confirm_password_label=tk.Label(student_info_frame,text="Confirm password")
+    confirm_password_label.grid(row=0,column=2,padx=20,pady=20)
+
+    username_label_register_entry=tk.Entry(student_info_frame)
+    password_label_register_entry=tk.Entry(student_info_frame)
+    confirm_password_label_entry=tk.Entry(student_info_frame)
+    username_label_register_entry.grid(row=1,column=0,padx=20,pady=20)
+    password_label_register_entry.grid(row=1,column=1)
+    confirm_password_label_entry.grid(row=1,column=2)
+
     backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
     register_frame.pack()
 
