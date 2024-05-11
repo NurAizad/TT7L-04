@@ -32,6 +32,16 @@ def login(): #ni nanti kena connect dgn database sql kot
     else:
         messagebox.showerror(title="Error", message="Account can't be found")
 
+def show():
+    global register_frame
+    hide_button=tk.Button(register_frame, image=hide_eye, command=hide)
+    hide_button.grid(register_frame,row=2,column=2)
+
+def hide(): #bila tekan dia tukar jadi show 
+    global register_frame
+    show_button=tk.Button(register_frame, image=show_eye, command=show)
+    show_button.grid(register_frame,row=2,column=2)
+
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
@@ -55,6 +65,9 @@ def register(): #function utk kalau click register keluar page register
     confirm_password_label_entry.grid(row=1,column=2,padx=20)
 
     #show/hide password
+    show_button=tk.Button(register_frame, image=show_eye, command=show)#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
+    show_button.grid(register_frame,row=2,column=2)
+
 
     backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
     register_frame.pack()
