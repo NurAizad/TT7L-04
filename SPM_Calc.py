@@ -11,6 +11,8 @@ import math
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
+import sqlite3
+
 #test
 window = tk.Tk()
 window.title("Login form")
@@ -30,9 +32,14 @@ def login(): #ni nanti kena connect dgn database sql kot
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
-    global backButtonGlobal
-
     frame.pack_forget()
+
+    student_info_frame=tk.LabelFrame(register_frame, text="Student information")
+    student_info_frame.grid(row=0,column=0,padx=20,pady=20)
+
+    name_label=tk.Label(student_info_frame,text="Username")
+    name_label.grid(row=1,column=0,padx=20,pady=20)
+    
     backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
     register_frame.pack()
 
@@ -40,6 +47,7 @@ def backbutton(forgetSurface,packSurface):
     forgetSurface.pack_forget()
     packSurface.pack()
 
+#frames
 frame = tk.Frame(bg='#333333')
 register_frame=tk.Frame(bg="#333333")
 
@@ -53,6 +61,7 @@ login_button = tk.Button(frame, text="Login", bg="#FF3399", fg="#FFFFFF", font=(
 register_button = tk.Button(frame, text="Register", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=register)
 
 backRegister_button = tk.Button(register_frame, text="Back", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(register_frame,frame))
+
 # Placing widgets on the screen
 login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
 username_label.grid(row=1, column=0)
