@@ -17,9 +17,9 @@ from PIL import ImageTk
 #test
 window = tk.Tk()
 window.title("Login form")
-
-show_eye=ImageTk.PhotoImage(file="Images\\show.png")
+show_eye=ImageTk.PhotoImage(file="Images\\show.jpg")
 hide_eye=ImageTk.PhotoImage(file="Images\\hide.jpg")
+
 #utk dapatkan size screen
 window.state("zoomed")
 window.configure(bg='#333333')
