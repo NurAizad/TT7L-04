@@ -12,11 +12,14 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
 import sqlite3
+from PIL import ImageTk
 
 #test
 window = tk.Tk()
 window.title("Login form")
 
+show_eye=ImageTk.PhotoImage(file="Images\\show.png")
+hide_eye=ImageTk.PhotoImage(file="Images\\hide.jpg")
 #utk dapatkan size screen
 window.state("zoomed")
 window.configure(bg='#333333')
@@ -50,6 +53,8 @@ def register(): #function utk kalau click register keluar page register
     username_label_register_entry.grid(row=1,column=0,padx=20,pady=20)
     password_label_register_entry.grid(row=1,column=1,padx=20,)
     confirm_password_label_entry.grid(row=1,column=2,padx=20)
+
+    #show/hide password
 
     backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
     register_frame.pack()
