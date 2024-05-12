@@ -78,13 +78,24 @@ def register(): #function utk kalau click register keluar page register
         className=class_combobox.get()
 
         if username and password: #means if username and password if not empty strings
-            print ("hi")
+            #print ("hi")
             if password != confirmPassword:
                 messagebox.showerror(title="Error", message="Password didn't match")
             elif form and className:
                 pass
             else:
                 messagebox.showerror(title="Error", message="Form and class can't be empty")
+
+            conn=sqlite3.connect("data.db")
+            table_create_query='''CREATE TABLE IF NOT EXISTS Student_Data
+                    (username TEXT, password TEXT, form INT, className TEXT)
+            '''
+            conn.execute(table_create_query)
+            
+            #insert data
+            data_insert_query=
+
+            conn.close()
         else:
             messagebox.showerror(title="Error", message="Username and password can't be empty")
 
