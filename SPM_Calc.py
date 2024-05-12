@@ -46,29 +46,29 @@ def register(): #function utk kalau click register keluar page register
     global register_frame
     frame.pack_forget()
 
-    student_info_frame=tk.LabelFrame(register_frame, text="Student information")
+    student_info_frame=tk.LabelFrame(register_frame, text="Student information",font=("Helvetica", 16))
     student_info_frame.grid(row=0,column=0,padx=20,pady=20)
 
-    username_label_register=tk.Label(student_info_frame,text="Username")
-    username_label_register.grid(row=0,column=0,padx=20,pady=20)
-    password_label_register=tk.Label(student_info_frame,text="Password")
+    username_label_register=tk.Label(student_info_frame,text="Username",font=("Helvetica", 12))
+    username_label_register.grid(row=0,column=0,padx=20,pady=10)
+    password_label_register=tk.Label(student_info_frame,text="Password",font=("Helvetica", 12))
     password_label_register.grid(row=0,column=1)
-    confirm_password_label=tk.Label(student_info_frame,text="Confirm password")
+    confirm_password_label=tk.Label(student_info_frame,text="Confirm password",font=("Helvetica", 12))
     confirm_password_label.grid(row=0,column=2)
-    form_label=tk.Label(student_info_frame,text="Form")
-    form_label.grid(row=3,column=0,padx=20,pady=20)
-    class_label=tk.Label(student_info_frame,text="Class")
+    form_label=tk.Label(student_info_frame,text="Form",font=("Helvetica", 12))
+    form_label.grid(row=3,column=0,padx=20,pady=10)
+    class_label=tk.Label(student_info_frame,text="Class",font=("Helvetica", 12))
     class_label.grid(row=3,column=2)
 
-    username_register_entry=tk.Entry(student_info_frame)
-    password_register_entry=tk.Entry(student_info_frame,show="*")
-    confirm_password_entry=tk.Entry(student_info_frame,show="*")
-    username_register_entry.grid(row=1,column=0,padx=20,pady=20)
-    password_register_entry.grid(row=1,column=1,padx=20,)
+    username_register_entry=tk.Entry(student_info_frame,font=("Helvetica", 12))
+    password_register_entry=tk.Entry(student_info_frame,show="*",font=("Helvetica", 12))
+    confirm_password_entry=tk.Entry(student_info_frame,show="*",font=("Helvetica", 12))
+    username_register_entry.grid(row=1,column=0,padx=20,pady=10)
+    password_register_entry.grid(row=1,column=1,padx=10,)
     confirm_password_entry.grid(row=1,column=2,padx=20)
-    form_combobox=ttk.Combobox(student_info_frame,values=["4", "5"])
-    form_combobox.grid(row=4,column=0,padx=20,pady=20)
-    class_combobox=ttk.Combobox(student_info_frame,values=["Perdana", "Bestari", "Satria"])
+    form_combobox=ttk.Combobox(student_info_frame,values=["4", "5"],font=("Helvetica", 12))
+    form_combobox.grid(row=4,column=0,padx=20,pady=10)
+    class_combobox=ttk.Combobox(student_info_frame,values=["Perdana", "Bestari", "Satria"],font=("Helvetica", 12))
     class_combobox.grid(row=4,column=2)
     
     def showPassword():
@@ -80,7 +80,7 @@ def register(): #function utk kalau click register keluar page register
             confirm_password_entry.config(show='*')
     
     #show/hide password
-    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword)#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
+    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10))#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
     show_button.grid(row=2,column=1)
 
 
