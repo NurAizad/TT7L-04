@@ -73,9 +73,22 @@ def register(): #function utk kalau click register keluar page register
     def enter_data():
         username=username_register_entry.get()
         password= password_register_entry.get()
+        confirmPassword= confirm_password_entry.get()
         form= form_combobox.get()
         className=class_combobox.get()
-        
+
+        if username and password: #means if username and password if not empty strings
+            print ("hi")
+            if password != confirmPassword:
+                messagebox.showerror(title="Error", message="Password didn't match")
+            elif form and className:
+                pass
+            else:
+                messagebox.showerror(title="Error", message="Form and class can't be empty")
+        else:
+            messagebox.showerror(title="Error", message="Username and password can't be empty")
+
+
     #show/hide password
     show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10),bg="#212129",fg="#08edff")
     show_button.update()
