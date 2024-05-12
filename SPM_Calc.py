@@ -70,13 +70,19 @@ def register(): #function utk kalau click register keluar page register
             confirm_password_entry.config(show='*')
             show_button.update()
     
+    def enter_data():
+        username=username_register_entry.get()
+        password= password_register_entry.get()
+        form= form_combobox.get()
+        className=class_combobox.get()
+        
     #show/hide password
-    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10),bg="#212129",fg="#0ad608")
+    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10),bg="#212129",fg="#08edff")
     show_button.update()
     show_button.grid(row=2,column=1)
 
     #enter data button
-    signUp_button=tk.Button(register_frame,text="Confirm registration",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16))
+    signUp_button=tk.Button(register_frame,text="Confirm registration",command=enter_data,bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16))
     signUp_button.grid(row=5,padx=20,pady=5,sticky="EW")
 
     backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
