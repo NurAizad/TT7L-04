@@ -99,6 +99,8 @@ def register(): #function utk kalau click register keluar page register
             cursor.execute(data_insert_query,data_insert_tuple) #means execute x and put y in your execution
             conn.commit() #use commit whenever insert data into sqlite database///penting utk save data in database
             conn.close()
+            messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")#
+            backbutton(register_frame,frame)
         else:
             messagebox.showerror(title="Error", message="Username and password can't be empty")
 
