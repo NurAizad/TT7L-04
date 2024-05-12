@@ -54,22 +54,25 @@ def register(): #function utk kalau click register keluar page register
     password_label_register.grid(row=0,column=1)
     confirm_password_label=tk.Label(student_info_frame,text="Confirm password")
     confirm_password_label.grid(row=0,column=2)
+    form_label=tk.Label(student_info_frame,text="Form")
+    form_label.grid(row=3,column=0,padx=20,pady=20)
 
-    username_label_register_entry=tk.Entry(student_info_frame)
-    password_label_register_entry=tk.Entry(student_info_frame,show="*")
-    confirm_password_label_entry=tk.Entry(student_info_frame,show="*")
-    username_label_register_entry.grid(row=1,column=0,padx=20,pady=20)
-    password_label_register_entry.grid(row=1,column=1,padx=20,)
-    confirm_password_label_entry.grid(row=1,column=2,padx=20)
-    
+
+    username_register_entry=tk.Entry(student_info_frame)
+    password_register_entry=tk.Entry(student_info_frame,show="*")
+    confirm_password_entry=tk.Entry(student_info_frame,show="*")
+    username_register_entry.grid(row=1,column=0,padx=20,pady=20)
+    password_register_entry.grid(row=1,column=1,padx=20,)
+    confirm_password_entry.grid(row=1,column=2,padx=20)
+    form_combobox=
     
     def showPassword():
-        if password_label_register_entry.cget("show")=="*" and confirm_password_label_entry.cget("show")=="*":
-            password_label_register_entry.config(show='')
-            confirm_password_label_entry.config(show='')
+        if password_register_entry.cget("show")=="*" and confirm_password_entry.cget("show")=="*":
+            password_register_entry.config(show='')
+            confirm_password_entry.config(show='')
         else:
-            password_label_register_entry.config(show="*")
-            confirm_password_label_entry.config(show='*')
+            password_register_entry.config(show="*")
+            confirm_password_entry.config(show='*')
     
     #show/hide password
     show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword)#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
