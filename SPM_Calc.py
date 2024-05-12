@@ -64,12 +64,15 @@ def register(): #function utk kalau click register keluar page register
         if password_register_entry.cget("show")=="*" and confirm_password_entry.cget("show")=="*":
             password_register_entry.config(show='')
             confirm_password_entry.config(show='')
+            show_button.update()
         else:
             password_register_entry.config(show="*")
             confirm_password_entry.config(show='*')
+            show_button.update()
     
     #show/hide password
-    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10),bg="#212129",fg="#FFFFFF", activebackground="#212129", activeforeground="#FFFFFF")#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
+    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10),bg="#212129",fg="#0ad608")
+    show_button.update()
     show_button.grid(row=2,column=1)
 
 
