@@ -75,8 +75,11 @@ def register(): #function utk kalau click register keluar page register
     show_button.update()
     show_button.grid(row=2,column=1)
 
+    #enter data button
+    signUp_button=tk.Button(register_frame,text="Confirm registration",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16))
+    signUp_button.grid(row=5,padx=20,pady=5,sticky="EW")
 
-    backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
+    backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
     register_frame.pack()
 
 def backbutton(forgetSurface,packSurface):
@@ -104,8 +107,8 @@ username_label.grid(row=1, column=0)
 username_entry.grid(row=1, column=1, pady=20)
 password_label.grid(row=2, column=0)
 password_entry.grid(row=2, column=1, pady=20)
-login_button.grid(row=3, column=0,columnspan=2,pady=5 )
-register_button.grid(row=4,column=0,columnspan=2,pady=5 )
+login_button.grid(row=3, column=0,columnspan=2,padx=20,pady=5,sticky="EW" )
+register_button.grid(row=4,column=0,columnspan=2,padx=20,pady=5,sticky="EW" )
 
 
 frame.pack()
