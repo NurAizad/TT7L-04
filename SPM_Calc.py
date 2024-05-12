@@ -20,7 +20,7 @@ window.title("Login form")
 
 #utk dapatkan size screen
 window.state("zoomed")
-window.configure(bg='#333333')
+window.configure(bg='#212129')
 
 def login(): #ni nanti kena connect dgn database sql kot
     username = "test"
@@ -29,35 +29,24 @@ def login(): #ni nanti kena connect dgn database sql kot
         messagebox.showinfo(title="Login Success", message="You successfully logged in.")
     else:
         messagebox.showerror(title="Error", message="Account can't be found")
-
-'''
-def show():
-    global register_frame
-    hide_button=tk.Button(register_frame, image=hide_eye, command=hide)
-    hide_button.grid(register_frame,row=2,column=2)
-
-def hide(): #bila tekan dia tukar jadi show 
-    global register_frame
-    show_button=tk.Button(register_frame, image=show_eye, command=show)
-    show_button.grid(register_frame,row=2,column=2)
-'''
+    
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
     frame.pack_forget()
 
-    student_info_frame=tk.LabelFrame(register_frame, text="Student information",font=("Helvetica", 16))
+    student_info_frame=tk.LabelFrame(register_frame, text="Student information",font=("Helvetica", 16),bg="#212129",fg="#FFFFFF")
     student_info_frame.grid(row=0,column=0,padx=20,pady=20)
 
-    username_label_register=tk.Label(student_info_frame,text="Username",font=("Helvetica", 12))
+    username_label_register=tk.Label(student_info_frame,text="Username",font=("Helvetica", 12),bg="#212129",fg="#FFFFFF")
     username_label_register.grid(row=0,column=0,padx=20,pady=10)
-    password_label_register=tk.Label(student_info_frame,text="Password",font=("Helvetica", 12))
+    password_label_register=tk.Label(student_info_frame,text="Password",font=("Helvetica", 12),bg="#212129",fg="#FFFFFF")
     password_label_register.grid(row=0,column=1)
-    confirm_password_label=tk.Label(student_info_frame,text="Confirm password",font=("Helvetica", 12))
+    confirm_password_label=tk.Label(student_info_frame,text="Confirm password",font=("Helvetica", 12),bg="#212129",fg="#FFFFFF")
     confirm_password_label.grid(row=0,column=2)
-    form_label=tk.Label(student_info_frame,text="Form",font=("Helvetica", 12))
+    form_label=tk.Label(student_info_frame,text="Form",font=("Helvetica", 12),bg="#212129",fg="#FFFFFF")
     form_label.grid(row=3,column=0,padx=20,pady=10)
-    class_label=tk.Label(student_info_frame,text="Class",font=("Helvetica", 12))
+    class_label=tk.Label(student_info_frame,text="Class",font=("Helvetica", 12),bg="#212129",fg="#FFFFFF")
     class_label.grid(row=3,column=2)
 
     username_register_entry=tk.Entry(student_info_frame,font=("Helvetica", 12))
@@ -80,7 +69,7 @@ def register(): #function utk kalau click register keluar page register
             confirm_password_entry.config(show='*')
     
     #show/hide password
-    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10))#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
+    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword,font=("Helvetica", 10),bg="#212129",fg="#FFFFFF", activebackground="#212129", activeforeground="#FFFFFF")#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
     show_button.grid(row=2,column=1)
 
 
@@ -92,19 +81,19 @@ def backbutton(forgetSurface,packSurface):
     packSurface.pack()
 
 #frames
-frame = tk.Frame(bg='#333333')
-register_frame=tk.Frame(bg="#333333")
+frame = tk.Frame(bg='#212129')
+register_frame=tk.Frame(bg="#212129")
 
 # Creating widgets
-login_label = tk.Label(frame, text="Login", bg='#333333', fg="#FF3399", font=("Helvetica", 30))
-username_label = tk.Label(frame, text="Username", bg='#333333', fg="#FFFFFF", font=("Helvetica", 16))
+login_label = tk.Label(frame, text="Login", bg='#212129', fg="#08edff", font=("Helvetica", 30))
+username_label = tk.Label(frame, text="Username", bg='#212129', fg="#FFFFFF", font=("Helvetica", 16))
 username_entry = tk.Entry(frame, font=("Helvetica", 16))
 password_entry = tk.Entry(frame, show="*", font=("Helvetica", 16))
-password_label = tk.Label(frame, text="Password", bg='#333333', fg="#FFFFFF", font=("Helvetica", 16))
-login_button = tk.Button(frame, text="Login", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=login)
-register_button = tk.Button(frame, text="Register", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=register)
+password_label = tk.Label(frame, text="Password", bg='#212129', fg="#FFFFFF", font=("Helvetica", 16))
+login_button = tk.Button(frame, text="Login", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=login)
+register_button = tk.Button(frame, text="Register", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=register)
 
-backRegister_button = tk.Button(register_frame, text="Back", bg="#FF3399", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(register_frame,frame))
+backRegister_button = tk.Button(register_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(register_frame,frame))
 
 # Placing widgets on the screen
 login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
