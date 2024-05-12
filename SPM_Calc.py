@@ -12,13 +12,10 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
 import sqlite3
-from PIL import ImageTk
 
 #test
 window = tk.Tk()
 window.title("Login form")
-show_eye=ImageTk.PhotoImage(file="Images\\show.jpg")
-hide_eye=ImageTk.PhotoImage(file="Images\\hide.jpg")
 
 #utk dapatkan size screen
 window.state("zoomed")
@@ -32,6 +29,7 @@ def login(): #ni nanti kena connect dgn database sql kot
     else:
         messagebox.showerror(title="Error", message="Account can't be found")
 
+'''
 def show():
     global register_frame
     hide_button=tk.Button(register_frame, image=hide_eye, command=hide)
@@ -41,7 +39,7 @@ def hide(): #bila tekan dia tukar jadi show
     global register_frame
     show_button=tk.Button(register_frame, image=show_eye, command=show)
     show_button.grid(register_frame,row=2,column=2)
-
+'''
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
@@ -63,10 +61,19 @@ def register(): #function utk kalau click register keluar page register
     username_label_register_entry.grid(row=1,column=0,padx=20,pady=20)
     password_label_register_entry.grid(row=1,column=1,padx=20,)
     confirm_password_label_entry.grid(row=1,column=2,padx=20)
-
+    
+    
+    def showPassword():
+        if password_label_register_entry.cget("show")=="*" and confirm_password_label_entry.cget("show")=="*":
+            password_label_register_entry.config(show='')
+            confirm_password_label_entry.config(show='')
+        else:
+            password_label_register_entry.config(show="*")
+            confirm_password_label_entry.config(show='*')
+    
     #show/hide password
-    show_button=tk.Button(register_frame, image=show_eye, command=show)#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
-    show_button.grid(register_frame,row=2,column=2)
+    show_button=Checkbutton(student_info_frame,text="Show password",command=showPassword)#so kalau tekan ni nanti function show activate, then kalau tekan balik function hide activate
+    show_button.grid(row=2,column=1)
 
 
     backRegister_button.grid (row=5,column=0,columnspan=2,pady=5)
