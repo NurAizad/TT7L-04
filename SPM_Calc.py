@@ -11,6 +11,7 @@ import math
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
+from tkinter import ttk
 import sqlite3
 
 #test
@@ -56,7 +57,8 @@ def register(): #function utk kalau click register keluar page register
     confirm_password_label.grid(row=0,column=2)
     form_label=tk.Label(student_info_frame,text="Form")
     form_label.grid(row=3,column=0,padx=20,pady=20)
-
+    class_label=tk.Label(student_info_frame,text="Class")
+    class_label.grid(row=3,column=2)
 
     username_register_entry=tk.Entry(student_info_frame)
     password_register_entry=tk.Entry(student_info_frame,show="*")
@@ -64,7 +66,10 @@ def register(): #function utk kalau click register keluar page register
     username_register_entry.grid(row=1,column=0,padx=20,pady=20)
     password_register_entry.grid(row=1,column=1,padx=20,)
     confirm_password_entry.grid(row=1,column=2,padx=20)
-    form_combobox=
+    form_combobox=ttk.Combobox(student_info_frame,values=["4", "5"])
+    form_combobox.grid(row=4,column=0,padx=20,pady=20)
+    class_combobox=ttk.Combobox(student_info_frame,values=["Perdana", "Bestari", "Satria"])
+    class_combobox.grid(row=4,column=2)
     
     def showPassword():
         if password_register_entry.cget("show")=="*" and confirm_password_entry.cget("show")=="*":
