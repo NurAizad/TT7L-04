@@ -93,8 +93,11 @@ def register(): #function utk kalau click register keluar page register
             conn.execute(table_create_query)
             
             #insert data
-            data_insert_query=
-
+            data_insert_query='''INSERT INTO Student_Data (username,password,form,className) VALUES (?,?,?,?)'''
+            data_insert_tuple=(username, password, form, className) #tuple will replace the question mark
+            cursor=conn.cursor()#midway between sql connection and database
+            cursor.execute(data_insert_query,data_insert_tuple) #means execute x and put y in your execution
+            conn.commit() #use commit whenever insert data into sqlite database///penting utk save data in database
             conn.close()
         else:
             messagebox.showerror(title="Error", message="Username and password can't be empty")
