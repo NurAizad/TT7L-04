@@ -12,6 +12,14 @@ import tkinter
 
 if __name__ == '__main__':
     window=tkinter.Tk()
+    window.title("spm calculator")
+    window.geometry('600x400')
+
+    frame =tkinter.Frame(window)
+    frame.pack()
+
+    label = tkinter.Label (window, text='spm calculator')
+    label.pack
 
     window.mainloop()
 
