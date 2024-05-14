@@ -87,11 +87,13 @@ def register(): #function utk kalau click register keluar page register
             conn.execute(table_create_query)
             cursor=conn.cursor()
             #check if username and password already exist
-            cursor.execute("SELECT * FROM Student_Data WHERE username=? AND password=?",[username,password])
-            result=cursor.fetchall()
+            cursor.execute("SELECT * FROM Student_Data WHERE username=?",[username])
+            result=cursor.fetchone()
             if result: #if result exists
                 print ("oredi exists")  
+                print (result)
                 messagebox.showerror(title="Error", message="Account already exists")
+      
             else:
                 #insert data
                 data_insert_query='''INSERT INTO Student_Data (username,password,form,className) VALUES (?,?,?,?)'''
@@ -99,12 +101,12 @@ def register(): #function utk kalau click register keluar page register
                 #cursor=conn.cursor()#midway between sql connection and database
                 cursor.execute(data_insert_query,data_insert_tuple) #means execute x and put y in your execution
                 conn.commit() #use commit whenever insert data into sqlite database///penting utk save data in database
-
+                messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")
 
 
 
             conn.close()
-            messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")
+            #messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")
             backbutton(register_frame,frame)
 
 
