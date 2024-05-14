@@ -22,14 +22,7 @@ window.title("Login form")
 window.state("zoomed")
 window.configure(bg='#212129')
 
-def login(): #ni nanti kena connect dgn database sql kot
-    username = "test"
-    password = "test"
-    if username_entry.get()==username and password_entry.get()==password:
-        messagebox.showinfo(title="Login Success", message="You successfully logged in.")
-    else:
-        messagebox.showerror(title="Error", message="Account can't be found")
-    
+
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
@@ -71,12 +64,14 @@ def register(): #function utk kalau click register keluar page register
             show_button.update()
     
     def enter_data():
+        global cursor
+        global conn
         username=username_register_entry.get()
         password= password_register_entry.get()
         confirmPassword= confirm_password_entry.get()
         form= form_combobox.get()
         className=class_combobox.get()
-
+    
         if username and password: #means if username and password if not empty strings
             #print ("hi")
             if password != confirmPassword:
@@ -99,7 +94,7 @@ def register(): #function utk kalau click register keluar page register
             cursor.execute(data_insert_query,data_insert_tuple) #means execute x and put y in your execution
             conn.commit() #use commit whenever insert data into sqlite database///penting utk save data in database
             conn.close()
-            messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")#
+            messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")
             backbutton(register_frame,frame)
         else:
             messagebox.showerror(title="Error", message="Username and password can't be empty")
@@ -116,6 +111,25 @@ def register(): #function utk kalau click register keluar page register
 
     backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
     register_frame.pack()
+
+def login(): #ni nanti kena connect dgn database sql kot
+    #username = "test"
+    #password = "test"
+    global cursor
+    global conn
+    '''
+    if username_entry.get()==username and password_entry.get()==password:
+        messagebox.showinfo(title="Login Success", message="You successfully logged in.")
+    else:
+        messagebox.showerror(title="Error", message="Account can't be found")
+    '''
+    username=username_entry.get()
+    password=password_entry.get()
+    if username and password:
+        cursor.execute("SELECT * FROM Student_Data WHERE username=?",[username])
+        print("yes")
+    else:
+        messagebox.showerror(title="Error", message="Username and password can't be empty")
 
 def backbutton(forgetSurface,packSurface):
     forgetSurface.pack_forget()
