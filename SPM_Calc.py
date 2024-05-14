@@ -6,16 +6,14 @@
     b) git commit -m "comment"
 3. Make sure edit dkt branch bukan dkt main code
 4. Kalau nak merge dgn main code, buat branch baru sbb takut tk jadi . so apa apa boleh pergi balik branch asal
+5. git push -u origin branchname
 '''
-from tkinter import Tk, Label, Button
-#test
-root = Tk()
+import tkinter
 
-myLabel1 = Label(root, text='spm formula calculator')
-myLabel2 = Label(root, text='Subjects')
-myLabel1.grid (row = 0,column=0)
-myLabel2.grid (row = 0,column=1)
+if __name__ == '__main__':
+    window=tkinter.Tk()
 
-backButton = Button(root, text='back')
-backButton.grid(row =1, column=1)
-root.mainloop()
+    window.mainloop()
+
+
+
