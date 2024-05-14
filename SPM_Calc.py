@@ -73,7 +73,6 @@ def register(): #function utk kalau click register keluar page register
         className=class_combobox.get()
     
         if username and password: #means if username and password if not empty strings
-            #print ("hi")
             if password != confirmPassword:
                 messagebox.showerror(title="Error", message="Password didn't match")
             elif form and className:
@@ -86,16 +85,30 @@ def register(): #function utk kalau click register keluar page register
                     (username TEXT, password TEXT, form INT, className TEXT)
             '''
             conn.execute(table_create_query)
-            
-            #insert data
-            data_insert_query='''INSERT INTO Student_Data (username,password,form,className) VALUES (?,?,?,?)'''
-            data_insert_tuple=(username, password, form, className) #tuple will replace the question mark
-            cursor=conn.cursor()#midway between sql connection and database
-            cursor.execute(data_insert_query,data_insert_tuple) #means execute x and put y in your execution
-            conn.commit() #use commit whenever insert data into sqlite database///penting utk save data in database
+            cursor=conn.cursor()
+            #check if username and password already exist
+            cursor.execute("SELECT * FROM Student_Data WHERE username=? AND password=?",[username,password])
+            result=cursor.fetchall()
+            if result: #if result exists
+                print ("oredi exists")  
+                messagebox.showerror(title="Error", message="Account already exists")
+            else:
+                #insert data
+                data_insert_query='''INSERT INTO Student_Data (username,password,form,className) VALUES (?,?,?,?)'''
+                data_insert_tuple=(username, password, form, className) #tuple will replace the question mark
+                #cursor=conn.cursor()#midway between sql connection and database
+                cursor.execute(data_insert_query,data_insert_tuple) #means execute x and put y in your execution
+                conn.commit() #use commit whenever insert data into sqlite database///penting utk save data in database
+
+
+
+
             conn.close()
             messagebox.showinfo(title="Registered Succesfully", message="You successfully registered")
             backbutton(register_frame,frame)
+
+
+
         else:
             messagebox.showerror(title="Error", message="Username and password can't be empty")
 
