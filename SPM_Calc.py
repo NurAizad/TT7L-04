@@ -131,8 +131,10 @@ def login(): #ni nanti kena connect dgn database sql kot
         conn=sqlite3.connect("data.db")
         cursor=conn.cursor()
         cursor.execute("SELECT * FROM Student_Data WHERE username=? AND password=?",[username,password])
-        print("yes")
+        #print("yes")
         result=cursor.fetchall()
+        if result == []:
+            messagebox.showerror(title="Error", message="Account not found")
         print (result)
         conn.close()
     else:
