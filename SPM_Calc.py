@@ -130,8 +130,10 @@ def login(): #ni nanti kena connect dgn database sql kot
     if username and password:
         conn=sqlite3.connect("data.db")
         cursor=conn.cursor()
-        cursor.execute("SELECT * FROM Student_Data WHERE username=?",[username])
+        cursor.execute("SELECT * FROM Student_Data WHERE username=? AND password=?",[username,password])
         print("yes")
+        result=cursor.fetchall()
+        print (result)
         conn.close()
     else:
         messagebox.showerror(title="Error", message="Username and password can't be empty")
