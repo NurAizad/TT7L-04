@@ -14,12 +14,21 @@ if __name__ == '__main__':
     window=tkinter.Tk()
     window.title("spm calculator")
     window.geometry('600x400')
+    window.configure(bg='#0317fc')
 
     frame =tkinter.Frame(window)
     frame.pack()
 
-    label = tkinter.Label (window, text='spm calculator')
-    label.pack
+    #widgets
+    label_spmcalculator = tkinter.Label (frame, text='spm calculator', bg='#FFFFFF', fg="#0317fc")
+    form4_button = tkinter.Button (frame, text='form 4', bg='#FFFFFF', fg="#0317fc")
+    form5_button = tkinter.Button (frame, text='form 5', bg='#FFFFFF',fg='#0317fc')
+
+    #placing them
+    label_spmcalculator.grid(row=0, column=0, columnspan=2)
+    form4_button.grid(row=1, column=0)
+    form5_button.grid(row=1, column=1)
+
 
     window.mainloop()
 
