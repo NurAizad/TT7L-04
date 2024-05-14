@@ -112,6 +112,8 @@ def register(): #function utk kalau click register keluar page register
     backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
     register_frame.pack()
 
+#conn=sqlite3.connect("data.db")
+#cursor=conn.cursor()
 def login(): #ni nanti kena connect dgn database sql kot
     #username = "test"
     #password = "test"
@@ -126,8 +128,11 @@ def login(): #ni nanti kena connect dgn database sql kot
     username=username_entry.get()
     password=password_entry.get()
     if username and password:
+        conn=sqlite3.connect("data.db")
+        cursor=conn.cursor()
         cursor.execute("SELECT * FROM Student_Data WHERE username=?",[username])
         print("yes")
+        conn.close()
     else:
         messagebox.showerror(title="Error", message="Username and password can't be empty")
 
