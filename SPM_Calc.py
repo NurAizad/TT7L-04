@@ -123,10 +123,13 @@ def register(): #function utk kalau click register keluar page register
     backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
     register_frame.pack()
 
+
+
 def login(): #ni nanti kena connect dgn database sql kot
 
     global cursor
     global conn
+    global afterLogin
 
     username=username_entry.get()
     password=password_entry.get()
@@ -139,6 +142,8 @@ def login(): #ni nanti kena connect dgn database sql kot
             messagebox.showerror(title="Error", message="Account not found")
         else:
             print ("yay") #nanti letak function
+            backbutton(frame,afterLogin_frame)
+
         conn.close()
     else:
         messagebox.showerror(title="Error", message="Username and password can't be empty")
@@ -150,6 +155,7 @@ def backbutton(forgetSurface,packSurface):
 #frames
 frame = tk.Frame(bg='#212129')
 register_frame=tk.Frame(bg="#212129")
+afterLogin_frame=tk.Frame(bg="#212129")
 
 # Creating widgets
 login_label = tk.Label(frame, text="Login", bg='#212129', fg="#08edff", font=("Helvetica", 30))
