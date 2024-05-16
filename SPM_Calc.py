@@ -10,6 +10,9 @@
 
 import tkinter
 
+def click():
+    print("Thank you for choosing")
+
 if __name__ == '__main__': 
     window = tkinter.Tk()
     window.title("SPM Formula Calculator")
@@ -17,7 +20,7 @@ if __name__ == '__main__':
 
     label = tkinter.Label(window, text = 'Hello Dunia')
     label.pack()
-    button = tkinter.Button(window, text = 'testingg')
+    button = tkinter.Button(window, text = 'testingg', command=click)
     button.pack()
 
 
