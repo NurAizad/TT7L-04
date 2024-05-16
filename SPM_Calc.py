@@ -13,4 +13,6 @@ import tkinter
 if __name__ == '__main__': 
     window = tkinter.Tk()
 
-window.mainloop()
+    window.mainloop()
+
+    print("Halo")
