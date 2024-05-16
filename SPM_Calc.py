@@ -45,7 +45,7 @@ button_style.configure('TButton', font = ("Manrope", 15,))
 subjects = ["Physics", "Biology", "Chemistry"]
 for subject in subjects:
     buttons = tk.Button(menu_frame, text=subject, font = ("Manrope, 15"), command=lambda s=subject: show_frame(pages[s]))
-    buttons.pack(fill='x', pady=5)
+    buttons.pack(fill='x', pady = 5)
 
 
 for subjects in subjects:
