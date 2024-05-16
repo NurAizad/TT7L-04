@@ -49,7 +49,7 @@ for subject in subjects:
 
 
 for subjects in subjects:
-    subject_page(subject)
+    subject_page(subjects)
 
 
 
