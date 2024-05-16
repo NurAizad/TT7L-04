@@ -16,8 +16,10 @@ if __name__ == '__main__':
     window.geometry('400x300')
 
     label = tkinter.Label(window, text = 'Hello Dunia')
+    label.pack()
     button = tkinter.Button(window, text = 'testingg')
-    
+    button.pack()
+
 
     window.mainloop()
 
