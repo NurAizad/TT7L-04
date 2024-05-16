@@ -8,8 +8,9 @@
 4. Kalau nak merge dgn main code, buat branch baru sbb takut tk jadi . so apa apa boleh pergi balik branch asal
 '''
 
-import tkinter as tk
-from tkinter import ttk
+import tkinter
 
+if __name__ == '__main__': 
+    window = tkinter.Tk()
 
-
+window.mainloop()
