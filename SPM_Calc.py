@@ -8,22 +8,52 @@
 4. Kalau nak merge dgn main code, buat branch baru sbb takut tk jadi . so apa apa boleh pergi balik branch asal
 '''
 
-import tkinter
+import tkinter as tk
+from tkinter import ttk
 
-def click():
-    print("Thank you for choosing")
+def show_frame(frame):
+    frame.tkraise()
 
-if __name__ == '__main__': 
-    window = tkinter.Tk()
-    window.title("SPM Formula Calculator")
-    window.geometry('400x300')
+def subject_page(subejct_name):
+    page = tk.Frame(window)
+    pages[subject_name] = page
 
-    label = tkinter.Label(window, text = 'Hello Dunia')
+    label = tk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Manrope", 17, "bold"))
     label.pack()
-    button = tkinter.Button(window, text = 'testingg', command=click)
-    button.pack()
+
+    back_button = tk.Button(page, text = "Back to Menu", command = lambda: show_frame(menu_frame))
+    back_button.pack()
+
+    page.grid(row=0, column=0, sticky="nsew")
+    return page
+
+window = tk.Tk()
+window.title("SPM Formula Calculator")
+window.geometry("400x300")
+
+pages = {}
+
+menu_frame = tk.Frame(window)
+menu_frame.grid(row=0, column=0, sticky="nsew")
+
+menu_label = tk.Label(menu_frame, text = "Choose a subject:", font = ("Manrope", 19, "bold"))
+menu_label.pack() 
+
+button_style = ttk.Style()
+button_style.configure('TButton', font = ("Manrope", 15,))
+
+subjects = ["Physics", "Biology", "Chemistry"]
+for subject in subjects:
+    buttons = tk.Button(menu_frame, text=subject, font = ("Manrope, 15"), command=lambda s=subject: show_frame(pages[s]))
+    buttons.pack()
 
 
-    window.mainloop()
+for subjects in subjects:
+    subject_page(subject)
 
-    print("Halo")
+
+
+
+
+show_frame(menu_frame)
+window.mainloop()
