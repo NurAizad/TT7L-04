@@ -14,7 +14,7 @@ from tkinter import ttk
 def show_frame(frame):
     frame.tkraise()
 
-def subject_page(subejct_name):
+def subject_page(subject_name):
     page = tk.Frame(window)
     pages[subject_name] = page
 
