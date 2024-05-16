@@ -40,7 +40,7 @@ menu_label = tk.Label(menu_frame, text = "Choose a subject:", font = ("Manrope",
 menu_label.pack() 
 
 button_style = ttk.Style()
-button_style.configure('TButton', font = ("Helvetica", 15,))
+button_style.configure('TButton', font = "Manrope", padding = 10)
 
 subjects = ["Physics", "Biology", "Chemistry"]
 for subject in subjects:
