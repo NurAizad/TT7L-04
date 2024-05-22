@@ -16,21 +16,37 @@ def show_frame(frame):
 
 def home_page():
     menu_frame = ttk.Frame(container)
-    home_frame.grid(row=0, column=0, sticky="nsew")
+    menu_frame.grid(row=0, column=0, sticky="nsew")
 
-    label = ttk.Label(home_frame, text="Choose a subject: ", font=("Arial", 18, "bold"))
+    label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 18, "bold"))
     label.pack(pady = 20)
 
+    button_frame = ttk.Frame(menu_frame)
+    button_frame.pack(pady=20)
+
+    button_style = ttk.Style()
+    button_style.configure('TButton', font=("Arial", 14), padding=10)
+
+    physics_button = ttk.Button(button_frame, text="Physics", style='TButton', command=lambda: show_frame(pages["PhysicsPage"]))
+    physics_button.pack(fill="x", pady=5)
+
+    chemistry_button = ttk.Button(button_frame, text="Chemistry", style='TButton', command=lambda: show_frame(pages["ChemistryPage"]))
+    chemistry_button.pack(fill='x', pady=5)
+
+    biology_button = ttk.Button(button_frame, text="Biology", style='TButton', command=lambda: show_frame(pages["BiologyPage"]))
+    biology_button.pack(fill='x', pady=5)
+
+    return menu_frame
 
 def subject_page(subject_name):
-    page = tk.Frame(window)
-    pages[subject_name] = page
+    page = ttk.Frame(container)
+    pages[subject_name + "Page"] = page
 
-    label = tk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Manrope", 17, "bold"))
-    label.pack()
+    label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 16, "bold"))
+    label.pack(pady=20)
 
-    back_button = tk.Button(page, text = "Back to Menu", command = lambda: show_frame(menu_frame))
-    back_button.pack()
+    back_button = ttk.Button(page, text = "Back to Menu", command = lambda: show_frame(pages["StartPage"]))
+    back_button.pack(pady=20)
 
     page.grid(row=0, column=0, sticky="nsew")
     return page
@@ -44,27 +60,11 @@ container.pack(fill="both", expand=True)
 
 pages = {}
 
-menu_frame = tk.Frame(window)
-menu_frame.grid(row=0, column=0, sticky="nsew")
+pages["StartPage"] = home_page()
 
-menu_label = tk.Label(menu_frame, text = "Choose a subject:", font = ("Manrope", 19, "bold"))
-menu_label.pack() 
+for subject in ["Physics", "Chemistry", "Biology"]:
+    pages[subject + "Page"] = subject_page(subject)
 
-button_style = ttk.Style()
-button_style.configure('TButton', font = "Manrope", padding = 10)
+show_frame(pages["StartPage"])
 
-subjects = ["Physics", "Biology", "Chemistry"]
-for subject in subjects:
-    buttons = tk.Button(menu_frame, text=subject, font = ("Manrope, 15"), command=lambda s=subject: show_frame(pages[s]))
-    buttons.pack(fill='x', pady = 5)
-
-
-for subjects in subjects:
-    subject_page(subjects)
-
-
-
-
-
-show_frame(menu_frame)
 window.mainloop()
