@@ -14,6 +14,14 @@ from tkinter import ttk
 def show_frame(frame):
     frame.tkraise()
 
+def home_page():
+    menu_frame = ttk.Frame(container)
+    home_frame.grid(row=0, column=0, sticky="nsew")
+
+    label = ttk.Label(home_frame, text="Choose a subject: ", font=("Arial", 18, "bold"))
+    label.pack(pady = 20)
+
+
 def subject_page(subject_name):
     page = tk.Frame(window)
     pages[subject_name] = page
