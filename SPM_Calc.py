@@ -31,6 +31,9 @@ window = tk.Tk()
 window.title("SPM Formula Calculator")
 window.geometry("400x300")
 
+container = ttk.Frame(window)
+container.pack(fill="both", expand=True)
+
 pages = {}
 
 menu_frame = tk.Frame(window)
