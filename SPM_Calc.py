@@ -36,6 +36,8 @@ def home_page():
     biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 14), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
     biology_button.pack(row=2, column=0, pady=5, sticky='ew')
 
+    button_frame.columnconfigure(0, weight=1)
+
     return menu_frame
 
 def subject_page(subject_name):
