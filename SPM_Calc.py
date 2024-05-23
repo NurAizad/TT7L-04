@@ -55,7 +55,7 @@ def subject_page(subject_name):
     label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 16, "bold"), background="purple")
     label.grid(row=0, column=0, pady=20)
 
-    back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 14), bg="lightyellow", command = lambda: show_frame(pages["StartPage"]))
+    back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 14), bg="#3EA99F", command = lambda: show_frame(pages["StartPage"]))
     back_button.grid(row=1, column=0, pady=20)
 
     page.columnconfigure(0, weight=1)
