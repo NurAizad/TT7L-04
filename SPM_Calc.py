@@ -15,26 +15,26 @@ def show_frame(frame):
     frame.tkraise()
 
 def home_page():
-    menu_frame = ttk.Frame(container)
+    menu_frame = ttk.Frame(container, style="TFrame")
     menu_frame.grid(row=0, column=0, sticky="nsew")
 
-    label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 18, "bold"))
-    label.pack(pady = 20)
+    label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 18, "bold"), background="purple")
+    label.grid(row=0, column=0, pady=20)
 
-    button_frame = ttk.Frame(menu_frame)
-    button_frame.pack(pady=20)
+    button_frame = ttk.Frame(menu_frame, style="TFrame")
+    button_frame.grid(row=1, column=0, pady=20)
 
-    button_style = ttk.Style()
-    button_style.configure('TButton', font=("Arial", 14), padding=10)
+    #button_style = ttk.Style()
+    #button_style.configure('TButton', font=("Arial", 14), padding=10)
 
-    physics_button = ttk.Button(button_frame, text="Physics", style='TButton', command=lambda: show_frame(pages["PhysicsPage"]))
-    physics_button.pack(fill="x", pady=5)
+    physics_button = tk.Button(button_frame, text="Physics", font=("Arial", 14), bg="lightgreen", command=lambda: show_frame(pages["PhysicsPage"]))
+    physics_button.pack(row=0, column=0, pady=5, sticky='ew')
 
-    chemistry_button = ttk.Button(button_frame, text="Chemistry", style='TButton', command=lambda: show_frame(pages["ChemistryPage"]))
-    chemistry_button.pack(fill='x', pady=5)
+    chemistry_button = tk.Button(button_frame, text="Chemistry", font=('Arial', 14), bg="lightblue", command=lambda: show_frame(pages["ChemistryPage"]))
+    chemistry_button.pack(row=1, column=0, pady=5, sticky='ew')
 
-    biology_button = ttk.Button(button_frame, text="Biology", style='TButton', command=lambda: show_frame(pages["BiologyPage"]))
-    biology_button.pack(fill='x', pady=5)
+    biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 14), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
+    biology_button.pack(row=2, column=0, pady=5, sticky='ew')
 
     return menu_frame
 
