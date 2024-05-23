@@ -50,7 +50,7 @@ def subject_page(subject_name):
     back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 14), bg="#212129", command = lambda: show_frame(pages["StartPage"]))
     back_button.pack(row=1, column=0, pady=20)
 
-    
+    page.columnconfigure(0, weight=1)
 
     page.grid(row=0, column=0, sticky="nsew")
     return page
