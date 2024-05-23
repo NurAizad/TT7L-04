@@ -22,7 +22,7 @@ def home_page():
         menu_frame.rowconfigure(i, weight=1)
     menu_frame.columnconfigure(0, weight=1)
 
-    label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 18, "bold"), background="purple")
+    label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 24, "bold"), background="purple")
     label.grid(row=0, column=0, pady=20)
 
     button_frame = ttk.Frame(menu_frame, style="TFrame")
@@ -31,13 +31,13 @@ def home_page():
     #button_style = ttk.Style()
     #button_style.configure('TButton', font=("Arial", 14), padding=10)
 
-    physics_button = tk.Button(button_frame, text="Physics", font=("Arial", 14), bg="lightgreen", command=lambda: show_frame(pages["PhysicsPage"]))
+    physics_button = tk.Button(button_frame, text="Physics", font=("Arial", 18), bg="lightgreen", command=lambda: show_frame(pages["PhysicsPage"]))
     physics_button.grid(row=0, column=0, pady=5, sticky='ew')
 
-    chemistry_button = tk.Button(button_frame, text="Chemistry", font=('Arial', 14), bg="lightblue", command=lambda: show_frame(pages["ChemistryPage"]))
+    chemistry_button = tk.Button(button_frame, text="Chemistry", font=('Arial', 18), bg="lightblue", command=lambda: show_frame(pages["ChemistryPage"]))
     chemistry_button.grid(row=1, column=0, pady=5, sticky='ew')
 
-    biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 14), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
+    biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 18), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
     biology_button.grid(row=2, column=0, pady=5, sticky='ew')
 
     button_frame.columnconfigure(0, weight=1)
@@ -52,10 +52,10 @@ def subject_page(subject_name):
         page.rowconfigure(i, weight=1)
     page.columnconfigure(0, weight=1)
 
-    label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 16, "bold"), background="purple")
+    label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 20, "bold"), background="purple")
     label.grid(row=0, column=0, pady=20)
 
-    back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 14), bg="#3EA99F", command = lambda: show_frame(pages["StartPage"]))
+    back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 18), bg="#3EA99F", command = lambda: show_frame(pages["StartPage"]))
     back_button.grid(row=1, column=0, pady=20)
 
     page.columnconfigure(0, weight=1)
