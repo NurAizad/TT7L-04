@@ -32,13 +32,13 @@ def home_page():
     #button_style.configure('TButton', font=("Arial", 14), padding=10)
 
     physics_button = tk.Button(button_frame, text="Physics", font=("Arial", 18), bg="lightgreen", command=lambda: show_frame(pages["PhysicsPage"]))
-    physics_button.grid(row=0, column=0, pady=5, sticky='ew')
+    physics_button.grid(row=0, column=0, pady=10, padx=20, sticky='ew')
 
     chemistry_button = tk.Button(button_frame, text="Chemistry", font=('Arial', 18), bg="lightblue", command=lambda: show_frame(pages["ChemistryPage"]))
-    chemistry_button.grid(row=1, column=0, pady=5, sticky='ew')
+    chemistry_button.grid(row=1, column=0, pady=10, padx=20, sticky='ew')
 
     biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 18), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
-    biology_button.grid(row=2, column=0, pady=5, sticky='ew')
+    biology_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
 
     button_frame.columnconfigure(0, weight=1)
 
