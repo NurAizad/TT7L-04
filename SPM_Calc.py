@@ -87,3 +87,5 @@ for subject in ["Physics", "Chemistry", "Biology"]:
 show_frame(pages["StartPage"])
 
 window.mainloop()
+
+print('hi')
