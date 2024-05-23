@@ -16,29 +16,29 @@ def show_frame(frame):
 
 def home_page():
     menu_frame = ttk.Frame(container, style="TFrame")
-    menu_frame.grid(row=0, column=0, sticky="nsew")
+    menu_frame.grid(row=0, column=6, sticky="nsew")
 
     for i in range(3):
         menu_frame.rowconfigure(i, weight=1)
-    menu_frame.columnconfigure(0, weight=1)
+    menu_frame.columnconfigure(6, weight=1)
 
     label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 18, "bold"), background="purple")
-    label.grid(row=0, column=0, pady=20)
+    label.grid(row=0, column=6, pady=20)
 
     button_frame = ttk.Frame(menu_frame, style="TFrame")
-    button_frame.grid(row=1, column=0, pady=20)
+    button_frame.grid(row=1, column=6, pady=20)
 
     #button_style = ttk.Style()
     #button_style.configure('TButton', font=("Arial", 14), padding=10)
 
     physics_button = tk.Button(button_frame, text="Physics", font=("Arial", 14), bg="lightgreen", command=lambda: show_frame(pages["PhysicsPage"]))
-    physics_button.grid(row=0, column=0, pady=5, sticky='ew')
+    physics_button.grid(row=0, column=6, pady=5, sticky='ew')
 
     chemistry_button = tk.Button(button_frame, text="Chemistry", font=('Arial', 14), bg="lightblue", command=lambda: show_frame(pages["ChemistryPage"]))
-    chemistry_button.grid(row=1, column=0, pady=5, sticky='ew')
+    chemistry_button.grid(row=1, column=6, pady=5, sticky='ew')
 
     biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 14), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
-    biology_button.grid(row=2, column=0, pady=5, sticky='ew')
+    biology_button.grid(row=2, column=6, pady=5, sticky='ew')
 
     button_frame.columnconfigure(0, weight=1)
 
@@ -50,17 +50,17 @@ def subject_page(subject_name):
 
     for i in range(3):
         page.rowconfigure(i, weight=1)
-    page.columnconfigure(0, weight=1)
+    page.columnconfigure(6, weight=1)
 
     label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 16, "bold"), background="purple")
-    label.grid(row=0, column=0, pady=20)
+    label.grid(row=0, column=6, pady=20)
 
     back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 14), bg="#3EA99F", command = lambda: show_frame(pages["StartPage"]))
-    back_button.grid(row=1, column=0, pady=20)
+    back_button.grid(row=3, column=6, pady=20)
 
-    page.columnconfigure(0, weight=1)
+    page.columnconfigure(6, weight=1)
 
-    page.grid(row=0, column=0, sticky="nsew")
+    page.grid(row=0, column=6, sticky="nsew")
     return page
 
 window = tk.Tk()
