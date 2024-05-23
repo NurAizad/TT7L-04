@@ -41,10 +41,10 @@ def home_page():
     return menu_frame
 
 def subject_page(subject_name):
-    page = ttk.Frame(container)
+    page = ttk.Frame(container, style='TFrame')
     pages[subject_name + "Page"] = page
 
-    label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 16, "bold"))
+    label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 16, "bold"), background="purple")
     label.pack(pady=20)
 
     back_button = ttk.Button(page, text = "Back to Menu", command = lambda: show_frame(pages["StartPage"]))
