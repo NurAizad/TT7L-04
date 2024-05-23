@@ -16,7 +16,7 @@ def show_frame(frame):
 
 def home_page():
     menu_frame = ttk.Frame(container, style="TFrame")
-    menu_frame.grid(row=0, column=6, sticky="nsew")
+    menu_frame.grid(row=0, column=1, sticky="nsew")
 
     for i in range(3):
         menu_frame.rowconfigure(i, weight=1)
