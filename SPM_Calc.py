@@ -65,7 +65,7 @@ def subject_page(subject_name):
 
 window = tk.Tk()
 window.title("SPM Formula Calculator")
-window.geometry("400x300")
+window.geometry("500x400")
 
 container = ttk.Frame(window)
 container.pack(fill="both", expand=True)
