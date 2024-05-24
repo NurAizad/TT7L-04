@@ -24,6 +24,11 @@ window.title("Login form")
 window.state("zoomed")
 window.configure(bg='#212129')
 
+#frames
+frame = tk.Frame(bg='#212129')
+register_frame=tk.Frame(bg="#212129")
+afterLogin_frame=tk.Frame(bg="#212129")
+home=tk.Frame(bg="#212129")
 
 def register(): #function utk kalau click register keluar page register
     global frame
@@ -124,12 +129,13 @@ def register(): #function utk kalau click register keluar page register
 
     backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
     register_frame.pack()
-
+'''
 def show_frame(frame):
     frame.tkraise()
 
 def home_page():
-    menu_frame = ttk.Frame(container, style="TFrame")
+    global page
+    menu_frame = ttk.Frame(container, style="TFrame") #ni tukar container tu home
     menu_frame.grid(row=0, column=1, sticky="nsew")
 
     for i in range(3):
@@ -160,7 +166,8 @@ def home_page():
 
 
 def subject_page(subject_name):
-    page = ttk.Frame(container, style='TFrame')
+    global page
+    page = ttk.Frame(container, style='TFrame') #tukar from container
     pages[subject_name + "Page"] = page
 
     for i in range(3):
@@ -182,8 +189,9 @@ def subject_page(subject_name):
 #window.title("SPM Formula Calculator")
 #window.geometry("500x400")
 
-container = ttk.Frame(window)
-container.pack(fill="both", expand=True)
+container = ttk.Frame(window) #ni originally window tapi kalau tukar home tk jadi
+#container.pack(fill="both", expand=True)
+container.pack()
 
 for i in range(3):
     container.rowconfigure(i, weight=1)
@@ -202,12 +210,12 @@ for subject in ["Physics", "Chemistry", "Biology"]:
 show_frame(pages["StartPage"])
 
 #window.mainloop()
-
+'''
 def login(): #ni nanti kena connect dgn database sql kot
 
     global cursor
     global conn
-    global afterLogin
+    global pages
 
     username=username_entry.get()
     password=password_entry.get()
@@ -220,8 +228,90 @@ def login(): #ni nanti kena connect dgn database sql kot
             messagebox.showerror(title="Error", message="Account not found")
         else:
             print ("yay") #nanti letak function
-            home_page()
-            backbutton(frame,afterLogin_frame)
+            #show_frame(pages["StartPage"])
+            #show_frame(home)
+            #home_page()
+            #subject_page() ... subject_page() missing 1 required positional argument: 'subject_name'
+            def show_frame(frame):
+                frame.tkraise()
+
+            def home_page():
+                global menu_frame
+                menu_frame = ttk.Frame(container, style="TFrame")
+                menu_frame.grid(row=0, column=1, sticky="nsew")
+
+                for i in range(3):
+                    menu_frame.rowconfigure(i, weight=1)
+                menu_frame.columnconfigure(0, weight=1)
+
+                label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 24, "bold"), background="purple")
+                label.grid(row=0, column=0, pady=20)
+
+                button_frame = ttk.Frame(menu_frame, style="TFrame")
+                button_frame.grid(row=1, column=0, pady=20)
+
+                #button_style = ttk.Style()
+                #button_style.configure('TButton', font=("Arial", 14), padding=10)
+
+                physics_button = tk.Button(button_frame, text="Physics", font=("Arial", 18), bg="lightgreen", command=lambda: show_frame(pages["PhysicsPage"]))
+                physics_button.grid(row=0, column=0, pady=10, padx=20, sticky='ew')
+
+                chemistry_button = tk.Button(button_frame, text="Chemistry", font=('Arial', 18), bg="lightblue", command=lambda: show_frame(pages["ChemistryPage"]))
+                chemistry_button.grid(row=1, column=0, pady=10, padx=20, sticky='ew')
+
+                biology_button = tk.Button(button_frame, text="Biology", font=('Arial', 18), bg='lightcoral', command=lambda: show_frame(pages["BiologyPage"]))
+                biology_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
+
+                button_frame.columnconfigure(0, weight=1)
+
+                return menu_frame
+
+            def subject_page(subject_name):
+                #global subject_name
+                global page
+                page = ttk.Frame(container, style='TFrame')
+                pages[subject_name + "Page"] = page
+
+                for i in range(3):
+                    page.rowconfigure(i, weight=1)
+                page.columnconfigure(0, weight=1)
+
+                label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 20, "bold"), background="purple")
+                label.grid(row=0, column=0, pady=20)
+
+                back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 18), bg="#5DEBD7", command = lambda: show_frame(pages["StartPage"]))
+                back_button.grid(row=1, column=0, pady=20)
+
+                page.columnconfigure(0, weight=1)
+
+                page.grid(row=0, column=1, sticky="nsew")
+                return page
+
+        #window = tk.Tk()
+        #window.title("SPM Formula Calculator")
+        #window.geometry("500x400")
+
+        container = ttk.Frame(window)
+        container.pack(fill="both", expand=True)
+
+        for i in range(3):
+            container.rowconfigure(i, weight=1)
+            container.columnconfigure(i, weight=1)
+
+        style= ttk.Style()
+        style.configure("TFrame", background="#212129")
+
+        pages = {}
+
+        pages["StartPage"] = home_page()
+
+        for subject in ["Physics", "Chemistry", "Biology"]:
+            pages[subject + "Page"] = subject_page(subject)
+
+        show_frame(pages["StartPage"])
+
+#window.mainloop()
+        backbutton(frame,afterLogin_frame)
 
         conn.close()
     else:
@@ -231,10 +321,7 @@ def backbutton(forgetSurface,packSurface):
     forgetSurface.pack_forget()
     packSurface.pack()
 
-#frames
-frame = tk.Frame(bg='#212129')
-register_frame=tk.Frame(bg="#212129")
-afterLogin_frame=tk.Frame(bg="#212129")
+
 
 # Creating widgets
 login_label = tk.Label(frame, text="Login", bg='#212129', fg="#08edff", font=("Helvetica", 30))
