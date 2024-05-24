@@ -132,6 +132,7 @@ def register(): #function utk kalau click register keluar page register
     register_frame.pack()
 
 def chooseForm():
+    #bekas=tk.Frame()
     form_4_window = tk.Frame(window)
     form_5_window = tk.Frame(window)
     form_4_window.grid(row=0, column=0, sticky='news')
@@ -144,16 +145,16 @@ def chooseForm():
 
     #frame = tk.Frame(window, bg='#0317fc')
     #frame = ttk.Frame(window)
-    frame=tk.Frame()
-    frame.grid(row=0, column=0, sticky='news')
+    chooseFormFrame=tk.Frame()
+    chooseFormFrame.grid(row=0, column=0, sticky='news')
 
     # Widgets
-    label_spmcalculator = tk.Label(frame, text='SPM Calculator', bg='#0317fc', fg="#FFFFFF", font=('Arial', 30), pady=40)
-    label_spmcalculator = tk.Label(frame, text='SPM Calculator', bg='#0317fc', fg="#000000", font=('Arial', 30), pady=40)
-    form4_button = tk.Button(frame, text='Form 4', bg='#FFFFFF', fg="#0317fc", font=('Arial', 20), padx=20, command=lambda: form_4_window.tkraise())
-    form5_button = tk.Button(frame, text='Form 5', bg='#FFFFFF', fg='#0317fc', font=('Arial', 20), padx=20, command=lambda: form_5_window.tkraise())
-    back_button_form4 = tk.Button(form_4_window, text='Back', command=lambda: frame.tkraise())
-    back_button_form5 = tk.Button(form_5_window, text='Back', command=lambda: frame.tkraise())
+    label_spmcalculator = tk.Label(chooseFormFrame, text='SPM Calculator', bg='#0317fc', fg="#FFFFFF", font=('Arial', 30), pady=40)
+    label_spmcalculator = tk.Label(chooseFormFrame, text='SPM Calculator', bg='#0317fc', fg="#000000", font=('Arial', 30), pady=40)
+    form4_button = tk.Button(chooseFormFrame, text='Form 4', bg='#FFFFFF', fg="#0317fc", font=('Arial', 20), padx=20, command=lambda: form_4_window.tkraise())
+    form5_button = tk.Button(chooseFormFrame, text='Form 5', bg='#FFFFFF', fg='#0317fc', font=('Arial', 20), padx=20, command=lambda: form_5_window.tkraise())
+    back_button_form4 = tk.Button(form_4_window, text='Back', command=lambda: chooseFormFrame.tkraise())
+    back_button_form5 = tk.Button(form_5_window, text='Back', command=lambda: chooseFormFrame.tkraise())
 
     label_spmcalculator.grid(row=0, column=0, columnspan=2, sticky='news')
     form4_button.grid(row=1, column=0)
@@ -170,8 +171,8 @@ def chooseForm():
     back_button_form4.grid(row=1, column=0, padx=10, pady=10)
     back_button_form5.grid(row=1, column=0, padx=10, pady=10)
 
-    frame.grid_columnconfigure(0, weight=1)
-    frame.grid_columnconfigure(1, weight=1)
+    chooseFormFrame.grid_columnconfigure(0, weight=1)
+    chooseFormFrame.grid_columnconfigure(1, weight=1)
 
     form_4_window.grid_columnconfigure(0, weight=1)
     form_4_window.grid_rowconfigure(0, weight=1)
@@ -181,10 +182,11 @@ def chooseForm():
     window.grid_columnconfigure(0, weight=1)
     window.grid_rowconfigure(0, weight=1)
 
-    frame.grid(row=0, column=0, sticky='news')
-    frame.tkraise()
+    chooseFormFrame.grid(row=0, column=0, sticky='news')
+    chooseFormFrame.tkraise()
+    #chooseFormFrame.pack()
 
-    window.mainloop()
+    #window.mainloop()
 
 def login(): #ni nanti kena connect dgn database sql kot
 
@@ -205,7 +207,7 @@ def login(): #ni nanti kena connect dgn database sql kot
             print ("yay") #nanti letak function
             def show_frame(frame):
                 frame.tkraise()
-                #chooseForm()
+                chooseForm()
 
             def home_page():
                 global menu_frame
@@ -278,7 +280,6 @@ def login(): #ni nanti kena connect dgn database sql kot
             pages[subject + "Page"] = subject_page(subject)
 
         show_frame(pages["StartPage"])
-
         backbutton(frame,afterLogin_frame)
         
         conn.close()
