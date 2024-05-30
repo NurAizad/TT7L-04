@@ -28,12 +28,14 @@ window.configure(bg='#212129')
 frame = tk.Frame(bg='#212129')
 register_frame=tk.Frame(bg="#212129")
 subject_frame=tk.Frame(bg="#212129")
-phy_frame=tk.Frame(bg="#212129")
 chem_frame=tk.Frame(bg="#212129")
 bio_frame=tk.Frame(bg="#212129")
 
+#physics
+phy_frame=tk.Frame(bg="#212129")
 phyf4_frame=tk.Frame(bg="#212129")
 phyf4c2_frame=tk.Frame(bg="#212129")
+speed_frame=tk.Frame(bg="#212129")
 
 def register(): #function utk kalau click register keluar page register
     global frame
@@ -141,7 +143,6 @@ def login(): #ni nanti kena connect dgn database sql kot
 
     global cursor
     global conn
-    global phy_frame
 
     username=username_entry.get()
     password=password_entry.get()
@@ -161,15 +162,28 @@ def login(): #ni nanti kena connect dgn database sql kot
                     backbutton(phy_frame,phyf4_frame)
                     def phy_f4_chap2():
                         backbutton(phyf4_frame,phyf4c2_frame)
+                        def speed():
+                            backbutton(phyf4c2_frame,speed_frame)
+                            speed_label=tk.Label(speed_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            distance_label=tk.Label(speed_frame,text="Distance = ",bg="#212129",fg="#90ee90", font=("Helvetica", 16))
+                            time_label=tk.Label(speed_frame,text="Time taken = ",bg="#212129",fg="#90ee90", font=("Helvetica", 16))
+
+                            distance_entry=tk.Entry(speed_frame, font=("Helvetica", 16))
+                            time_entry=tk.Entry(speed_frame, font=("Helvetica", 16))
+
+
+                            speed_label.grid(row=0,column=1,pady=10)
+
+
                         f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
-                        speed_button=tk.Button(phyf4c2_frame,text="Speed", font=("Helvetica",24))
-                        velocity_button=tk.Button(phyf4c2_frame,text="Velocity", font=("Helvetica",24))
-                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration", font=("Helvetica",24))
-                        momentum_button=tk.Button(phyf4c2_frame,text="Momentum", font=("Helvetica",24))
-                        force_button=tk.Button(phyf4c2_frame,text="Force", font=("Helvetica",24))
-                        impulse_button=tk.Button(phyf4c2_frame,text="Impulse", font=("Helvetica",24))
-                        impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force", font=("Helvetica",24))
-                        weight_button=tk.Button(phyf4c2_frame,text="Weight", font=("Helvetica",24))
+                        speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
+                        velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24))
+                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24))
+                        momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24))
+                        force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24))
+                        impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24))
+                        impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force",bg="#90ee90", font=("Helvetica",24))
+                        weight_button=tk.Button(phyf4c2_frame,text="Weight",bg="#90ee90", font=("Helvetica",24))
 
                         phy_f4c2_back=tk.Button(phyf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4c2_frame,phyf4_frame))
                         phy_f4c2_back.grid(row=9,column=1,pady=10)
@@ -188,11 +202,11 @@ def login(): #ni nanti kena connect dgn database sql kot
 
 
                     f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
-                    chap2_button=tk.Button(phyf4_frame,text="Chapter 2", font=("Helvetica",24),command=lambda:phy_f4_chap2())
-                    chap3_button=tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                    chap4_button=tk.Button(phyf4_frame,text="Chapter 4", font=("Helvetica",24))
-                    chap5_button=tk.Button(phyf4_frame,text="Chapter 5", font=("Helvetica",24))
-                    chap6_button=tk.Button(phyf4_frame,text="Chapter 6", font=("Helvetica",24))
+                    chap2_button=tk.Button(phyf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f4_chap2())
+                    chap3_button=tk.Button(phyf4_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24))
+                    chap4_button=tk.Button(phyf4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24))
+                    chap5_button=tk.Button(phyf4_frame,text="Chapter 5",bg="#90ee90", font=("Helvetica",24))
+                    chap6_button=tk.Button(phyf4_frame,text="Chapter 6",bg="#90ee90", font=("Helvetica",24))
 
                     phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,phy_frame))
                     phy_f4_back.grid(row=6,column=2,pady=10)
@@ -204,8 +218,8 @@ def login(): #ni nanti kena connect dgn database sql kot
                     chap5_button.grid(row=2,column=1,padx=10,pady=50)
                     chap6_button.grid(row=2,column=3,padx=10)
 
-                form4_button=tk.Button(phy_frame,text="Form 4", bg="#FFFFFF", font=("Helvetica",24), command=lambda:phy_f4())
-                form5_button=tk.Button(phy_frame,text="Form 5", bg="#FFFFFF", font=("Helvetica",24))
+                form4_button=tk.Button(phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f4())
+                form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24))
                 chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
                 phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phy_frame,subject_frame))
@@ -217,9 +231,9 @@ def login(): #ni nanti kena connect dgn database sql kot
 
             subject_label = tk.Label(subject_frame, text="Choose a subject", bg="#212129",fg="#08edff", font=("Helvetica",34))
 
-            phy_button = tk.Button(subject_frame, text="Physics", bg="#FFFFFF", font=("Helvetica",24),command=lambda:PhysicsPage())
-            chem_button = tk.Button(subject_frame, text="Chemistry", bg="#FFFFFF", font=("Helvetica",24))
-            bio_button = tk.Button(subject_frame, text="Biology", bg="#FFFFFF", font=("Helvetica",24))
+            phy_button = tk.Button(subject_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:PhysicsPage())
+            chem_button = tk.Button(subject_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24))
+            bio_button = tk.Button(subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24))
 
             subject_back = tk.Button(subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(subject_frame,frame))
 
