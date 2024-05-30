@@ -28,7 +28,7 @@ window.configure(bg='#212129')
 frame = tk.Frame(bg='#212129')
 register_frame=tk.Frame(bg="#212129")
 subject_frame=tk.Frame(bg="#212129")
-phy_frame=tk.Frame(bg="#8352ce")
+phy_frame=tk.Frame(bg="#212129")
 chem_frame=tk.Frame(bg="#212129")
 bio_frame=tk.Frame(bg="#212129")
 
@@ -161,28 +161,34 @@ def login(): #ni nanti kena connect dgn database sql kot
                     backbutton(phy_frame,phyf4_frame)
                     def phy_f4_chap2():
                         backbutton(phyf4_frame,phyf4c2_frame)
-                        f4Chapter2_label=tk.Label(phyf4_frame, text="Physics Form 4 Chapter 2", bg="#FFFFFF",font=("Helvetica",34))
-                        speed_button=           tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        velocity_button=        tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        acceleration_button=    tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        momentum_button=        tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        force_button=           tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        impulse_button=         tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        impulsive_force_button= tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
-                        weight_button=          tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
+                        f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                        speed_button=tk.Button(phyf4c2_frame,text="Speed", font=("Helvetica",24))
+                        velocity_button=tk.Button(phyf4c2_frame,text="Velocity", font=("Helvetica",24))
+                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration", font=("Helvetica",24))
+                        momentum_button=tk.Button(phyf4c2_frame,text="Momentum", font=("Helvetica",24))
+                        force_button=tk.Button(phyf4c2_frame,text="Force", font=("Helvetica",24))
+                        impulse_button=tk.Button(phyf4c2_frame,text="Impulse", font=("Helvetica",24))
+                        impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force", font=("Helvetica",24))
+                        weight_button=tk.Button(phyf4c2_frame,text="Weight", font=("Helvetica",24))
 
-                        f4Chapter2_label.grid(row=0,column=1)
-                        speed_button.grid(column=2)          
-                        velocity_button(column=2)          
-                        acceleration_button(column=2)       
-                        momentum_button(column=2)      
-                        force_button(column=2)        
-                        impulse_button(column=2)       
-                        impulsive_force_button(column=2)    
-                        weight_button(column=2)              
+                        phy_f4c2_back=tk.Button(phyf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4c2_frame,phyf4_frame))
+                        phy_f4c2_back.grid(row=9,column=1,pady=10)
 
-                    f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#FFFFFF",font=("Helvetica",34))
-                    chap2_button=tk.Button(phyf4_frame,text="Chapter 2", font=("Helvetica",24),command=lambda:phy_f4_chap2)
+
+                        f4Chapter2_label.grid(row=0,column=1,pady=10)
+                        speed_button.grid(row=1,column=1,pady=10,sticky="ew")          
+                        velocity_button.grid(row=2,column=1,pady=10,sticky="ew")          
+                        acceleration_button.grid(row=3,column=1,pady=10,sticky="ew")       
+                        momentum_button.grid(row=4,column=1,pady=10,sticky="ew")      
+                        force_button.grid(row=5,column=1,pady=10,sticky="ew")        
+                        impulse_button.grid(row=6,column=1,pady=10,sticky="ew")       
+                        impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew")    
+                        weight_button.grid(row=8,column=1,pady=10,sticky="ew")              
+                        
+
+
+                    f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                    chap2_button=tk.Button(phyf4_frame,text="Chapter 2", font=("Helvetica",24),command=lambda:phy_f4_chap2())
                     chap3_button=tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
                     chap4_button=tk.Button(phyf4_frame,text="Chapter 4", font=("Helvetica",24))
                     chap5_button=tk.Button(phyf4_frame,text="Chapter 5", font=("Helvetica",24))
@@ -200,7 +206,7 @@ def login(): #ni nanti kena connect dgn database sql kot
 
                 form4_button=tk.Button(phy_frame,text="Form 4", bg="#FFFFFF", font=("Helvetica",24), command=lambda:phy_f4())
                 form5_button=tk.Button(phy_frame,text="Form 5", bg="#FFFFFF", font=("Helvetica",24))
-                chooseForm_label=tk.Label(phy_frame,text="Choose which form:", font=("Helvetica",34))
+                chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
                 phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phy_frame,subject_frame))
 
@@ -209,7 +215,7 @@ def login(): #ni nanti kena connect dgn database sql kot
                 chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
                 phy_back.grid(row=6,column=1)
 
-            subject_label = tk.Label(subject_frame, text="Choose a subject", bg="#FFFFFF", font=("Helvetica",34))
+            subject_label = tk.Label(subject_frame, text="Choose a subject", bg="#212129",fg="#08edff", font=("Helvetica",34))
 
             phy_button = tk.Button(subject_frame, text="Physics", bg="#FFFFFF", font=("Helvetica",24),command=lambda:PhysicsPage())
             chem_button = tk.Button(subject_frame, text="Chemistry", bg="#FFFFFF", font=("Helvetica",24))
@@ -235,7 +241,7 @@ def backbutton(forgetSurface,packSurface):
 
 
 # Creating widgets
-login_label = tk.Label(frame, text="Login", bg='#212129', fg="#08edff", font=("Helvetica", 30))
+login_label = tk.Label(frame, text="Login", bg='#212129', fg="#08edff", font=("Helvetica", 34))
 username_label = tk.Label(frame, text="Username", bg='#212129', fg="#FFFFFF", font=("Helvetica", 16))
 username_entry = tk.Entry(frame, font=("Helvetica", 16))
 password_entry = tk.Entry(frame, show="*", font=("Helvetica", 16))
