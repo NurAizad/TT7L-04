@@ -36,7 +36,7 @@ phy_frame=tk.Frame(bg="#212129")
 phyf4_frame=tk.Frame(bg="#212129")
 phyf4c2_frame=tk.Frame(bg="#212129")
 speed_frame=tk.Frame(bg="#212129")
-
+velocity_frame=tk.Frame(bg="#212129")
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
@@ -164,20 +164,69 @@ def login(): #ni nanti kena connect dgn database sql kot
                         backbutton(phyf4_frame,phyf4c2_frame)
                         def speed():
                             backbutton(phyf4c2_frame,speed_frame)
+                            def speed_calc():
+                                distance=float(distance_entry.get())
+                                time = float(time_entry.get())
+                                speed=distance/time
+                                result_label.config(text=f"Speed: {speed}")
+
+
                             speed_label=tk.Label(speed_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
-                            distance_label=tk.Label(speed_frame,text="Distance = ",bg="#212129",fg="#90ee90", font=("Helvetica", 16))
-                            time_label=tk.Label(speed_frame,text="Time taken = ",bg="#212129",fg="#90ee90", font=("Helvetica", 16))
+                            distance_label=tk.Label(speed_frame,text="Distance",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            time_label=tk.Label(speed_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(speed_frame,text="Speed: ",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
 
                             distance_entry=tk.Entry(speed_frame, font=("Helvetica", 16))
                             time_entry=tk.Entry(speed_frame, font=("Helvetica", 16))
 
+                            speed_back=tk.Button(speed_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(speed_frame,phyf4c2_frame))
+                            speed_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(speed_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:speed_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
 
                             speed_label.grid(row=0,column=1,pady=10)
+                            distance_label.grid(row=1,column=0,pady=10)
+                            time_label.grid(row=2,column=0,pady=10)
+                            distance_entry.grid(row=1,column=2)
+                            time_entry.grid(row=2,column=2)
+                            result_label.grid(row=3,column=1,pady=10)
+
+                        def velocity():
+                            backbutton(phyf4c2_frame,velocity_frame)
+                            def velocity_calc():
+                                displacement=float(displacement_entry.get())
+                                time = float(time_entry.get())
+                                velocity=displacement/time
+                                result_label.config(text=f"Speed: {velocity}")
 
 
+                            velocity_label=tk.Label(velocity_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            displacement_label=tk.Label(velocity_frame,text="Displacement",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            time_label=tk.Label(velocity_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(velocity_frame,text="Velocity: ",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            displacement_entry=tk.Entry(velocity_frame, font=("Helvetica", 16))
+                            time_entry=tk.Entry(velocity_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(velocity_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(velocity_frame,phyf4c2_frame))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(velocity_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:velocity_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            velocity_label.grid(row=0,column=1,pady=10)
+                            displacement_label.grid(row=1,column=0,pady=10)
+                            time_label.grid(row=2,column=0,pady=10)
+                            displacement_entry.grid(row=1,column=2)
+                            time_entry.grid(row=2,column=2)
+                            result_label.grid(row=3,column=1,pady=10)
+
+                        
+                        
                         f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
                         speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
-                        velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24))
+                        velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
                         acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24))
                         momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24))
                         force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24))
