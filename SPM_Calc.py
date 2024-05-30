@@ -28,7 +28,11 @@ window.configure(bg='#212129')
 frame = tk.Frame(bg='#212129')
 register_frame=tk.Frame(bg="#212129")
 subject_frame=tk.Frame(bg="#212129")
-home=tk.Frame(bg="#212129")
+phy_frame=tk.Frame(bg="#8352ce")
+chem_frame=tk.Frame(bg="#212129")
+bio_frame=tk.Frame(bg="#212129")
+
+phyf4_frame=tk.Frame(bg="#212129")
 
 
 def register(): #function utk kalau click register keluar page register
@@ -137,7 +141,7 @@ def login(): #ni nanti kena connect dgn database sql kot
 
     global cursor
     global conn
-    global pages
+    global phy_frame
 
     username=username_entry.get()
     password=password_entry.get()
@@ -151,20 +155,51 @@ def login(): #ni nanti kena connect dgn database sql kot
         else:
             print ("yay") #nanti letak function
             backbutton(frame,subject_frame)
-            #def subjectPage():
-                #print("subject")
+            def PhysicsPage():
+                backbutton(subject_frame,phy_frame)
+                def phy_f4():
+                    backbutton(phy_frame,phyf4_frame)
+                    f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#FFFFFF",font=("Helvetica",34))
+                    chap2_button=tk.Button(phyf4_frame,text="Chapter 2", font=("Helvetica",24))
+                    chap3_button=tk.Button(phyf4_frame,text="Chapter 3", font=("Helvetica",24))
+                    chap4_button=tk.Button(phyf4_frame,text="Chapter 4", font=("Helvetica",24))
+                    chap5_button=tk.Button(phyf4_frame,text="Chapter 5", font=("Helvetica",24))
+                    chap6_button=tk.Button(phyf4_frame,text="Chapter 6", font=("Helvetica",24))
+
+                    phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,phy_frame))
+                    phy_f4_back.grid(row=6,column=2,pady=10)
+
+                    f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+                    chap2_button.grid(row=1,column=0,padx=10,pady=50)
+                    chap3_button.grid(row=1,column=2,padx=10)
+                    chap4_button.grid(row=1,column=4,padx=10)
+                    chap5_button.grid(row=2,column=1,padx=10,pady=50)
+                    chap6_button.grid(row=2,column=3,padx=10)
+
+                form4_button=tk.Button(phy_frame,text="Form 4", bg="#FFFFFF", font=("Helvetica",24), command=lambda:phy_f4())
+                form5_button=tk.Button(phy_frame,text="Form 5", bg="#FFFFFF", font=("Helvetica",24))
+                chooseForm_label=tk.Label(phy_frame,text="Choose which form:", font=("Helvetica",34))
+
+                phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phy_frame,subject_frame))
+
+                form4_button.grid(row=1,column=0,padx=5,pady=200)
+                form5_button.grid(row=1,column=2,padx=5)
+                chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
+                phy_back.grid(row=6,column=1)
+
             subject_label = tk.Label(subject_frame, text="Choose a subject", bg="#FFFFFF", font=("Helvetica",34))
-            phy_label = tk.Label(subject_frame, text="Physics", bg="#FFFFFF", font=("Helvetica",24))
-            chem_label = tk.Label(subject_frame, text="Chemistry", bg="#FFFFFF", font=("Helvetica",24))
-            bio_label = tk.Label(subject_frame, text="Biology", bg="#FFFFFF", font=("Helvetica",24))
+
+            phy_button = tk.Button(subject_frame, text="Physics", bg="#FFFFFF", font=("Helvetica",24),command=lambda:PhysicsPage())
+            chem_button = tk.Button(subject_frame, text="Chemistry", bg="#FFFFFF", font=("Helvetica",24))
+            bio_button = tk.Button(subject_frame, text="Biology", bg="#FFFFFF", font=("Helvetica",24))
 
             subject_back = tk.Button(subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(subject_frame,frame))
 
             subject_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
             subject_back.grid(row=6,column=1,columnspan=2,padx=20,pady=40)
-            phy_label.grid(row=1,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
-            chem_label.grid(row=2,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
-            bio_label.grid(row=3,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
+            phy_button.grid(row=1,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
+            chem_button.grid(row=2,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
+            bio_button.grid(row=3,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
             
                 
         conn.close()
