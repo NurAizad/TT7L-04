@@ -154,7 +154,10 @@ def login(): #ni nanti kena connect dgn database sql kot
             #def subjectPage():
                 #print("subject")
             subject_label = tk.Label(subject_frame, text="Choose a subject", bg="#FFFFFF", font=("Helvetica",34))
+            subject_back = tk.Button(subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(subject_frame,frame))
+
             subject_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
+            subject_back.grid(row=6,column=1,columnspan=2,padx=20,pady=5,sticky="EW")
                 
         conn.close()
     else:
