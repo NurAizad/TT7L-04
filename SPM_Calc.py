@@ -19,13 +19,15 @@ if __name__ == '__main__':
 
     form_4_window = tk.Frame(window, bg="#212129")
     form_5_window = tk.Frame(window, bg="#212129")
-    c1_f4_window = tk.Frame(window, bg="#212129"  )
-    c1_f5_window =tk.Frame(window, bg="#212129"  )
+    c9_f5_bio_window =tk.Frame(window, bg="#212129"  )
+    c4_f4_bio_window =tk.Frame(window, bg="#212129" )
+    c5_f4_bio_window = tk.Frame(window, bg="#212129"  )
 
     form_4_window.grid(row=0, column=0, sticky='news')
     form_5_window.grid(row=0, column=0, sticky='news')
-    c1_f4_window.grid (row=0, column=0, sticky='news') 
-    c1_f5_window.grid(row=0, column=0, sticky='news') 
+    c5_f4_bio_window.grid (row=0, column=0, sticky='news') 
+    c9_f5_bio_window.grid(row=0, column=0, sticky='news') 
+    c4_f4_bio_window.grid (row=0, column=0, sticky='news') 
 
     window.title("SPM Calculator")
     window.geometry('500x500')
@@ -36,58 +38,78 @@ if __name__ == '__main__':
 
     #functions
 
-    def calculate_area():
-      try:
-        height = int(entry_enter_height.get())
-        width = int(entry_enter_width.get())
-        area = 0.5 * height * width
-        label_area.config(text=f"{area}")
-      except ValueError:
-        print("please enter numbers")
- 
+    def calculate_percentage_difference_in_mass():
+       try:
+          final_mass = int(entry_enter_final_mass.get())
+          initial_mass = int(entry_enter_initial_mass.get())
+          percentage_difference_in_mass = ((final_mass-initial_mass)/initial_mass)*0.01
+          label_percentage_difference_in_mass.config(text=f"{percentage_difference_in_mass}")
+       except ValueError:
+        print("please enter numbers")  
+
+    def calculate_enzyem_reaction_rate():
+       try:
+          time_taken=int(entry_time_taken.get())    
+          enzyme_reaction_rate = 1/time_taken
+          rounded_rate=round(enzyme_reaction_rate,4)
+          label_enzyme_reaction_rate.config(text=f"{rounded_rate}")
+       except ValueError:
+          print('please enter numbers')  
+       
     # Widgets main menu
     label_spmcalculator = tk.Label(frame, text='SPM Calculator', bg='#212129', fg="#08edff", font=('Arial', 30), pady=40)
     form4_button = tk.Button(frame, text='Form 4', bg='#212129', fg="#08edff", font=('Arial', 20), padx=20, command=lambda: form_4_window.tkraise())
     form5_button = tk.Button(frame, text='Form 5', bg='#212129', fg='#08edff', font=('Arial', 20), padx=20, command=lambda: form_5_window.tkraise())
     back_button_form4 = tk.Button(form_4_window, text='Back', command=lambda: frame.tkraise())
     back_button_form5 = tk.Button(form_5_window, text='Back', command=lambda: frame.tkraise())
-    #widgets chapters f4
-    chapter_1_button_form4 = tk.Button(form_4_window, text='chapter 1',command=lambda: c1_f4_window.tkraise())
-    back_button_chapter_to_form_4=tk.Button(c1_f4_window, text='back',command=lambda: form_4_window.tkraise())
-    label_enter_height =tk.Label(c1_f4_window, text='enter height',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)   
-    entry_enter_height = ttk.Entry(c1_f4_window)
-    label_enter_width =tk.Label(c1_f4_window, text='enter width',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)   
-    entry_enter_width = ttk.Entry(c1_f4_window)
-    label_area = tk.Label(c1_f4_window, text='area',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40) 
-    button_calculate_area = ttk.Button(c1_f4_window, text='calculate area', command=calculate_area )
+    #widgets chapters f4 
+    chapter_5_button_form4 = tk.Button(form_4_window, text='chapter 5',command=lambda: c5_f4_bio_window.tkraise())
+    chapter_4_button_form4 =tk.Button(form_4_window, text='chapter 4',command=lambda: c4_f4_bio_window.tkraise())
+    back_button_chapter4_to_form_4 = tk.Button(c4_f4_bio_window,text='back',command=lambda:form_4_window.tkraise())
 
-
-
+    #widgets bio chapter 4 f4
+    back_button_c4bio_to_form_4 =tk.Button(c4_f4_bio_window, text='back',command=lambda: form_4_window.tkraise())
+    label_enter_final_mass = tk.Label(c4_f4_bio_window, text='enter final mass:',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)
+    entry_enter_final_mass = ttk.Entry(c4_f4_bio_window)
+    label_enter_initial_mass = tk.Label(c4_f4_bio_window, text='enter initial mass:',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)
+    entry_enter_initial_mass = ttk.Entry(c4_f4_bio_window)
+    label_percentage_difference_in_mass = tk.Label(c4_f4_bio_window, text='',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)
+    button_calculate_percentage_difference_in_mass = ttk.Button(c4_f4_bio_window, text='calculate percentage difference in mass', command=calculate_percentage_difference_in_mass)
+    #widgets bio chapter 5 f4
+    back_button_c5bio_to_form_4 =tk.Button(c5_f4_bio_window, text='back',command=lambda: form_4_window.tkraise())
+    label_enter_time_taken = tk.Label(c5_f4_bio_window, text='enter time taken:',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)
+    entry_time_taken = ttk.Entry(c5_f4_bio_window)
+    label_enzyme_reaction_rate = tk.Label(c5_f4_bio_window, text='',bg='#212129', fg="#08edff", font=('Arial', 15), pady=40)
+    button_calculate_enzyme_reaction_rate = ttk.Button(c5_f4_bio_window, text='calcuate enzyme reaction rate', command=calculate_enzyem_reaction_rate)
 
     #widgets chapter f5
-    chapter_1_button_form5 = tk.Button(form_5_window, text='chapter 1', command=lambda: c1_f5_window.tkraise())
-    back_button_chapter_to_form_5=tk.Button(c1_f5_window, text='back',command=lambda: form_5_window.tkraise())
-    
-   #grid
+    chapter_9_button_form5 = tk.Button(form_5_window, text='chapter 9', command=lambda: c9_f5_bio_window.tkraise())
+    back_button_chapter9_to_form_5=tk.Button(c9_f5_bio_window, text='back',command=lambda: form_5_window.tkraise())
+
+    #grid chapters
     label_spmcalculator.grid(row=0, column=0, columnspan=2, pady=10, sticky='news')
     form4_button.grid(row=1, column=0, padx=10, pady=10)
     form5_button.grid(row=1, column=1, padx=10, pady=10)
-    back_button_form4.grid(row=1, column=0,)
-    back_button_form5.grid(row=1, column=0,)
-    chapter_1_button_form4.grid(row=0, column=0,)
-    chapter_1_button_form5.grid(row=0, column=0,)
-    back_button_chapter_to_form_4.grid(row=0,column=0)
-    back_button_chapter_to_form_5.grid(row=0,column=0)
+    back_button_form4.grid(row=3, column=3,)
+    back_button_form5.grid(row=2, column=2,)
+    chapter_5_button_form4.grid(row=1, column=0,)
+    chapter_4_button_form4.grid (row=0, column=0)
+    chapter_9_button_form5.grid (row=0, column=0)
     
-
-    #grid widgets chapter 4
-    label_enter_height.grid(row=0, column=0)
-    entry_enter_height.grid(row =0, column=1)
-    label_enter_width.grid(row=0, column=2)
-    entry_enter_width.grid(row =0, column=3)
-    button_calculate_area.grid(row=1, column=1)
-    label_area.grid(row=1, column=2)
-    
+   #grid biolog c4 f4
+    label_enter_final_mass.grid(row=0, column=0)
+    entry_enter_final_mass.grid(row=0, column=1)
+    label_enter_initial_mass.grid(row=1, column=0)
+    entry_enter_initial_mass.grid(row=1, column=1)
+    button_calculate_percentage_difference_in_mass.grid(row=2, column=0)
+    label_percentage_difference_in_mass.grid(row=2, column=1)
+    back_button_c4bio_to_form_4.grid (row=3, column=2)
+    #grid biology c5 f4
+    label_enter_time_taken.grid(row=0, column=0)
+    entry_time_taken.grid(row=0, column=1)
+    button_calculate_enzyme_reaction_rate.grid(row=2, column=0)
+    back_button_c5bio_to_form_4.grid(row=3, column=2)
+    label_enzyme_reaction_rate.grid(row=2, column=1)
 
 
     frame.grid_columnconfigure(0, weight=1)
