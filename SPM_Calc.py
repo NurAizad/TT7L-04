@@ -132,6 +132,16 @@ def subject_page(subject_name):
     page.grid(row=0, column=1, sticky="nsew")
     return page 
 
+def calculate_area(entry_height, entry_width, label_area):
+    try:
+        height = int(entry_height.get())
+        width = int(entry_width.get())
+        area = 0.5 * height * width
+        label_area.config(text=f"Area: {area}")
+    except ValueError:
+        label_area.config(text="Please enter valid numbers")
+
+
 window = tk.Tk()
 window.title("SPM Formula Calculator")
 window.geometry("600x400")
