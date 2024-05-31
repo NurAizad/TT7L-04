@@ -44,6 +44,15 @@ def home_page():
 
     button_frame.columnconfigure(0, weight=1)
 
+
+    # Create pages for Form 4 and Form 5
+    pages["PhysicsForm4Page"] = form_page("Physics", "Form4")
+    pages["PhysicsForm5Page"] = form_page("Physics", "Form5")
+    pages["ChemistryForm4Page"] = form_page("Chemistry", "Form4")
+    pages["ChemistryForm5Page"] = form_page("Chemistry", "Form5")
+    pages["BiologyForm4Page"] = form_page("Biology", "Form4")
+    pages["BiologyForm5Page"] = form_page("Biology", "Form5")
+
     return menu_frame
 
 def form_page(subject_name, form):
@@ -117,7 +126,7 @@ def subject_page(subject_name):
     label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 20, "bold"), background="purple")
     label.grid(row=0, column=0, pady=20)
 
-    button_options = {'font': ("Arial", 18), bg: '#D3D3D3', 'width': 10, 'height': 2}
+    button_options = {'font': ("Arial", 18), 'bg': '#D3D3D3', 'width': 10, 'height': 2}
 
     form4_button = tk.Button(page, text="Form 4", **button_options, command=lambda: show_frame(pages[subject_name + "Form4Page"]))
     form4_button.grid(row=1, column=0, pady=10, padx=20, sticky='ew')
@@ -132,6 +141,7 @@ def subject_page(subject_name):
     page.grid(row=0, column=1, sticky="nsew")
     return page 
 
+
 def calculate_area(entry_height, entry_width, label_area):
     try:
         height = int(entry_height.get())
@@ -140,7 +150,6 @@ def calculate_area(entry_height, entry_width, label_area):
         label_area.config(text=f"Area: {area}")
     except ValueError:
         label_area.config(text="Please enter valid numbers")
-
 
 window = tk.Tk()
 window.title("SPM Formula Calculator")
