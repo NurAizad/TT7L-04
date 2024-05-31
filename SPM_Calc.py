@@ -73,6 +73,38 @@ def form_page(subject_name, form):
     page.grid(row=0, column=1, sticky="nsew")
     return page
 
+def chapter_page(subject_name, form):
+    page = ttk.Frame(container, style='TFrame')
+    pages[subject_name + form + "Chapter1"] = page
+
+    for i in range(5):
+        page.rowconfigure(i, weight=1)
+    for i in range(4):
+        page.columnconfigure(i, weight=1)
+
+    label = ttk.Label(page, text=f"{subject_name} - Form {form} Chapter 1", font=("Arial", 20, "bold"), background="purple")
+    label.grid(row=0, column=1, columnspan=2, pady=20)
+
+    back_button = tk.Button(page, text="Back to Form", font=("Arial", 18), bg="#5DEBD7", command=lambda: show_frame(pages[subject_name + form + "Page"]))
+    back_button.grid(row=1, column=1, columnspan=2, pady=20)
+
+    # Chapter-specific widgets (example: area calculation)
+    label_enter_height = tk.Label(page, text='Enter Height', bg='#212129', fg="#08edff", font=('Arial', 15), pady=10)
+    entry_enter_height = ttk.Entry(page)
+    label_enter_width = tk.Label(page, text='Enter Width', bg='#212129', fg="#08edff", font=('Arial', 15), pady=10)
+    entry_enter_width = ttk.Entry(page)
+    button_calculate_area = ttk.Button(page, text='Calculate Area', command=lambda: calculate_area(entry_enter_height, entry_enter_width, label_area))
+    label_area = tk.Label(page, text='Area', bg='#212129', fg="#08edff", font=('Arial', 15), pady=10)
+
+    label_enter_height.grid(row=2, column=0, pady=10, sticky='e')
+    entry_enter_height.grid(row=2, column=1, pady=10, sticky='w')
+    label_enter_width.grid(row=2, column=2, pady=10, sticky='e')
+    entry_enter_width.grid(row=2, column=3, pady=10, sticky='w')
+    button_calculate_area.grid(row=3, column=1, columnspan=2, pady=10)
+    label_area.grid(row=4, column=1, columnspan=2, pady=10)
+
+    page.grid(row=0, column=1, sticky="nsew")
+    return page
 
 def subject_page(subject_name):
     page = ttk.Frame(container, style='TFrame')
