@@ -171,6 +171,10 @@ pages["StartPage"] = home_page()
 
 for subject in ["Physics", "Chemistry", "Biology"]:
     pages[subject + "Page"] = subject_page(subject)
+    pages[subject + "Form4Page"] = form_page(subject, '4')
+    pages[subject + "Form5Page"] = form_page(subject, '5')
+    pages[subject + "Form4Chapter1"] = chapter_page(subject, '4')
+    pages[subject + "Form5Chapter1"] = chapter_page(subject, '5')
 
 show_frame(pages["StartPage"])
 
