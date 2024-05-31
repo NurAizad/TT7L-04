@@ -117,13 +117,20 @@ def subject_page(subject_name):
     label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 20, "bold"), background="purple")
     label.grid(row=0, column=0, pady=20)
 
-    back_button = tk.Button(page, text = "Back to Menu", font=("Arial", 18), bg="#5DEBD7", command = lambda: show_frame(pages["StartPage"]))
-    back_button.grid(row=1, column=0, pady=20)
+    button_options = {'font': ("Arial", 18), bg: '#D3D3D3', 'width': 10, 'height': 2}
+
+    form4_button = tk.Button(page, text="Form 4", **button_options, command=lambda: show_frame(pages[subject_name + "Form4Page"]))
+    form4_button.grid(row=1, column=0, pady=10, padx=20, sticky='ew')
+
+    form5_button = tk.Button(page, text="Form 5", **button_options, command=lambda: show_frame(pages[subject_name + "Form5Page"]))
+    form5_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
+
+    back_button = tk.Button(page, text="Back to Menu", font=("Arial", 18), bg="#5DEBD7", command=lambda: show_frame(pages["StartPage"]))
+    back_button.grid(row=3, column=0, pady=20)
 
     page.columnconfigure(0, weight=1)
-
     page.grid(row=0, column=1, sticky="nsew")
-    return page
+    return page 
 
 window = tk.Tk()
 window.title("SPM Formula Calculator")
