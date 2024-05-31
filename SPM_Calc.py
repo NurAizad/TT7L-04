@@ -46,6 +46,34 @@ def home_page():
 
     return menu_frame
 
+def form_page(subject_name, form):
+    page = ttk.Frame(container, style='TFrame')
+    pages[subject_name + form + "Page"] = page
+
+    for i in range(3):
+        page.rowconfigure(i, weight=1)
+    page.columnconfigure(0, weight=1)
+
+    label = ttk.Label(page, text=f"{subject_name} - Form {form} Calculator", font=("Arial", 20, "bold"), background="purple")
+    label.grid(row=0, column=0, pady=20)
+
+    back_button = tk.Button(page, text="Back to Menu", font=("Arial", 18), bg="#5DEBD7", command=lambda: show_frame(pages[subject_name + "Page"]))
+    back_button.grid(row=1, column=0, pady=20)
+
+    button_options = {'font': ("Arial", 18), 'bg': 'lightgray', 'width': 10, 'height': 2}
+
+    if form == '4':
+        chapter_button = tk.Button(page, text="Chapter 1", **button_options, command=lambda: show_frame(pages[subject_name + "Form4Chapter1"]))
+        chapter_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
+    elif form == '5':
+        chapter_button = tk.Button(page, text="Chapter 1", **button_options, command=lambda: show_frame(pages[subject_name + "Form5Chapter1"]))
+        chapter_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
+
+    page.columnconfigure(0, weight=1)
+    page.grid(row=0, column=1, sticky="nsew")
+    return page
+
+
 def subject_page(subject_name):
     page = ttk.Frame(container, style='TFrame')
     pages[subject_name + "Page"] = page
