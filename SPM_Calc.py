@@ -154,7 +154,6 @@ def login(): #ni nanti kena connect dgn database sql kot
         if result == []:
             messagebox.showerror(title="Error", message="Account not found")
         else:
-            print ("yay") #nanti letak function
             backbutton(frame,subject_frame)
             def PhysicsPage():
                 backbutton(subject_frame,phy_frame)
@@ -165,21 +164,30 @@ def login(): #ni nanti kena connect dgn database sql kot
                         def speed():
                             backbutton(phyf4c2_frame,speed_frame)
                             def speed_calc():
+                                '''
+                                if result_label.get() != None:
+                                    result_label.get() == None
+                                    print("yay")
+                                '''
+                                #if result_label.cget()!="":
+                                    #result_label.config(text="")
+
                                 distance=float(distance_entry.get())
                                 time = float(time_entry.get())
                                 speed=distance/time
-                                result_label.config(text=f"Speed: {speed}")
+                                result_label.config(text=f"{speed}")
 
 
                             speed_label=tk.Label(speed_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
                             distance_label=tk.Label(speed_frame,text="Distance",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
                             time_label=tk.Label(speed_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
-                            result_label=tk.Label(speed_frame,text="Speed: ",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                            result_label=tk.Label(speed_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                            
 
                             distance_entry=tk.Entry(speed_frame, font=("Helvetica", 16))
                             time_entry=tk.Entry(speed_frame, font=("Helvetica", 16))
 
-                            speed_back=tk.Button(speed_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(speed_frame,phyf4c2_frame))
+                            speed_back=tk.Button(speed_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(speed_frame,phyf4c2_frame,result_label))
                             speed_back.grid(row=9,column=1,pady=10)
                             calculate_button=tk.Button(speed_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:speed_calc())
                             calculate_button.grid(row=8,column=1,pady=10)
@@ -301,6 +309,10 @@ def backbutton(forgetSurface,packSurface):
     forgetSurface.pack_forget()
     packSurface.pack()
 
+def backbutton_delresult(forgetSurface,packSurface,result_label):
+    result_label.config(text="")
+    forgetSurface.pack_forget()
+    packSurface.pack()
 
 
 # Creating widgets
