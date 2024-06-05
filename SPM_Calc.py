@@ -178,9 +178,6 @@ def login(): #ni nanti kena connect dgn database sql kot
                         def speed():
                             backbutton(phyf4c2_frame,speed_frame)
                             def speed_calc():
-                                #if result_label.cget()!="":
-                                    #result_label.config(text="")
-
                                 distance=float(distance_entry.get())
                                 time = float(time_entry.get())
                                 speed=distance/time
