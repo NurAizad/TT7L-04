@@ -11,13 +11,6 @@ import math
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
-import physics
-#import importlib
-
-#reload py files using importlib.reload(filename)
-#importlib.reload(physics)
-#print(dir(physics))
-
 from tkinter import ttk
 import sqlite3
 
@@ -37,12 +30,6 @@ chem_frame=tk.Frame(bg="#212129")
 bio_frame=tk.Frame(bg="#212129")
 
 #physics
-'''
-global phyf4_frame
-global phyf4c2_frame
-global backbutton
-global acceleration_frame
-'''
 phy_frame=tk.Frame(bg="#212129")
 phyf4_frame=tk.Frame(bg="#212129")
 phyf4c2_frame=tk.Frame(bg="#212129")
@@ -180,7 +167,9 @@ def login(): #ni nanti kena connect dgn database sql kot
                             def speed_calc():
                                 distance=float(distance_entry.get())
                                 time = float(time_entry.get())
-                                speed=distance/time
+                                if distance<0 or time<0:
+                                    messagebox.showerror(title="Error", message="Distance or time cannot be negative")
+                                speed=abs(distance/time)
                                 result_label.config(text=f"{speed}")
 
 
@@ -212,18 +201,18 @@ def login(): #ni nanti kena connect dgn database sql kot
                                 displacement=float(displacement_entry.get())
                                 time = float(time_entry.get())
                                 velocity=displacement/time
-                                result_label.config(text=f"Speed: {velocity}")
+                                result_label.config(text=f"{velocity}")
 
 
                             velocity_label=tk.Label(velocity_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
                             displacement_label=tk.Label(velocity_frame,text="Displacement",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
                             time_label=tk.Label(velocity_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
-                            result_label=tk.Label(velocity_frame,text="Velocity: ",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                            result_label=tk.Label(velocity_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
 
                             displacement_entry=tk.Entry(velocity_frame, font=("Helvetica", 16))
                             time_entry=tk.Entry(velocity_frame, font=("Helvetica", 16))
 
-                            velocity_back=tk.Button(velocity_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(velocity_frame,phyf4c2_frame))
+                            velocity_back=tk.Button(velocity_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(velocity_frame,phyf4c2_frame,result_label))
                             velocity_back.grid(row=9,column=1,pady=10)
                             calculate_button=tk.Button(velocity_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:velocity_calc())
                             calculate_button.grid(row=8,column=1,pady=10)
