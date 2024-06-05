@@ -39,7 +39,7 @@ acceleration_frame=tk.Frame(bg="#212129")
 momentum_frame=tk.Frame(bg="#212129")
 force_frame=tk.Frame(bg="#212129")
 impulse_frame=tk.Frame(bg="#212129")
-impulsive_force_frame=tk.Frame(bg="#212129")
+impulsiveForce_frame=tk.Frame(bg="#212129")
 weight_frame=tk.Frame(bg="#212129")
 
 
@@ -273,17 +273,195 @@ def login(): #ni nanti kena connect dgn database sql kot
                             time_entry.grid(row=3,column=2)
                             result_label.grid(row=4,column=1,pady=10)
 
-                    
+                        def momentum():
+                            backbutton(phyf4c2_frame,momentum_frame)
+                            def momentum_calc():
+                                v=float(vel_entry.get())
+                                m=float(mass_entry.get())
+                                if m<0:
+                                    messagebox.showerror(title="Error", message="Mass cannot be negative")
+                                else:
+                                    momentum=m*v
+                                result_label.config(text=f"{momentum}")
+
+
+                            momentum_label=tk.Label(momentum_frame, text="Momentum", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            vel_label=tk.Label(momentum_frame,text="Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            mass_label=tk.Label(momentum_frame,text="Mass",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(momentum_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            vel_entry=tk.Entry(momentum_frame, font=("Helvetica", 16))
+                            mass_entry=tk.Entry(momentum_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(momentum_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(momentum_frame,phyf4c2_frame,result_label))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(momentum_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:momentum_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            momentum_label.grid(row=0,column=1,pady=10)
+                            vel_label.grid(row=1,column=0,pady=10)
+                            mass_label.grid(row=2,column=0,pady=10)
+
+                            vel_entry.grid(row=1,column=2)
+                            mass_entry.grid(row=2,column=2)
+                            result_label.grid(row=3,column=1,pady=10)
+
+                        def force():
+                            backbutton(phyf4c2_frame,force_frame)
+                            def force_calc():
+                                m=float(mass_entry.get())
+                                a=float(acc_entry.get())
+                                if m<0:
+                                    messagebox.showerror(title="Error", message="Mass cannot be negative")
+                                else:
+                                    force=m*a
+                                result_label.config(text=f"{force}")
+
+
+                            force_label=tk.Label(force_frame, text="Force", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            mass_label=tk.Label(force_frame,text="Mass",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            acc_label=tk.Label(force_frame,text="Acceleration",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(force_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            mass_entry=tk.Entry(force_frame, font=("Helvetica", 16))
+                            acc_entry=tk.Entry(force_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(force_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(force_frame,phyf4c2_frame,result_label))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(force_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:force_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            force_label.grid(row=0,column=1,pady=10)
+                            mass_label.grid(row=1,column=0,pady=10)
+                            acc_label.grid(row=2,column=0,pady=10)
+
+                            mass_entry.grid(row=1,column=2)
+                            acc_entry.grid(row=2,column=2)
+                            result_label.grid(row=3,column=1,pady=10)
+
+                        def impulse():
+                            backbutton(phyf4c2_frame,impulse_frame)
+                            def impulse_calc():
+                                m=float(mass_entry.get())
+                                v=float(fin_vel_entry.get())
+                                u=float(ini_vel_entry.get())
+                                if m<0:
+                                    messagebox.showerror(title="Error", message="Mass cannot be negative")
+                                else:
+                                    impulse=m*v-m*u
+                                result_label.config(text=f"{impulse}")
+
+
+                            impulse_label=tk.Label(impulse_frame, text="Impulse", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            fin_vel_label=tk.Label(impulse_frame,text="Final Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            ini_vel_label=tk.Label(impulse_frame,text="Initial Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            mass_label=tk.Label(impulse_frame,text="Mass",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(impulse_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            fin_vel_entry=tk.Entry(impulse_frame, font=("Helvetica", 16))
+                            ini_vel_entry=tk.Entry(impulse_frame, font=("Helvetica", 16))
+                            mass_entry=tk.Entry(impulse_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(impulse_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(impulse_frame,phyf4c2_frame,result_label))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(impulse_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:impulse_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            impulse_label.grid(row=0,column=1,pady=10)
+                            fin_vel_label.grid(row=1,column=0,pady=10)
+                            ini_vel_label.grid(row=2,column=0,pady=10)
+                            mass_label.grid(row=3,column=0,pady=10)
+
+                            fin_vel_entry.grid(row=1,column=2)
+                            ini_vel_entry.grid(row=2,column=2)
+                            mass_entry.grid(row=3,column=2)
+                            result_label.grid(row=4,column=1,pady=10)
+
+                        def impulsiveForce():
+                            backbutton(phyf4c2_frame,impulsiveForce_frame)
+                            def impulsiveForce_calc():
+                                m=float(mass_entry.get())
+                                v=float(fin_vel_entry.get())
+                                u=float(ini_vel_entry.get())
+                                t=float(time_entry.get())
+                                if m<0 or t<0:
+                                    messagebox.showerror(title="Error", message="Mass or time cannot be negative")
+                                else:
+                                    impulsiveForce=(m*v-m*u)/t
+                                result_label.config(text=f"{impulsiveForce}")
+
+
+                            impulsiveForce_label=tk.Label(impulsiveForce_frame, text="Impulsive Force", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            fin_vel_label=tk.Label(impulsiveForce_frame,text="Final Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            ini_vel_label=tk.Label(impulsiveForce_frame,text="Initial Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            mass_label=tk.Label(impulsiveForce_frame,text="Mass",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            time_label=tk.Label(impulsiveForce_frame,text="Time",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(impulsiveForce_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            fin_vel_entry=tk.Entry(impulsiveForce_frame, font=("Helvetica", 16))
+                            ini_vel_entry=tk.Entry(impulsiveForce_frame, font=("Helvetica", 16))
+                            mass_entry=tk.Entry(impulsiveForce_frame, font=("Helvetica", 16))
+                            time_entry=tk.Entry(impulsiveForce_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(impulsiveForce_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(impulsiveForce_frame,phyf4c2_frame,result_label))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(impulsiveForce_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:impulsiveForce_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            impulsiveForce_label.grid(row=0,column=1,pady=10)
+                            fin_vel_label.grid(row=1,column=0,pady=10)
+                            ini_vel_label.grid(row=2,column=0,pady=10)
+                            mass_label.grid(row=3,column=0,pady=10)
+                            time_label.grid(row=4,column=0,pady=10)
+
+                            fin_vel_entry.grid(row=1,column=2)
+                            ini_vel_entry.grid(row=2,column=2)
+                            mass_entry.grid(row=3,column=2)
+                            time_entry.grid(row=4,column=2)
+                            result_label.grid(row=5,column=1,pady=10)
+
+                        def weight():
+                            backbutton(phyf4c2_frame,weight_frame)
+                            def weight_calc():
+                                m=float(mass_entry.get())
+                                if m<0:
+                                    messagebox.showerror(title="Error", message="Mass cannot be negative")
+                                else:
+                                    weight=m*9.81
+                                result_label.config(text=f"{weight}")
+
+
+                            weight_label=tk.Label(weight_frame, text="Weight", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            mass_label=tk.Label(weight_frame,text="Mass",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(weight_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            mass_entry=tk.Entry(weight_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(weight_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(weight_frame,phyf4c2_frame,result_label))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(weight_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:weight_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            weight_label.grid(row=0,column=1,pady=10)
+                            mass_label.grid(row=1,column=0,pady=10)
+
+                            mass_entry.grid(row=1,column=2)
+                            result_label.grid(row=2,column=1,pady=10)
                         
                         f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
                         speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
                         velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
                         acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:acceleration())
-                        momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24))
-                        force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24))
-                        impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24))
-                        impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force",bg="#90ee90", font=("Helvetica",24))
-                        weight_button=tk.Button(phyf4c2_frame,text="Weight",bg="#90ee90", font=("Helvetica",24))
+                        momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24),command=lambda:momentum())
+                        force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24),command=lambda:force())
+                        impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24),command=lambda:impulse())
+                        impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force",bg="#90ee90", font=("Helvetica",24),command=lambda:impulsiveForce())
+                        weight_button=tk.Button(phyf4c2_frame,text="Weight",bg="#90ee90", font=("Helvetica",24),command=lambda:weight())
 
                         phy_f4c2_back=tk.Button(phyf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4c2_frame,phyf4_frame))
                         phy_f4c2_back.grid(row=9,column=1,pady=10)
