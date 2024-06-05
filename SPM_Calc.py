@@ -36,6 +36,11 @@ phyf4c2_frame=tk.Frame(bg="#212129")
 speed_frame=tk.Frame(bg="#212129")
 velocity_frame=tk.Frame(bg="#212129")
 acceleration_frame=tk.Frame(bg="#212129")
+momentum_frame=tk.Frame(bg="#212129")
+force_frame=tk.Frame(bg="#212129")
+impulse_frame=tk.Frame(bg="#212129")
+impulsive_force_frame=tk.Frame(bg="#212129")
+weight_frame=tk.Frame(bg="#212129")
 
 
 def register(): #function utk kalau click register keluar page register
@@ -169,11 +174,12 @@ def login(): #ni nanti kena connect dgn database sql kot
                                 time = float(time_entry.get())
                                 if distance<0 or time<0:
                                     messagebox.showerror(title="Error", message="Distance or time cannot be negative")
-                                speed=abs(distance/time)
+                                else:
+                                    speed=abs(distance/time)
                                 result_label.config(text=f"{speed}")
 
 
-                            speed_label=tk.Label(speed_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            speed_label=tk.Label(speed_frame, text="Speed", bg="#212129",fg="#08edff",font=("Helvetica",34))
                             distance_label=tk.Label(speed_frame,text="Distance",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
                             time_label=tk.Label(speed_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
                             result_label=tk.Label(speed_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
@@ -200,11 +206,14 @@ def login(): #ni nanti kena connect dgn database sql kot
                             def velocity_calc():
                                 displacement=float(displacement_entry.get())
                                 time = float(time_entry.get())
-                                velocity=displacement/time
+                                if time<0:
+                                    messagebox.showerror(title="Error", message="Time cannot be negative")
+                                if time>0:
+                                    velocity=displacement/time
                                 result_label.config(text=f"{velocity}")
 
 
-                            velocity_label=tk.Label(velocity_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            velocity_label=tk.Label(velocity_frame, text="Velocity", bg="#212129",fg="#08edff",font=("Helvetica",34))
                             displacement_label=tk.Label(velocity_frame,text="Displacement",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
                             time_label=tk.Label(velocity_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
                             result_label=tk.Label(velocity_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
@@ -224,13 +233,52 @@ def login(): #ni nanti kena connect dgn database sql kot
                             displacement_entry.grid(row=1,column=2)
                             time_entry.grid(row=2,column=2)
                             result_label.grid(row=3,column=1,pady=10)
+                        
+                        def acceleration():
+                            backbutton(phyf4c2_frame,acceleration_frame)
+                            def acceleration_calc():
+                                v=float(fin_vel_entry.get())
+                                u=float(ini_vel_entry.get())
+                                t = float(time_entry.get())
+                                if t<0:
+                                    messagebox.showerror(title="Error", message="Time cannot be negative")
+                                if t>0:
+                                    acceleration=(v-u)/t
+                                result_label.config(text=f"{acceleration}")
+
+
+                            acceleration_label=tk.Label(acceleration_frame, text="Acceleration", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                            ini_vel_label=tk.Label(acceleration_frame,text="Initial Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            fin_vel_label=tk.Label(acceleration_frame,text="Final Velocity",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            time_label=tk.Label(acceleration_frame,text="Time taken",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                            result_label=tk.Label(acceleration_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                            ini_vel_entry=tk.Entry(acceleration_frame, font=("Helvetica", 16))
+                            fin_vel_entry=tk.Entry(acceleration_frame, font=("Helvetica", 16))
+                            time_entry=tk.Entry(acceleration_frame, font=("Helvetica", 16))
+
+                            velocity_back=tk.Button(acceleration_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(acceleration_frame,phyf4c2_frame,result_label))
+                            velocity_back.grid(row=9,column=1,pady=10)
+                            calculate_button=tk.Button(acceleration_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:acceleration_calc())
+                            calculate_button.grid(row=8,column=1,pady=10)
+
+
+                            acceleration_label.grid(row=0,column=1,pady=10)
+                            ini_vel_label.grid(row=1,column=0,pady=10)
+                            fin_vel_label.grid(row=2,column=0,pady=10)
+                            time_label.grid(row=3,column=0,pady=10)
+
+                            ini_vel_entry.grid(row=1,column=2)
+                            fin_vel_entry.grid(row=2,column=2)
+                            time_entry.grid(row=3,column=2)
+                            result_label.grid(row=4,column=1,pady=10)
 
                     
                         
                         f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
                         speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
                         velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
-                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:physics.acc())
+                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:acceleration())
                         momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24))
                         force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24))
                         impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24))
