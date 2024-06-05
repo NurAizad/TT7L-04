@@ -11,7 +11,12 @@ import math
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
+import physics
+#import importlib
 
+#reload py files using importlib.reload(filename)
+#importlib.reload(physics)
+#print(dir(physics))
 
 from tkinter import ttk
 import sqlite3
@@ -32,11 +37,20 @@ chem_frame=tk.Frame(bg="#212129")
 bio_frame=tk.Frame(bg="#212129")
 
 #physics
+'''
+global phyf4_frame
+global phyf4c2_frame
+global backbutton
+global acceleration_frame
+'''
 phy_frame=tk.Frame(bg="#212129")
 phyf4_frame=tk.Frame(bg="#212129")
 phyf4c2_frame=tk.Frame(bg="#212129")
 speed_frame=tk.Frame(bg="#212129")
 velocity_frame=tk.Frame(bg="#212129")
+acceleration_frame=tk.Frame(bg="#212129")
+
+
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
@@ -164,11 +178,6 @@ def login(): #ni nanti kena connect dgn database sql kot
                         def speed():
                             backbutton(phyf4c2_frame,speed_frame)
                             def speed_calc():
-                                '''
-                                if result_label.get() != None:
-                                    result_label.get() == None
-                                    print("yay")
-                                '''
                                 #if result_label.cget()!="":
                                     #result_label.config(text="")
 
@@ -230,12 +239,12 @@ def login(): #ni nanti kena connect dgn database sql kot
                             time_entry.grid(row=2,column=2)
                             result_label.grid(row=3,column=1,pady=10)
 
-                        
+                    
                         
                         f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
                         speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
                         velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
-                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24))
+                        acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:physics.acc())
                         momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24))
                         force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24))
                         impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24))
