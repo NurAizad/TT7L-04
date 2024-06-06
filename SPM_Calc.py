@@ -605,7 +605,6 @@ def admin():
             tree.delete(*tree.get_children()) #delete content in tree view before inserting in tree view to prevent multiple times
             for student in students:
                 tree.insert("", END, values=student)
-                print (student)
 
         def insert():
             username=user_entry.get()
@@ -619,8 +618,27 @@ def admin():
             else:
                 insertStudent(username,password,form,className)
                 addToTree()
-                #messagebox.showinfo("Success", "Data has been inserted")
-        #addToTree()
+            
+        def clear(*clicked): 
+            if clicked:
+                tree.selection_remove(tree.focus()) #utk clearkan hover
+            user_entry.delete(0,END) #clear dkt entry box
+            password_entry.delete(0,END) #end represent the postiions after the last character in the widget
+            form_entry.delete(0,END) # means we delete from index 0 till end
+            className_entry.delete(0,END)
+        
+        def display_data(event):
+            selected_item = tree.focus()
+            if selected_item: #means we are clicking on the row, if the condition is true we will get the value of row yg line under ni
+                row=tree.item(selected_item)["values"]
+                clear()
+                user_entry.insert(0,row[0]) #means we insert the values of row dkt entry, row=[0] means the 1st column, so we insert value of 1st column into username entry
+                password_entry.insert(0,row[1])
+                form_entry.insert(0,row[2])
+                className_entry.insert(0,row[3])
+            else: #if we are not clicking on a row, we pass
+                pass
+        
         adminCmd_frame=tk.Frame(adminInterface_frame, bg="#212129")
         adminCmd_frame.grid(row=0,column=0,padx=20,pady=20)
 
@@ -632,7 +650,7 @@ def admin():
         adminAdd_frame.grid(row=1,column=0,sticky="news",padx=10)
         adminDisplay_frame.grid(row=1,column=2,sticky="news",padx=10)
         adminButtons_frame.grid(row=2,column=0,sticky="ew",padx=10)
-        title_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
+        title_label.grid(row=0,column=1,sticky="news",pady=40)
 
         #add
         user=tk.Label(adminAdd_frame,text="Username",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
@@ -644,8 +662,8 @@ def admin():
 
         user_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
         password_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
-        form_entry=ttk.Combobox(adminAdd_frame,values=["4", "5"],font=("Helvetica", 16))
-        className_entry=ttk.Combobox(adminAdd_frame,values=["Perdana", "Bestari", "Satria"],font=("Helvetica", 16))
+        form_entry=ttk.Combobox(adminAdd_frame,values=["4", "5","ADMIN"],font=("Helvetica", 16))
+        className_entry=ttk.Combobox(adminAdd_frame,values=["Perdana", "Bestari", "Satria","ADMIN"],font=("Helvetica", 16))
 
         user.grid(row=0,column=0,padx=10,pady=10,sticky="w")
         password.grid(row=1,column=0,padx=10,pady=10,sticky="w")
@@ -681,7 +699,10 @@ def admin():
         tree.heading("Class Name", text="Class Name")
 
         tree.grid(row=0,column=0,sticky="news")
+        clearSelection_button=tk.Button(adminDisplay_frame,text="Clear Selection",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:clear(True))
+        clearSelection_button.grid(row=1,column=0,sticky="news")
         addToTree()
+        tree.bind("<ButtonRelease>", display_data) #means if we click on a row in the tree view, the function will be executed
 
 
 
