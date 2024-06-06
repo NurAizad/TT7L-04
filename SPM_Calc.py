@@ -555,6 +555,31 @@ def PhysicsPage(forget_surface,pack_surface):
     chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
     phy_back.grid(row=6,column=1)
 
+def admin():
+        global cursor
+        global conn
+        def fetchStudent():
+            cursor.execute("SELECT * FROM Student_Data")
+            students=cursor.fetchall()
+            conn.close
+            return students
+        def insertStudent(username,password,form,className):
+            cursor.execute("INSERT INTO Student_Data (username,password,form,className) VALUES(?,?,?,?)",(username,password,form,className))
+            conn.commit()
+            conn.close()
+        def deleteStudent(username):
+            cursor.execute("DELETE FROM Student_Data WHERE username = ?",(username,))
+            conn.commit()
+            conn.close()
+        def updateStudent(new_user,new_password,new_form,new_className):
+            cursor.execute("UPDATE Student_Data SET username = ?, password = ?, form = ?, className = ?", (new_user,new_password,new_form,new_className))
+            conn.commit()
+            conn.close()
+        def userExists(username):
+            cursor.execute("SELECT COUNT(*) FROM Student_Data WHERE username = ?", (username,))
+            result = cursor.fetchone()
+            conn.close()
+            return result[0] > 0 #return username if more than 0
 
 
 # Creating widgets
