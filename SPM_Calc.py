@@ -560,9 +560,67 @@ def PhysicsPage(forget_surface,pack_surface):
     phy_back.grid(row=6,column=1)
 
 def admin():
-        global cursor
-        global conn
+        #global cursor
+        #global conn
+        global addToTree
+        #conn=sqlite3.connect("data.db")
+        #cursor=conn.cursor()
         backbutton(admin_frame,adminInterface_frame)
+        def fetchStudent():
+            conn=sqlite3.connect("data.db")
+            cursor=conn.cursor()
+            cursor.execute("SELECT * FROM Student_Data")
+            students=cursor.fetchall()
+            #conn.commit()
+            conn.close()
+            return students
+        def insertStudent(username,password,form,className):
+            conn=sqlite3.connect("data.db")
+            cursor=conn.cursor()
+            cursor.execute("INSERT INTO Student_Data (username,password,form,className) VALUES(?,?,?,?)",(username,password,form,className))
+            conn.commit()
+            conn.close()
+        def deleteStudent(username):
+            conn=sqlite3.connect("data.db")
+            cursor=conn.cursor()
+            cursor.execute("DELETE FROM Student_Data WHERE username = ?",(username,))
+            conn.commit()
+            conn.close()
+        def updateStudent(new_user,new_password,new_form,new_className):
+            conn=sqlite3.connect("data.db")
+            cursor=conn.cursor()
+            cursor.execute("UPDATE Student_Data SET username = ?, password = ?, form = ?, className = ?", (new_user,new_password,new_form,new_className))
+            conn.commit()
+            conn.close()
+        def usernameExists(username):
+            conn=sqlite3.connect("data.db")
+            cursor=conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM Student_Data WHERE username = ?", (username,))
+            result = cursor.fetchone()
+            conn.close()
+            return result[0] > 0 #return username if more than 0
+        
+        def addToTree():
+            students=fetchStudent()
+            tree.delete(*tree.get_children()) #delete content in tree view before inserting in tree view to prevent multiple times
+            for student in students:
+                tree.insert("", END, values=student)
+                print (student)
+
+        def insert():
+            username=user_entry.get()
+            password=password_entry.get()
+            form=form_entry.get()
+            className=className_entry.get()
+            if not (username and password and form and className): #means kosong
+                messagebox.showerror(title="Error", message="Enter all fields")
+            elif usernameExists(username):
+                messagebox.showerror(title="Error", message="Username already exists")
+            else:
+                insertStudent(username,password,form,className)
+                addToTree()
+                #messagebox.showinfo("Success", "Data has been inserted")
+        #addToTree()
         adminCmd_frame=tk.Frame(adminInterface_frame, bg="#212129")
         adminCmd_frame.grid(row=0,column=0,padx=20,pady=20)
 
@@ -573,14 +631,16 @@ def admin():
         title_label=tk.Label(adminCmd_frame, text="Student Database", bg="#212129",fg="#08edff", font=("Helvetica",34))
         adminAdd_frame.grid(row=1,column=0,sticky="news",padx=10)
         adminDisplay_frame.grid(row=1,column=2,sticky="news",padx=10)
-        adminButtons_frame.grid(row=2,column=1,sticky="news",padx=10)
+        adminButtons_frame.grid(row=2,column=0,sticky="ew",padx=10)
         title_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
 
         #add
-        user=tk.Label(adminAdd_frame,text="Username",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
-        password=tk.Label(adminAdd_frame,text="Password",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
-        form=tk.Label(adminAdd_frame,text="Form",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
-        className=tk.Label(adminAdd_frame,text="Class Name",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
+        user=tk.Label(adminAdd_frame,text="Username",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        password=tk.Label(adminAdd_frame,text="Password",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        form=tk.Label(adminAdd_frame,text="Form",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        className=tk.Label(adminAdd_frame,text="Class Name",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        
+        add_button=tk.Button(adminAdd_frame,text="Add Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:insert())
 
         user_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
         password_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
@@ -591,34 +651,40 @@ def admin():
         password.grid(row=1,column=0,padx=10,pady=10,sticky="w")
         form.grid(row=2,column=0,padx=10,pady=10,sticky="w")
         className.grid(row=3,column=0,padx=10,pady=10,sticky="w")
+        add_button.grid(row=4,columnspan=2,sticky="news",padx=10,pady=10) #button sini
         user_entry.grid(row=0,column=1,padx=10,pady=10,sticky="e")
         password_entry.grid(row=1,column=1,padx=10,pady=10,sticky="e")
         form_entry.grid(row=2,column=1,padx=10,pady=10,sticky="e")
         className_entry.grid(row=3,column=1,padx=10,pady=10,sticky="e")
 
+        #buttons
+        updateStudent_button=tk.Button(adminButtons_frame,text="Update Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        deleteStudent_button=tk.Button(adminButtons_frame,text="Delete Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        back_button=tk.Button(adminButtons_frame,text="Back",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:backbutton(adminInterface_frame,admin_frame))
 
-        def fetchStudent():
-            cursor.execute("SELECT * FROM Student_Data")
-            students=cursor.fetchall()
-            conn.close
-            return students
-        def insertStudent(username,password,form,className):
-            cursor.execute("INSERT INTO Student_Data (username,password,form,className) VALUES(?,?,?,?)",(username,password,form,className))
-            conn.commit()
-            conn.close()
-        def deleteStudent(username):
-            cursor.execute("DELETE FROM Student_Data WHERE username = ?",(username,))
-            conn.commit()
-            conn.close()
-        def updateStudent(new_user,new_password,new_form,new_className):
-            cursor.execute("UPDATE Student_Data SET username = ?, password = ?, form = ?, className = ?", (new_user,new_password,new_form,new_className))
-            conn.commit()
-            conn.close()
-        def userExists(username):
-            cursor.execute("SELECT COUNT(*) FROM Student_Data WHERE username = ?", (username,))
-            result = cursor.fetchone()
-            conn.close()
-            return result[0] > 0 #return username if more than 0
+        updateStudent_button.grid(row=0,column=0,padx=10,pady=10)
+        back_button.grid(row=1,column=1,padx=10,pady=10)
+        deleteStudent_button.grid(row=0,column=2,padx=10,pady=10)
+
+        #display table
+        tree=ttk.Treeview(adminDisplay_frame)
+        tree["columns"]=("Username", "Password", "Form", "Class Name")
+        tree.column("#0",width=0,stretch=tk.NO) # utk hide default first column
+        tree.column("Username", anchor=tk.CENTER,width=120)
+        tree.column("Password", anchor=tk.CENTER,width=120)
+        tree.column("Form", anchor=tk.CENTER,width=120)
+        tree.column("Class Name", anchor=tk.CENTER,width=120)
+
+        tree.heading("Username", text="Username")
+        tree.heading("Password", text="Password")
+        tree.heading("Form", text="Form")
+        tree.heading("Class Name", text="Class Name")
+
+        tree.grid(row=0,column=0,sticky="news")
+        addToTree()
+
+
+
 
 
 # Creating widgets
