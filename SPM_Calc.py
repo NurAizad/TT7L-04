@@ -638,6 +638,31 @@ def admin():
                 className_entry.insert(0,row[3])
             else: #if we are not clicking on a row, we pass
                 pass
+
+        def delete():
+            selected_item=tree.focus()
+            if not selected_item:
+                messagebox.showerror(title="Error", message="Choose a student to delete")
+            else:
+                username=user_entry.get()
+                deleteStudent(username)
+                addToTree() #so we can get the data from databse after deletion
+                clear()
+        
+        def update():
+            selected_item=tree.focus()
+            if not selected_item:
+                messagebox.showerror(title="Error", message="Choose a student to update")
+            else:
+                username=user_entry.get()
+                password=password_entry.get()
+                form=form_entry.get()
+                className=className_entry.get()
+                updateStudent(username,password,form,className)
+                addToTree()
+                clear()
+    
+            
         
         adminCmd_frame=tk.Frame(adminInterface_frame, bg="#212129")
         adminCmd_frame.grid(row=0,column=0,padx=20,pady=20)
@@ -662,8 +687,8 @@ def admin():
 
         user_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
         password_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
-        form_entry=ttk.Combobox(adminAdd_frame,values=["4", "5","ADMIN"],font=("Helvetica", 16))
-        className_entry=ttk.Combobox(adminAdd_frame,values=["Perdana", "Bestari", "Satria","ADMIN"],font=("Helvetica", 16))
+        form_entry=ttk.Combobox(adminAdd_frame,values=["4", "5"],font=("Helvetica", 16))
+        className_entry=ttk.Combobox(adminAdd_frame,values=["Perdana", "Bestari", "Satria"],font=("Helvetica", 16))
 
         user.grid(row=0,column=0,padx=10,pady=10,sticky="w")
         password.grid(row=1,column=0,padx=10,pady=10,sticky="w")
@@ -676,8 +701,8 @@ def admin():
         className_entry.grid(row=3,column=1,padx=10,pady=10,sticky="e")
 
         #buttons
-        updateStudent_button=tk.Button(adminButtons_frame,text="Update Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
-        deleteStudent_button=tk.Button(adminButtons_frame,text="Delete Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        updateStudent_button=tk.Button(adminButtons_frame,text="Update Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16),command=lambda:update())
+        deleteStudent_button=tk.Button(adminButtons_frame,text="Delete Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16),command=lambda:delete())
         back_button=tk.Button(adminButtons_frame,text="Back",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:backbutton(adminInterface_frame,admin_frame))
 
         updateStudent_button.grid(row=0,column=0,padx=10,pady=10)
