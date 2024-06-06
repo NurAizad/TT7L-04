@@ -662,28 +662,26 @@ def admin():
                 addToTree()
                 clear()
     
-            
-        
         adminCmd_frame=tk.Frame(adminInterface_frame, bg="#212129")
         adminCmd_frame.grid(row=0,column=0,padx=20,pady=20)
 
-        adminAdd_frame=tk.Frame(adminCmd_frame,bg="#fec195")
-        adminDisplay_frame=tk.Frame(adminCmd_frame,bg="#123456")
-        adminButtons_frame=tk.Frame(adminCmd_frame,bg="#345231")
+        adminAdd_frame=tk.Frame(adminCmd_frame,bg="#212129")
+        adminDisplay_frame=tk.Frame(adminCmd_frame,bg="#212129")
+        adminButtons_frame=tk.Frame(adminCmd_frame,bg="#212129")
         
         title_label=tk.Label(adminCmd_frame, text="Student Database", bg="#212129",fg="#08edff", font=("Helvetica",34))
         adminAdd_frame.grid(row=1,column=0,sticky="news",padx=10)
-        adminDisplay_frame.grid(row=1,column=2,sticky="news",padx=10)
+        adminDisplay_frame.grid(row=1,column=1,sticky="news",padx=10,rowspan=2)
         adminButtons_frame.grid(row=2,column=0,sticky="ew",padx=10)
-        title_label.grid(row=0,column=1,sticky="news",pady=40)
+        title_label.grid(row=0,column=0,pady=40,sticky='news')
 
         #add
-        user=tk.Label(adminAdd_frame,text="Username",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
-        password=tk.Label(adminAdd_frame,text="Password",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
-        form=tk.Label(adminAdd_frame,text="Form",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
-        className=tk.Label(adminAdd_frame,text="Class Name",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16))
+        user=tk.Label(adminAdd_frame,text="Username",bg="#212129",fg="#FFFFFF",font=("Helvetica",16))
+        password=tk.Label(adminAdd_frame,text="Password",bg="#212129",fg="#FFFFFF",font=("Helvetica",16))
+        form=tk.Label(adminAdd_frame,text="Form",bg="#212129",fg="#FFFFFF",font=("Helvetica",16))
+        className=tk.Label(adminAdd_frame,text="Class Name",bg="#212129",fg="#FFFFFF",font=("Helvetica",16))
         
-        add_button=tk.Button(adminAdd_frame,text="Add Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:insert())
+        add_button=tk.Button(adminButtons_frame,text="Add Student",bg="#fa6126",fg="#FFFFFF",font=("Helvetica",16), command=lambda:insert())
 
         user_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
         password_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
@@ -694,20 +692,23 @@ def admin():
         password.grid(row=1,column=0,padx=10,pady=10,sticky="w")
         form.grid(row=2,column=0,padx=10,pady=10,sticky="w")
         className.grid(row=3,column=0,padx=10,pady=10,sticky="w")
-        add_button.grid(row=4,columnspan=2,sticky="news",padx=10,pady=10) #button sini
-        user_entry.grid(row=0,column=1,padx=10,pady=10,sticky="e")
-        password_entry.grid(row=1,column=1,padx=10,pady=10,sticky="e")
-        form_entry.grid(row=2,column=1,padx=10,pady=10,sticky="e")
-        className_entry.grid(row=3,column=1,padx=10,pady=10,sticky="e")
+        add_button.grid(row=4,sticky="s",padx=10,pady=0) #button sini
+
+        user_entry.grid(row=0,column=1,pady=10,sticky="e",padx=10)
+        password_entry.grid(row=1,column=1,pady=10,sticky="e",padx=10)
+        form_entry.grid(row=2,column=1,pady=10,sticky="e",padx=10)
+        className_entry.grid(row=3,column=1,pady=10,sticky="e",padx=10)
 
         #buttons
-        updateStudent_button=tk.Button(adminButtons_frame,text="Update Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16),command=lambda:update())
-        deleteStudent_button=tk.Button(adminButtons_frame,text="Delete Student",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16),command=lambda:delete())
-        back_button=tk.Button(adminButtons_frame,text="Back",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:backbutton(adminInterface_frame,admin_frame))
-
-        updateStudent_button.grid(row=0,column=0,padx=10,pady=10)
-        back_button.grid(row=1,column=1,padx=10,pady=10)
+        updateStudent_button=tk.Button(adminButtons_frame,text="Update Student",bg="#fa6126",fg="#FFFFFF",font=("Helvetica",16),command=lambda:update())
+        deleteStudent_button=tk.Button(adminButtons_frame,text="Delete Student",bg="#b81836",fg="#FFFFFF",font=("Helvetica",16),command=lambda:delete())
+        back_button=tk.Button(adminButtons_frame,text="Back",bg="#1c6cc0",fg="#FFFFFF",font=("Helvetica",16), command=lambda:backbutton(adminInterface_frame,admin_frame))
+    
+        add_button.grid(row=0,column=0,padx=10,pady=10)
+        updateStudent_button.grid(row=0,column=1,padx=10,pady=10)
         deleteStudent_button.grid(row=0,column=2,padx=10,pady=10)
+
+        back_button.grid(row=1,column=1,padx=10,pady=10)
 
         #display table
         tree=ttk.Treeview(adminDisplay_frame)
@@ -724,8 +725,9 @@ def admin():
         tree.heading("Class Name", text="Class Name")
 
         tree.grid(row=0,column=0,sticky="news")
-        clearSelection_button=tk.Button(adminDisplay_frame,text="Clear Selection",bg="#fec195",fg="#FFFFFF",font=("Helvetica",16), command=lambda:clear(True))
-        clearSelection_button.grid(row=1,column=0,sticky="news")
+        clearSelection_button=tk.Button(adminDisplay_frame,text="Clear Selection",bg="#b81836",fg="#FFFFFF",font=("Helvetica",16), command=lambda:clear(True))
+        clearSelection_button.grid(row=6,column=0,sticky="news")
+
         addToTree()
         tree.bind("<ButtonRelease>", display_data) #means if we click on a row in the tree view, the function will be executed
 
