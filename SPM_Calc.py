@@ -28,6 +28,7 @@ register_frame=tk.Frame(bg="#212129")
 subject_frame=tk.Frame(bg="#212129")
 chem_frame=tk.Frame(bg="#212129")
 bio_frame=tk.Frame(bg="#212129")
+admin_frame=tk.Frame(bg="#212129")
 
 #physics
 phy_frame=tk.Frame(bg="#212129")
@@ -159,6 +160,23 @@ def login(): #ni nanti kena connect dgn database sql kot
         result=cursor.fetchall()
         if result == []:
             messagebox.showerror(title="Error", message="Account not found")
+        elif username =="admin" and password=="admin":
+            backbutton(frame,admin_frame)
+            subject_label = tk.Label(admin_frame, text="Choose a subject", bg="#212129",fg="#08edff", font=("Helvetica",34))
+
+            phy_button = tk.Button(admin_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:PhysicsPage())
+            chem_button = tk.Button(admin_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24))
+            bio_button = tk.Button(admin_frame, text="Biology", bg="#f08080", font=("Helvetica",24))
+            admin_button = tk.Button(admin_frame, text="Admin", bg="#b16eeb", font=("Helvetica",24))
+
+            subject_back = tk.Button(admin_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(admin_frame,frame))
+
+            subject_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
+            subject_back.grid(row=6,column=1,columnspan=2,padx=20,pady=40)
+            phy_button.grid(row=1,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
+            chem_button.grid(row=2,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
+            bio_button.grid(row=3,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
+            admin_button.grid(row=4,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
         else:
             backbutton(frame,subject_frame)
             def PhysicsPage():
