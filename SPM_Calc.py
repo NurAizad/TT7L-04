@@ -566,16 +566,35 @@ def admin():
         adminCmd_frame=tk.Frame(adminInterface_frame, bg="#212129")
         adminCmd_frame.grid(row=0,column=0,padx=20,pady=20)
 
-        adminSearch_frame=tk.Frame(adminCmd_frame,bg="#FFFFFF")
+        adminAdd_frame=tk.Frame(adminCmd_frame,bg="#fec195")
         adminDisplay_frame=tk.Frame(adminCmd_frame,bg="#123456")
         adminButtons_frame=tk.Frame(adminCmd_frame,bg="#345231")
         
         title_label=tk.Label(adminCmd_frame, text="Student Database", bg="#212129",fg="#08edff", font=("Helvetica",34))
-        adminSearch_frame.grid(row=1,column=0,sticky="news",padx=10)
+        adminAdd_frame.grid(row=1,column=0,sticky="news",padx=10)
         adminDisplay_frame.grid(row=1,column=2,sticky="news",padx=10)
         adminButtons_frame.grid(row=2,column=1,sticky="news",padx=10)
-
         title_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
+
+        #add
+        user=tk.Label(adminAdd_frame,text="Username",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
+        password=tk.Label(adminAdd_frame,text="Password",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
+        form=tk.Label(adminAdd_frame,text="Form",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
+        className=tk.Label(adminAdd_frame,text="Class Name",bg="#fec195",fg="#FFFFFF",font=("Helvetica",24))
+
+        user_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
+        password_entry=tk.Entry(adminAdd_frame,font=("Helvetica", 16))
+        form_entry=ttk.Combobox(adminAdd_frame,values=["4", "5"],font=("Helvetica", 16))
+        className_entry=ttk.Combobox(adminAdd_frame,values=["Perdana", "Bestari", "Satria"],font=("Helvetica", 16))
+
+        user.grid(row=0,column=0,padx=10,pady=10,sticky="w")
+        password.grid(row=1,column=0,padx=10,pady=10,sticky="w")
+        form.grid(row=2,column=0,padx=10,pady=10,sticky="w")
+        className.grid(row=3,column=0,padx=10,pady=10,sticky="w")
+        user_entry.grid(row=0,column=1,padx=10,pady=10,sticky="e")
+        password_entry.grid(row=1,column=1,padx=10,pady=10,sticky="e")
+        form_entry.grid(row=2,column=1,padx=10,pady=10,sticky="e")
+        className_entry.grid(row=3,column=1,padx=10,pady=10,sticky="e")
 
 
         def fetchStudent():
