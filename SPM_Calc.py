@@ -29,6 +29,10 @@ subject_frame=tk.Frame(bg="#212129")
 chem_frame=tk.Frame(bg="#212129")
 bio_frame=tk.Frame(bg="#212129")
 admin_frame=tk.Frame(bg="#212129")
+adminInterface_frame=tk.Frame(bg="#212129")
+#adminSearch_frame=tk.Frame(bg="#212129")
+#adminDisplay_frame=tk.Frame(bg="#212129")
+#adminButtons_frame=tk.Frame(bg="#212129")
 
 #physics
 phy_frame=tk.Frame(bg="#212129")
@@ -184,7 +188,7 @@ def login(): #ni nanti kena connect dgn database sql kot
             phy_button = tk.Button(admin_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:PhysicsPage(admin_frame,phy_frame))
             chem_button = tk.Button(admin_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24))
             bio_button = tk.Button(admin_frame, text="Biology", bg="#f08080", font=("Helvetica",24))
-            admin_button = tk.Button(admin_frame, text="Admin", bg="#b16eeb", font=("Helvetica",24))
+            admin_button = tk.Button(admin_frame, text="Admin", bg="#b16eeb", font=("Helvetica",24),command=lambda:admin())
 
             subject_back = tk.Button(admin_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(admin_frame,frame))
 
@@ -558,6 +562,22 @@ def PhysicsPage(forget_surface,pack_surface):
 def admin():
         global cursor
         global conn
+        backbutton(admin_frame,adminInterface_frame)
+        adminCmd_frame=tk.Frame(adminInterface_frame, bg="#212129")
+        adminCmd_frame.grid(row=0,column=0,padx=20,pady=20)
+
+        adminSearch_frame=tk.Frame(adminCmd_frame,bg="#FFFFFF")
+        adminDisplay_frame=tk.Frame(adminCmd_frame,bg="#123456")
+        adminButtons_frame=tk.Frame(adminCmd_frame,bg="#345231")
+        
+        title_label=tk.Label(adminCmd_frame, text="Student Database", bg="#212129",fg="#08edff", font=("Helvetica",34))
+        adminSearch_frame.grid(row=1,column=0,sticky="news",padx=10)
+        adminDisplay_frame.grid(row=1,column=2,sticky="news",padx=10)
+        adminButtons_frame.grid(row=2,column=1,sticky="news",padx=10)
+
+        title_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
+
+
         def fetchStudent():
             cursor.execute("SELECT * FROM Student_Data")
             students=cursor.fetchall()
