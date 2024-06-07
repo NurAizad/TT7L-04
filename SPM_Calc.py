@@ -586,10 +586,10 @@ def admin():
             cursor.execute("DELETE FROM Student_Data WHERE username = ?",(username,))
             conn.commit()
             conn.close()
-        def updateStudent(new_user,new_password,new_form,new_className):
+        def updateStudent(new_user,new_password,new_form,new_className,current_user):
             conn=sqlite3.connect("data.db")
             cursor=conn.cursor()
-            cursor.execute("UPDATE Student_Data SET username = ?, password = ?, form = ?, className = ?", (new_user,new_password,new_form,new_className))
+            cursor.execute("UPDATE Student_Data SET username = ?, password = ?, form = ?, className = ? WHERE username=?", (new_user,new_password,new_form,new_className,current_user))
             conn.commit()
             conn.close()
         def usernameExists(username):
@@ -644,7 +644,8 @@ def admin():
             if not selected_item:
                 messagebox.showerror(title="Error", message="Choose a student to delete")
             else:
-                username=user_entry.get()
+                username=tree.item(selected_item)["values"][0] #get username from selected row
+                #username=user_entry.get()
                 deleteStudent(username)
                 addToTree() #so we can get the data from databse after deletion
                 clear()
@@ -654,11 +655,12 @@ def admin():
             if not selected_item:
                 messagebox.showerror(title="Error", message="Choose a student to update")
             else:
+                current_username = tree.item(selected_item)["values"][0] #get current username from selected row
                 username=user_entry.get()
                 password=password_entry.get()
                 form=form_entry.get()
                 className=className_entry.get()
-                updateStudent(username,password,form,className)
+                updateStudent(username,password,form,className,current_username)
                 addToTree()
                 clear()
     
