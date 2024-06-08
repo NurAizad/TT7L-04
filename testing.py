@@ -55,7 +55,7 @@ biof4c5_frame=tk.Frame(bg="#212129")
 biof4c7_frame=tk.Frame(bg="#212129")
 biof5_frame=tk.Frame(bg="#212129")
 biof5c9_frame=tk.Frame(bg="#212129")
-percentage_difference_in_mass_frame=tk.Frame(bg="#212129")
+percentage_diff_in_mass_frame=tk.Frame(bg="#212129")
 enzyme_reaction_rate_frame=tk.Frame(bg="#212129")
 energy_value_food_sample_frame=tk.Frame(bg="#212129")
 percentage_cover_frame=tk.Frame(bg="#212129")
@@ -681,6 +681,7 @@ def BiologyPage(forget_surface, pack_surface):
                 temperature_rise_entry.grid(row=2,column=2)
                 mass_food_entry.grid(row=3,column=3)
                 result_label.grid(row=3,column=1,pady=10)
+
     def bio_f5():
         backbutton(bio_frame,biof5_frame)
         def bio_f5_chap9():
@@ -718,7 +719,7 @@ def BiologyPage(forget_surface, pack_surface):
             def population():
                 backbutton(biof5c9_frame, population_frame)
                 def population_calc():
-                    first_catch_number=int(first_catch_entry.get())
+                    first_catch_number=int(first_catch_number_entry.get())
                     second_catch_number=int(second_catch_number_entry.get())
                     marked_second_catch_number = int(marked_second_catch_number_entry.get())
                     if first_catch_number<0 or second_catch_number<0 or marked_second_catch_number<0: 
