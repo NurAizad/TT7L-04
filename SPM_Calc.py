@@ -13,6 +13,7 @@ from tkinter import messagebox
 from tkinter import *
 from tkinter import ttk
 import sqlite3
+from PIL import Image, ImageTk
 
 #test
 window = tk.Tk()
@@ -21,6 +22,17 @@ window.title("Login form")
 #utk dapatkan size screen
 window.state("zoomed")
 window.configure(bg='#212129')
+
+#ni test gambar
+screenWidth=window.winfo_screenwidth() #utk dptkan width window
+screenHeight=window.winfo_screenheight()#dptkan height
+
+BgImage=Image.open("images/science.jpg")
+ResizeBgImage= BgImage.resize((screenWidth,screenHeight))
+FinalBgImage=ImageTk.PhotoImage(ResizeBgImage)
+BgImage_label=tk.Label(window,image=FinalBgImage)
+BgImage_label.place(x=0,y=0)
+
 
 #frames
 frame = tk.Frame(bg='#212129')
@@ -48,10 +60,12 @@ impulsiveForce_frame=tk.Frame(bg="#212129")
 weight_frame=tk.Frame(bg="#212129")
 
 
+
+
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
-    frame.pack_forget()
+    #frame.pack_forget()
 
     student_info_frame=tk.LabelFrame(register_frame, text="Student information",font=("Helvetica", 16),bg="#212129",fg="#FFFFFF")
     student_info_frame.grid(row=0,column=0,padx=20,pady=20)
@@ -145,10 +159,9 @@ def register(): #function utk kalau click register keluar page register
     signUp_button=tk.Button(register_frame,text="Confirm registration",command=enter_data,bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16))
     signUp_button.grid(row=5,padx=20,pady=5,sticky="EW")
 
-    backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=5,sticky="EW")
-    register_frame.pack()
-
-
+    backRegister_button.grid (row=6,column=0,columnspan=2,padx=20,pady=10,sticky="EW")
+    backbutton(frame,register_frame)
+    #register_frame.pack()
 
 def login(): #ni nanti kena connect dgn database sql kot
 
@@ -174,7 +187,7 @@ def login(): #ni nanti kena connect dgn database sql kot
 
             subject_back = tk.Button(subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(subject_frame,frame))
 
-            subject_label.grid(row=0,column=1,columnspan=2,sticky="news",pady=40)
+            subject_label.grid(row=0,column=1,columnspan=2,sticky="news",padx=20,pady=40)
             subject_back.grid(row=6,column=1,columnspan=2,padx=20,pady=40)
             phy_button.grid(row=1,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
             chem_button.grid(row=2,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
@@ -204,13 +217,13 @@ def login(): #ni nanti kena connect dgn database sql kot
         messagebox.showerror(title="Error", message="Username and password can't be empty")
 
 def backbutton(forgetSurface,packSurface):
-    forgetSurface.pack_forget()
-    packSurface.pack()
+    forgetSurface.place_forget()
+    packSurface.place(relx=0.5, rely=0.5,anchor='center')
 
 def backbutton_delresult(forgetSurface,packSurface,result_label):
     result_label.config(text="")
-    forgetSurface.pack_forget()
-    packSurface.pack()
+    forgetSurface.place_forget()
+    packSurface.place(relx=0.5, rely=0.5,anchor='center')
 
 def PhysicsPage(forget_surface,pack_surface):
     #backbutton(subject_frame,phy_frame)
@@ -246,11 +259,12 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                speed_label.grid(row=0,column=1,pady=10)
-                distance_label.grid(row=1,column=0,pady=10)
-                time_label.grid(row=2,column=0,pady=10)
-                distance_entry.grid(row=1,column=2)
-                time_entry.grid(row=2,column=2)
+                speed_label.grid(row=0,column=1,pady=10,padx=20)
+                distance_label.grid(row=1,column=0,pady=10,padx=20)
+                time_label.grid(row=2,column=0,pady=10,padx=50)
+
+                distance_entry.grid(row=1,column=2,padx=20)
+                time_entry.grid(row=2,column=2,padx=20)
                 result_label.grid(row=3,column=1,pady=10)
 
             def velocity():
@@ -279,11 +293,12 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                velocity_label.grid(row=0,column=1,pady=10)
-                displacement_label.grid(row=1,column=0,pady=10)
-                time_label.grid(row=2,column=0,pady=10)
-                displacement_entry.grid(row=1,column=2)
-                time_entry.grid(row=2,column=2)
+                velocity_label.grid(row=0,column=1,pady=20,padx=20)
+                displacement_label.grid(row=1,column=0,pady=20,padx=40)
+                time_label.grid(row=2,column=0,pady=20,padx=20)
+
+                displacement_entry.grid(row=1,column=2,padx=20)
+                time_entry.grid(row=2,column=2,padx=20)
                 result_label.grid(row=3,column=1,pady=10)
             
             def acceleration():
@@ -315,14 +330,14 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                acceleration_label.grid(row=0,column=1,pady=10)
-                ini_vel_label.grid(row=1,column=0,pady=10)
-                fin_vel_label.grid(row=2,column=0,pady=10)
-                time_label.grid(row=3,column=0,pady=10)
+                acceleration_label.grid(row=0,column=1,pady=10,padx=20)
+                ini_vel_label.grid(row=1,column=0,pady=10,padx=20)
+                fin_vel_label.grid(row=2,column=0,pady=10,padx=40)
+                time_label.grid(row=3,column=0,pady=10,padx=20)
 
-                ini_vel_entry.grid(row=1,column=2)
-                fin_vel_entry.grid(row=2,column=2)
-                time_entry.grid(row=3,column=2)
+                ini_vel_entry.grid(row=1,column=2,padx=20)
+                fin_vel_entry.grid(row=2,column=2,padx=20)
+                time_entry.grid(row=3,column=2,padx=20)
                 result_label.grid(row=4,column=1,pady=10)
 
             def momentum():
@@ -351,12 +366,12 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                momentum_label.grid(row=0,column=1,pady=10)
-                vel_label.grid(row=1,column=0,pady=10)
-                mass_label.grid(row=2,column=0,pady=10)
+                momentum_label.grid(row=0,column=1,pady=10,padx=20)
+                vel_label.grid(row=1,column=0,pady=10,padx=70)
+                mass_label.grid(row=2,column=0,pady=10,padx=20)
 
-                vel_entry.grid(row=1,column=2)
-                mass_entry.grid(row=2,column=2)
+                vel_entry.grid(row=1,column=2,padx=20)
+                mass_entry.grid(row=2,column=2,padx=20)
                 result_label.grid(row=3,column=1,pady=10)
 
             def force():
@@ -385,12 +400,12 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                force_label.grid(row=0,column=1,pady=10)
-                mass_label.grid(row=1,column=0,pady=10)
-                acc_label.grid(row=2,column=0,pady=10)
+                force_label.grid(row=0,column=1,pady=10,padx=20)
+                mass_label.grid(row=1,column=0,pady=10,padx=20)
+                acc_label.grid(row=2,column=0,pady=10,padx=50)
 
-                mass_entry.grid(row=1,column=2)
-                acc_entry.grid(row=2,column=2)
+                mass_entry.grid(row=1,column=2,padx=20)
+                acc_entry.grid(row=2,column=2,padx=20)
                 result_label.grid(row=3,column=1,pady=10)
 
             def impulse():
@@ -422,14 +437,14 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                impulse_label.grid(row=0,column=1,pady=10)
-                fin_vel_label.grid(row=1,column=0,pady=10)
-                ini_vel_label.grid(row=2,column=0,pady=10)
-                mass_label.grid(row=3,column=0,pady=10)
+                impulse_label.grid(row=0,column=1,pady=10,padx=20)
+                fin_vel_label.grid(row=1,column=0,pady=10,padx=20)
+                ini_vel_label.grid(row=2,column=0,pady=10,padx=40)
+                mass_label.grid(row=3,column=0,pady=10,padx=20)
 
-                fin_vel_entry.grid(row=1,column=2)
-                ini_vel_entry.grid(row=2,column=2)
-                mass_entry.grid(row=3,column=2)
+                fin_vel_entry.grid(row=1,column=2,padx=20)
+                ini_vel_entry.grid(row=2,column=2,padx=20)
+                mass_entry.grid(row=3,column=2,padx=20)
                 result_label.grid(row=4,column=1,pady=10)
 
             def impulsiveForce():
@@ -464,16 +479,16 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                impulsiveForce_label.grid(row=0,column=1,pady=10)
-                fin_vel_label.grid(row=1,column=0,pady=10)
-                ini_vel_label.grid(row=2,column=0,pady=10)
-                mass_label.grid(row=3,column=0,pady=10)
-                time_label.grid(row=4,column=0,pady=10)
+                impulsiveForce_label.grid(row=0,column=1,pady=10,padx=20)
+                fin_vel_label.grid(row=1,column=0,pady=10,padx=50)
+                ini_vel_label.grid(row=2,column=0,pady=10,padx=20)
+                mass_label.grid(row=3,column=0,pady=10,padx=20)
+                time_label.grid(row=4,column=0,pady=10,padx=20)
 
-                fin_vel_entry.grid(row=1,column=2)
-                ini_vel_entry.grid(row=2,column=2)
-                mass_entry.grid(row=3,column=2)
-                time_entry.grid(row=4,column=2)
+                fin_vel_entry.grid(row=1,column=2,padx=20)
+                ini_vel_entry.grid(row=2,column=2,padx=20)
+                mass_entry.grid(row=3,column=2,padx=20)
+                time_entry.grid(row=4,column=2,padx=20)
                 result_label.grid(row=5,column=1,pady=10)
 
             def weight():
@@ -499,10 +514,10 @@ def PhysicsPage(forget_surface,pack_surface):
                 calculate_button.grid(row=8,column=1,pady=10)
 
 
-                weight_label.grid(row=0,column=1,pady=10)
-                mass_label.grid(row=1,column=0,pady=10)
+                weight_label.grid(row=0,column=1,pady=10,padx=20)
+                mass_label.grid(row=1,column=0,pady=10,padx=100)
 
-                mass_entry.grid(row=1,column=2)
+                mass_entry.grid(row=1,column=2,padx=20)
                 result_label.grid(row=2,column=1,pady=10)
             
             f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -519,45 +534,45 @@ def PhysicsPage(forget_surface,pack_surface):
             phy_f4c2_back.grid(row=9,column=1,pady=10)
 
 
-            f4Chapter2_label.grid(row=0,column=1,pady=10)
-            speed_button.grid(row=1,column=1,pady=10,sticky="ew")          
-            velocity_button.grid(row=2,column=1,pady=10,sticky="ew")          
-            acceleration_button.grid(row=3,column=1,pady=10,sticky="ew")       
-            momentum_button.grid(row=4,column=1,pady=10,sticky="ew")      
-            force_button.grid(row=5,column=1,pady=10,sticky="ew")        
-            impulse_button.grid(row=6,column=1,pady=10,sticky="ew")       
-            impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew")    
-            weight_button.grid(row=8,column=1,pady=10,sticky="ew")              
+            f4Chapter2_label.grid(row=0,column=1,padx=20,pady=10)
+            speed_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
+            velocity_button.grid(row=2,column=1,pady=10,sticky="ew",padx=20)          
+            acceleration_button.grid(row=3,column=1,pady=10,sticky="ew",padx=20)       
+            momentum_button.grid(row=4,column=1,pady=10,sticky="ew",padx=20)      
+            force_button.grid(row=5,column=1,pady=10,sticky="ew",padx=20)        
+            impulse_button.grid(row=6,column=1,pady=10,sticky="ew",padx=20)       
+            impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew",padx=20)    
+            weight_button.grid(row=8,column=1,pady=10,sticky="ew",padx=20)              
             
 
 
         f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
         chap2_button=tk.Button(phyf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f4_chap2())
-        chap3_button=tk.Button(phyf4_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24))
-        chap4_button=tk.Button(phyf4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24))
-        chap5_button=tk.Button(phyf4_frame,text="Chapter 5",bg="#90ee90", font=("Helvetica",24))
-        chap6_button=tk.Button(phyf4_frame,text="Chapter 6",bg="#90ee90", font=("Helvetica",24))
+        chap3_button=tk.Button(phyf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
+        chap4_button=tk.Button(phyf4_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
+        chap5_button=tk.Button(phyf4_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
+        chap6_button=tk.Button(phyf4_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
 
         phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,pack_surface))
-        phy_f4_back.grid(row=6,column=2,pady=10)
+        phy_f4_back.grid(row=6,column=2,pady=40)
 
         f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
-        chap2_button.grid(row=1,column=0,padx=10,pady=50)
-        chap3_button.grid(row=1,column=2,padx=10)
-        chap4_button.grid(row=1,column=4,padx=10)
-        chap5_button.grid(row=2,column=1,padx=10,pady=50)
-        chap6_button.grid(row=2,column=3,padx=10)
+        chap2_button.grid(row=1,column=0,padx=20,pady=50)
+        chap3_button.grid(row=1,column=2,padx=20)
+        chap4_button.grid(row=1,column=4,padx=20)
+        chap5_button.grid(row=2,column=1,padx=20,pady=50)
+        chap6_button.grid(row=2,column=3,padx=20)
 
     form4_button=tk.Button(phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f4())
-    form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24))
+    form5_button=tk.Button(phy_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))
     chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
     phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
 
-    form4_button.grid(row=1,column=0,padx=5,pady=200)
-    form5_button.grid(row=1,column=2,padx=5)
+    form4_button.grid(row=1,column=0,padx=20,pady=100)
+    form5_button.grid(row=1,column=2,padx=20)
     chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
-    phy_back.grid(row=6,column=1)
+    phy_back.grid(row=6,column=1,pady=40)
 
 def admin():
         #global cursor
@@ -733,10 +748,6 @@ def admin():
         addToTree()
         tree.bind("<ButtonRelease>", display_data) #means if we click on a row in the tree view, the function will be executed
 
-
-
-
-
 # Creating widgets
 login_label = tk.Label(frame, text="Login", bg='#212129', fg="#08edff", font=("Helvetica", 34))
 username_label = tk.Label(frame, text="Username", bg='#212129', fg="#FFFFFF", font=("Helvetica", 16))
@@ -750,15 +761,16 @@ backRegister_button = tk.Button(register_frame, text="Back", bg="#1c6cc0", fg="#
 
 # Placing widgets on the screen
 login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
-username_label.grid(row=1, column=0)
-username_entry.grid(row=1, column=1, pady=20)
-password_label.grid(row=2, column=0)
-password_entry.grid(row=2, column=1, pady=20)
+username_label.grid(row=1, column=0,padx=10)
+username_entry.grid(row=1, column=1, pady=20,padx=10)
+password_label.grid(row=2, column=0,padx=10)
+password_entry.grid(row=2, column=1, pady=20,padx=10)
 login_button.grid(row=3, column=0,columnspan=2,padx=20,pady=5,sticky="EW" )
 register_button.grid(row=4,column=0,columnspan=2,padx=20,pady=5,sticky="EW" )
 
 
-frame.pack()
+
+frame.place(relx=0.5, rely=0.5,anchor='center')
 
 window.mainloop()
 
