@@ -191,7 +191,7 @@ def login(): #ni nanti kena connect dgn database sql kot
 
             phy_button = tk.Button(subject_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:PhysicsPage(subject_frame,phy_frame))
             chem_button = tk.Button(subject_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24))
-            bio_button = tk.Button(subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24))
+            bio_button = tk.Button(subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24),command=lambda:BiologyPage(subject_frame,phy_frame))
 
             subject_back = tk.Button(subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(subject_frame,frame))
 
@@ -570,7 +570,7 @@ def PhysicsPage(forget_surface,pack_surface):
         chap6_button.grid(row=2,column=3,padx=10)
 
     form4_button=tk.Button(phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f4())
-    form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24))
+    form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),)
     chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
     phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
@@ -657,7 +657,7 @@ def BiologyPage(forget_surface, pack_surface):
                        messagebox.showerroe(title='Error',message="mass water,food and temperature rise cannot be negative")
                     else:
                         energy_value_food_sample = ((4.2*mass_water*temperature_rise)/mass_food*1000)   
-                    result_label.config(text=f"{energy_value_food_sample}")
+                        result_label.config(text=f"{energy_value_food_sample}")
 
                 energy_value_food_sample_label=tk.Label(energy_value_food_sample_frame, text='energy value food sample',bg="#212129",fg="#08edff",font=("Helvetica",34))
                 mass_water_label = tk.Label(energy_value_food_sample_frame, text='mass water',bg="#212129",fg="#90ee90", font=("Helvetica", 24))
@@ -782,6 +782,32 @@ def BiologyPage(forget_surface, pack_surface):
                 distance_moved_by_air_bubble_from_x_to_y_entry.grid(row=1,column=2)
                 time_entry.grid(row=2,column=2)
                 result_label.grid(row=3,column=1,pady=10)
+
+        f4Chapter_label=tk.Label(biof4_frame, text="Biology Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap4_button=tk.Button(biof4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap7())
+        chap5_button=tk.Button(biof4_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap5())
+        chap7_button=tk.Button(biof4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24),)
+        
+
+        phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,pack_surface))
+        phy_f4_back.grid(row=6,column=2,pady=10)
+
+        f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        chap4_button.grid(row=1,column=0,padx=10,pady=50)
+        chap5_button.grid(row=1,column=2,padx=10)
+        chap7_button.grid(row=1,column=4,padx=10)
+        
+
+    form4_button=tk.Button(bio_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:bio_f4())
+    form5_button=tk.Button(bio_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),)
+    chooseForm_label=tk.Label(bio_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
+
+    bio_back = tk.Button(bio_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
+
+    form4_button.grid(row=1,column=0,padx=5,pady=200)
+    form5_button.grid(row=1,column=2,padx=5)
+    chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
+    bio_back.grid(row=6,column=1)    
 
 def admin():
         #global cursor
