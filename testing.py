@@ -62,13 +62,6 @@ percentage_cover_frame=tk.Frame(bg="#212129")
 population_frame=tk.Frame(bg="#212129")
 transpiration_rate_frame=tk.Frame(bg="#212129")
 
-
-
-
-
-
-
-
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
@@ -191,7 +184,7 @@ def login(): #ni nanti kena connect dgn database sql kot
 
             phy_button = tk.Button(subject_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:PhysicsPage(subject_frame,phy_frame))
             chem_button = tk.Button(subject_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24))
-            bio_button = tk.Button(subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24),command=lambda:BiologyPage(subject_frame,phy_frame))
+            bio_button = tk.Button(subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24),command=lambda:BiologyPage(subject_frame,bio_frame))
 
             subject_back = tk.Button(subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(subject_frame,frame))
 
@@ -580,7 +573,7 @@ def PhysicsPage(forget_surface,pack_surface):
     chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
     phy_back.grid(row=6,column=1)
 
-def BiologyPage(forget_surface, pack_surface):
+def BiologyPage(forget_surface,pack_surface):
     backbutton(subject_frame,bio_frame)
     def bio_f4():
         backbutton(bio_frame,biof4_frame)
@@ -646,41 +639,44 @@ def BiologyPage(forget_surface, pack_surface):
                 result_label.grid(row=3,column=1,pady=10)
 
         def bio_f4_chap7():
-            backbutton(biof4_frame,biof4c7_frame)  
+            backbutton(biof4_frame, biof4c7_frame)  
             def energy_value_food_sample():
                 backbutton(biof4c7_frame, energy_value_food_sample_frame)
                 def energy_value_food_sample_calc():
-                    mass_water=int(mass_water_entry.get())
-                    temperature_rise=(temperature_rise_entry.get())
-                    mass_food=(mass_food_entry.get())
-                    if mass_food < 0 or mass_water < 0 or temperature_rise < 0:
-                       messagebox.showerroe(title='Error',message="mass water,food and temperature rise cannot be negative")
-                    else:
-                        energy_value_food_sample = ((4.2*mass_water*temperature_rise)/mass_food*1000)   
-                        result_label.config(text=f"{energy_value_food_sample}")
+                  mass_water = int(mass_water_entry.get())
+                  temperature_rise = int(temperature_rise_entry.get())
+                  mass_food = int(mass_food_entry.get())
+                  if mass_food < 0 or mass_water < 0 or temperature_rise < 0:
+                    messagebox.showerror(title='Error', message="mass water, food and temperature rise cannot be negative")
+                  else:
+                    energy_value_food_sample = ((4.2 * mass_water * temperature_rise) / mass_food * 1000)   
+                    result_label.config(text=f"{energy_value_food_sample}")
+            
 
-                energy_value_food_sample_label=tk.Label(energy_value_food_sample_frame, text='energy value food sample',bg="#212129",fg="#08edff",font=("Helvetica",34))
-                mass_water_label = tk.Label(energy_value_food_sample_frame, text='mass water',bg="#212129",fg="#90ee90", font=("Helvetica", 24))
-                temperature_rise_label =tk.Label(energy_value_food_sample_frame,text='temperature rise',bg="#212129",fg="#90ee90", font=("Helvetica", 24))    
-                mass_food_label= tk.Label(energy_value_food_sample_frame,text='mass food',bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+        energy_value_food_sample_label = tk.Label(energy_value_food_sample_frame, text='energy value food sample', bg="#212129", fg="#08edff", font=("Helvetica", 34))
+        mass_water_label = tk.Label(energy_value_food_sample_frame, text='mass water', bg="#212129", fg="#90ee90", font=("Helvetica", 24))
+        temperature_rise_label = tk.Label(energy_value_food_sample_frame, text='temperature rise', bg="#212129", fg="#90ee90", font=("Helvetica", 24))    
+        mass_food_label = tk.Label(energy_value_food_sample_frame, text='mass food', bg="#212129", fg="#90ee90", font=("Helvetica", 24))
 
-                mass_water_entry=tk.Entry(energy_value_food_sample_frame,font=("Helvetica", 16))
-                temperature_rise_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica",16))
-                mass_food_entry = tk.Entry(energy_value_food_sample_frame,font=("Helvetica", 16))
+        mass_water_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica", 16))
+        temperature_rise_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica", 16))
+        mass_food_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica", 16))
 
-                energy_value_food_sample_back = tk.Button(energy_value_food_sample_frame, text="Back",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(energy_value_food_sample_frame,biof4c7_frame,result_label))
-                energy_value_food_sample_back.grid(row=9, column=1,pady=10)
-                calculate_button=tk.Button(energy_value_food_sample_frame, text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:energy_value_food_sample_calc())
-                calculate_button.grid(row=8, column=1, pady=10)
+        result_label = tk.Label(energy_value_food_sample_frame, text='', bg="#212129", fg="#ff4500", font=("Helvetica", 24))  
 
-                energy_value_food_sample_label.grid(row=0,column=1,pady=10)
-                mass_water_label.grid(row=1,column=0, pady=10)
-                temperature_rise_label.grid(row=2,column=0, pady=10)
-                mass_food_label.grid(row=3, column=0,pady=10)
-                mass_water_entry.grid(row=1,column=2)
-                temperature_rise_entry.grid(row=2,column=2)
-                mass_food_entry.grid(row=3,column=3)
-                result_label.grid(row=3,column=1,pady=10)
+        energy_value_food_sample_back = tk.Button(energy_value_food_sample_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton_delresult(energy_value_food_sample_frame, biof4c7_frame, result_label))
+        energy_value_food_sample_back.grid(row=9, column=1, pady=10)
+        calculate_button = tk.Button(energy_value_food_sample_frame, text="Calculate", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: energy_value_food_sample_calc())
+        calculate_button.grid(row=8, column=1, pady=10)
+
+        energy_value_food_sample_label.grid(row=0, column=1, pady=10)
+        mass_water_label.grid(row=1, column=0, pady=10)
+        temperature_rise_label.grid(row=2, column=0, pady=10)
+        mass_food_label.grid(row=3, column=0, pady=10)
+        mass_water_entry.grid(row=1, column=2)
+        temperature_rise_entry.grid(row=2, column=2)
+        mass_food_entry.grid(row=3, column=2)
+        result_label.grid(row=4, column=1, pady=10)
 
     def bio_f5():
         backbutton(bio_frame,biof5_frame)
@@ -783,31 +779,34 @@ def BiologyPage(forget_surface, pack_surface):
                 time_entry.grid(row=2,column=2)
                 result_label.grid(row=3,column=1,pady=10)
 
+        form4_button=tk.Button(bio_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:bio_f4())
+        form5_button=tk.Button(bio_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f5()) 
+        chooseForm_label=tk.Label(bio_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))   
+
+        form4_button.grid(row=1,column=0,padx=5,pady=200)
+        form5_button.grid(row=1,column=2,padx=5)
+        chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
+               
+
         f4Chapter_label=tk.Label(biof4_frame, text="Biology Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
-        chap4_button=tk.Button(biof4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap7())
-        chap5_button=tk.Button(biof4_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap5())
-        chap7_button=tk.Button(biof4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24),)
+        chap4_button=tk.Button(biof4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap4())
+        chap5_button=tk.Button(biof4_frame,text="Chapter 5",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap5())
+        chap7_button=tk.Button(biof4_frame,text="Chapter 7",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4_chap7())
         
-
-        phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,pack_surface))
-        phy_f4_back.grid(row=6,column=2,pady=10)
-
-        f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        
+        f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)  
         chap4_button.grid(row=1,column=0,padx=10,pady=50)
         chap5_button.grid(row=1,column=2,padx=10)
         chap7_button.grid(row=1,column=4,padx=10)
+
+        f5Chapter_label = tk.Label(biof5_frame, text="Biology Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap9_button=tk.Button(biof5_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f5_chap9())
+        f5Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        chap9_button.grid(row=1,column=0,padx=10,pady=50)
         
 
-    form4_button=tk.Button(bio_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:bio_f4())
-    form5_button=tk.Button(bio_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),)
-    chooseForm_label=tk.Label(bio_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
-
-    bio_back = tk.Button(bio_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
-
-    form4_button.grid(row=1,column=0,padx=5,pady=200)
-    form5_button.grid(row=1,column=2,padx=5)
-    chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
-    bio_back.grid(row=6,column=1)    
+        bio_back = tk.Button(bio_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
+        bio_back.grid(row=6,column=1)    
 
 def admin():
         #global cursor
