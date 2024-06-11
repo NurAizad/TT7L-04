@@ -7,175 +7,91 @@
 3. Make sure edit dkt branch bukan dkt main code
 4. Kalau nak merge dgn main code, buat branch baru sbb takut tk jadi . so apa apa boleh pergi balik branch asal
 '''
-
-import tkinter as tk
-from tkinter import ttk
-
-def show_frame(frame):
-    frame.tkraise()
-
-def home_page():
-    menu_frame = ttk.Frame(container, style="TFrame")
-    menu_frame.grid(row=0, column=1, sticky="nsew")
-
-    for i in range(3):
-        menu_frame.rowconfigure(i, weight=1)
-    menu_frame.columnconfigure(0, weight=1)
-
-    label = ttk.Label(menu_frame, text="Choose a subject: ", font=("Arial", 24, "bold"), background="purple")
-    label.grid(row=0, column=0, pady=20)
-
-    button_frame = ttk.Frame(menu_frame, style="TFrame")
-    button_frame.grid(row=1, column=0, pady=20)
-
-    #button_style = ttk.Style()
-    #button_style.configure('TButton', font=("Arial", 14), padding=10)
-
-    button_options = {'font': ("Arial", 18), 'bg': 'lightgray', 'width': 10, 'height': 2}
-
-    physics_button = tk.Button(button_frame, text="Physics", **button_options, command=lambda: show_frame(pages["PhysicsPage"]))
-    physics_button.grid(row=0, column=0, pady=10, padx=20, sticky='ew')
-
-    chemistry_button = tk.Button(button_frame, text="Chemistry", **button_options, command=lambda: show_frame(pages["ChemistryPage"]))
-    chemistry_button.grid(row=1, column=0, pady=10, padx=20, sticky='ew')
-
-    biology_button = tk.Button(button_frame, text="Biology", **button_options, command=lambda: show_frame(pages["BiologyPage"]))
-    biology_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
-
-    button_frame.columnconfigure(0, weight=1)
+#chemistry
+chem_frame=tk.Frame(bg="#212129")
+chemf4_frame=tk.Frame(bg="#212129")
+chemf4c2_frame=tk.Frame(bg="#212129")
+nucleon_frame=tk.Frame(bg="#212129")
 
 
-    # Create pages for Form 4 and Form 5
-    pages["PhysicsForm4Page"] = form_page("Physics", "Form4")
-    pages["PhysicsForm5Page"] = form_page("Physics", "Form5")
-    pages["ChemistryForm4Page"] = form_page("Chemistry", "Form4")
-    pages["ChemistryForm5Page"] = form_page("Chemistry", "Form5")
-    pages["BiologyForm4Page"] = form_page("Biology", "Form4")
-    pages["BiologyForm5Page"] = form_page("Biology", "Form5")
-
-    return menu_frame
-
-def form_page(subject_name, form):
-    page = ttk.Frame(container, style='TFrame')
-    pages[subject_name + form + "Page"] = page
-
-    for i in range(3):
-        page.rowconfigure(i, weight=1)
-    page.columnconfigure(0, weight=1)
-
-    label = ttk.Label(page, text=f"{subject_name} - Form {form} Calculator", font=("Arial", 20, "bold"), background="purple")
-    label.grid(row=0, column=0, pady=20)
-
-    back_button = tk.Button(page, text="Back to Menu", font=("Arial", 18), bg="#5DEBD7", command=lambda: show_frame(pages[subject_name + "Page"]))
-    back_button.grid(row=1, column=0, pady=20)
-
-    button_options = {'font': ("Arial", 18), 'bg': 'lightgray', 'width': 10, 'height': 2}
-
-    if form == '4':
-        chapter_button = tk.Button(page, text="Chapter 1", **button_options, command=lambda: show_frame(pages[subject_name + "Form4Chapter1"]))
-        chapter_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
-    elif form == '5':
-        chapter_button = tk.Button(page, text="Chapter 1", **button_options, command=lambda: show_frame(pages[subject_name + "Form5Chapter1"]))
-        chapter_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
-
-    page.columnconfigure(0, weight=1)
-    page.grid(row=0, column=1, sticky="nsew")
-    return page
-
-def chapter_page(subject_name, form):
-    page = ttk.Frame(container, style='TFrame')
-    pages[subject_name + form + "Chapter1"] = page
-
-    for i in range(5):
-        page.rowconfigure(i, weight=1)
-    for i in range(4):
-        page.columnconfigure(i, weight=1)
-
-    label = ttk.Label(page, text=f"{subject_name} - Form {form} Chapter 1", font=("Arial", 20, "bold"), background="purple")
-    label.grid(row=0, column=1, columnspan=2, pady=20)
-
-    back_button = tk.Button(page, text="Back to Form", font=("Arial", 18), bg="#5DEBD7", command=lambda: show_frame(pages[subject_name + form + "Page"]))
-    back_button.grid(row=1, column=1, columnspan=2, pady=20)
-
-    # Chapter-specific widgets (example: area calculation)
-    label_enter_height = tk.Label(page, text='Enter Height', bg='#212129', fg="#08edff", font=('Arial', 15), pady=10)
-    entry_enter_height = ttk.Entry(page)
-    label_enter_width = tk.Label(page, text='Enter Width', bg='#212129', fg="#08edff", font=('Arial', 15), pady=10)
-    entry_enter_width = ttk.Entry(page)
-    button_calculate_area = ttk.Button(page, text='Calculate Area', command=lambda: calculate_area(entry_enter_height, entry_enter_width, label_area))
-    label_area = tk.Label(page, text='Area', bg='#212129', fg="#08edff", font=('Arial', 15), pady=10)
-
-    label_enter_height.grid(row=2, column=0, pady=10, sticky='e')
-    entry_enter_height.grid(row=2, column=1, pady=10, sticky='w')
-    label_enter_width.grid(row=2, column=2, pady=10, sticky='e')
-    entry_enter_width.grid(row=2, column=3, pady=10, sticky='w')
-    button_calculate_area.grid(row=3, column=1, columnspan=2, pady=10)
-    label_area.grid(row=4, column=1, columnspan=2, pady=10)
-
-    page.grid(row=0, column=1, sticky="nsew")
-    return page
-
-def subject_page(subject_name):
-    page = ttk.Frame(container, style='TFrame')
-    pages[subject_name + "Page"] = page
-
-    for i in range(3):
-        page.rowconfigure(i, weight=1)
-    page.columnconfigure(0, weight=1)
-
-    label = ttk.Label(page, text = f"{subject_name} Formula Calculator", font = ("Arial", 20, "bold"), background="purple")
-    label.grid(row=0, column=0, pady=20)
-
-    button_options = {'font': ("Arial", 18), 'bg': '#D3D3D3', 'width': 10, 'height': 2}
-
-    form4_button = tk.Button(page, text="Form 4", **button_options, command=lambda: show_frame(pages[subject_name + "Form4Page"]))
-    form4_button.grid(row=1, column=0, pady=10, padx=20, sticky='ew')
-
-    form5_button = tk.Button(page, text="Form 5", **button_options, command=lambda: show_frame(pages[subject_name + "Form5Page"]))
-    form5_button.grid(row=2, column=0, pady=10, padx=20, sticky='ew')
-
-    back_button = tk.Button(page, text="Back to Menu", font=("Arial", 18), bg="#5DEBD7", command=lambda: show_frame(pages["StartPage"]))
-    back_button.grid(row=3, column=0, pady=20)
-
-    page.columnconfigure(0, weight=1)
-    page.grid(row=0, column=1, sticky="nsew")
-    return page 
+def ChemistryPage(forget_surface, pack_surface):
+    backbutton(forget_surface, pack_surface)
+    def chem_f4():
+        backbutton(chem_frame,chemf4_frame)
+        def chem_f4_chap2():
+            backbutton(chemf4_frame,chemf4c2_frame)
+            def nucleon_number():
+                backbutton(chemf4c2_frame, nucleon_frame)
+                def nucleon_calc():
+                    number_of_protons=int(number_of_protons_entry.get())
+                    number_of_neutrons=int(number_of_neutrons_entry.get())
+                    if number_of_protons <0 or number_of_neutrons <0:
+                        messagebox.showerror(title="Error", message="Number of protons and number of neutrons cannot be negative")
+                    else:
+                        nucleon=number_of_protons + number_of_neutrons
+                    result_label.config(text=f"{nucleon}")
 
 
-def calculate_area(entry_height, entry_width, label_area):
-    try:
-        height = int(entry_height.get())
-        width = int(entry_width.get())
-        area = 0.5 * height * width
-        label_area.config(text=f"Area: {area}")
-    except ValueError:
-        label_area.config(text="Please enter valid numbers")
+                nucleon_label=tk.Label(nucleon_frame, text="Nucleon Number", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                number_of_protons_label=tk.Label(nucleon_frame,text="Number of Protons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                number_of_neutrons_label=tk.Label(nucleon_frame,text="Number of Neutrons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                result_label=tk.Label(nucleon_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
 
-window = tk.Tk()
-window.title("SPM Formula Calculator")
-window.geometry("600x400")
+                number_of_protons_entry=tk.Entry(nucleon_frame, font=("Helvetica", 16))
+                number_of_neutrons_entry=tk.Entry(nucleon_frame, font=("Helvetica", 16))
 
-container = ttk.Frame(window)
-container.pack(fill="both", expand=True)
+                nucleon_back=tk.Button(nucleon_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(nucleon_frame,chemf4c2_frame,result_label))
+                nucleon_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(nucleon_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:nucleon_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
 
-for i in range(3):
-    container.rowconfigure(i, weight=1)
-    container.columnconfigure(i, weight=1)
+                nucleon_label.grid(row=0,column=1,pady=10,padx=20)
+                number_of_protons_label.grid(row=1,column=0,pady=10,padx=20)
+                number_of_neutrons_label.grid(row=2,column=0,pady=10,padx=50)
 
-style= ttk.Style()
-style.configure("TFrame", background="#212129")
+                number_of_protons_entry.grid(row=1,column=2,padx=20)
+                number_of_neutrons_entry.grid(row=2,column=2,padx=20)
+                result_label.grid(row=3,column=2,padx=20)
 
-pages = {}
+            f4Chapter2_label=tk.Label(chemf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            nucleon_number_button=tk.Button(chemf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:nucleon_number())
+            
 
-pages["StartPage"] = home_page()
+            chem_f4c2_back=tk.Button(chemf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(chemf4c2_frame,chemf4_frame))
+            chem_f4c2_back.grid(row=9,column=1,pady=10)
 
-for subject in ["Physics", "Chemistry", "Biology"]:
-    pages[subject + "Page"] = subject_page(subject)
-    pages[subject + "Form4Page"] = form_page(subject, '4')
-    pages[subject + "Form5Page"] = form_page(subject, '5')
-    pages[subject + "Form4Chapter1"] = chapter_page(subject, '4')
-    pages[subject + "Form5Chapter1"] = chapter_page(subject, '5')
 
-show_frame(pages["StartPage"])
+            f4Chapter2_label.grid(row=0,column=1,padx=20,pady=10)
+            nucleon_number_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
+                    
 
-window.mainloop()
+        f4Chapter_label=tk.Label(chemf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap2_button=tk.Button(chemf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:chem_f4_chap2())
+        chap3_button=tk.Button(chemf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
+        chap4_button=tk.Button(chemf4_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
+        chap5_button=tk.Button(chemf4_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
+        chap6_button=tk.Button(chemf4_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
+
+        chem_f4_back=tk.Button(chemf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(chemf4_frame,pack_surface))
+        chem_f4_back.grid(row=6,column=2,pady=40)
+
+        f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        chap2_button.grid(row=1,column=0,padx=20,pady=50)
+        chap3_button.grid(row=1,column=2,padx=20)
+        chap4_button.grid(row=1,column=4,padx=20)
+        chap5_button.grid(row=2,column=1,padx=20,pady=50)
+        chap6_button.grid(row=2,column=3,padx=20)
+    
+    
+    form4_button=tk.Button(chem_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:chem_f4())
+    form5_button=tk.Button(chem_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))
+    chooseForm_label=tk.Label(chem_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
+
+    chem_back = tk.Button(chem_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
+
+    form4_button.grid(row=1,column=0,padx=20,pady=100)
+    form5_button.grid(row=1,column=2,padx=20)
+    chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
+    chem_back.grid(row=6,column=1,pady=40)
+
+
