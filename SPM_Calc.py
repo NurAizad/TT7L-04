@@ -83,6 +83,10 @@ impulse_frame=tk.Frame(bg="#212129")
 impulsiveForce_frame=tk.Frame(bg="#212129")
 weight_frame=tk.Frame(bg="#212129")
 
+phyf5_frame=tk.Frame(bg="#212129")
+phyf5c1_frame=tk.Frame(bg="#212129")
+hookesLaw_frame=tk.Frame(bg="#212129")
+elasPotEn_frame=tk.Frame(bg="#212129")
 #chemistry
 chem_frame=tk.Frame(bg="#212129")
 chemf4_frame=tk.Frame(bg="#212129")
@@ -212,23 +216,21 @@ def login(): #ni nanti kena connect dgn database sql kot
 
     username=username_entry.get()
     password=password_entry.get()
-    #form=form_combobox.get()
     if username and password:
         conn=sqlite3.connect("data.db")
         cursor=conn.cursor()
         cursor.execute("SELECT * FROM Student_Data WHERE username=? AND password=?",[username,password])
         result=cursor.fetchall()
         form=result[0][2]
-        print(form)
         if result == []:
             messagebox.showerror(title="Error", message="Account not found")
         elif result !=[] and username!= "admin" and password!="admin" and form ==4: #means form 4
             backbutton(frame,f4_subject_frame)
             subject_label = tk.Label(f4_subject_frame, text="Choose a subject", bg="#212129",fg="#08edff", font=("Helvetica",34))
 
-            phy_button = tk.Button(f4_subject_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:f4_PhysicsPage(f4_subject_frame,f4_phyf4_frame))
-            chem_button = tk.Button(f4_subject_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24),command=lambda:ChemistryPage(f4_subject_frame,f4_chem_frame))
-            bio_button = tk.Button(f4_subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24),command=lambda:BiologyPage(f4_subject_frame,f4_bio_frame))
+            phy_button = tk.Button(f4_subject_frame, text="Physics", bg="#90ee90", font=("Helvetica",24),command=lambda:f4_PhysicsPage(f4_subject_frame))
+            chem_button = tk.Button(f4_subject_frame, text="Chemistry", bg="#add8e6", font=("Helvetica",24),command=lambda:f4_ChemistryPage(f4_subject_frame))
+            bio_button = tk.Button(f4_subject_frame, text="Biology", bg="#f08080", font=("Helvetica",24),command=lambda:f4_BiologyPage(f4_subject_frame))
 
             subject_back = tk.Button(f4_subject_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(f4_subject_frame,frame))
 
@@ -256,7 +258,6 @@ def login(): #ni nanti kena connect dgn database sql kot
             bio_button.grid(row=3,column=1,columnspan=2,padx=20,pady=20,sticky="ew")
         
         if username =="admin" and password=="admin":
-
             backbutton(frame,admin_frame)
             subject_label = tk.Label(admin_frame, text="Choose a subject", bg="#212129",fg="#08edff", font=("Helvetica",34))
 
@@ -288,7 +289,6 @@ def backbutton_delresult(forgetSurface,packSurface,result_label):
     packSurface.place(relx=0.5, rely=0.5,anchor='center')
 
 def PhysicsPage(forget_surface,pack_surface):
-    #backbutton(subject_frame,phy_frame)
     backbutton(forget_surface,pack_surface)
     def phy_f4():
         backbutton(phy_frame,phyf4_frame)
@@ -303,7 +303,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Distance or time cannot be negative")
                     else:
                         speed=abs(distance/time)
-                    result_label.config(text=f"{speed}")
+                    result_label.config(text=f"{speed} m/s")
 
 
                 speed_label=tk.Label(speed_frame, text="Speed", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -338,7 +338,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Time cannot be negative")
                     if time>0:
                         velocity=displacement/time
-                    result_label.config(text=f"{velocity}")
+                    result_label.config(text=f"{velocity} m/s")
 
 
                 velocity_label=tk.Label(velocity_frame, text="Velocity", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -373,7 +373,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Time cannot be negative")
                     if t>0:
                         acceleration=(v-u)/t
-                    result_label.config(text=f"{acceleration}")
+                    result_label.config(text=f"{acceleration} m/s^2")
 
 
                 acceleration_label=tk.Label(acceleration_frame, text="Acceleration", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -411,7 +411,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         momentum=m*v
-                    result_label.config(text=f"{momentum}")
+                    result_label.config(text=f"{momentum} kg m/s")
 
 
                 momentum_label=tk.Label(momentum_frame, text="Momentum", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -445,7 +445,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         force=m*a
-                    result_label.config(text=f"{force}")
+                    result_label.config(text=f"{force} N")
 
 
                 force_label=tk.Label(force_frame, text="Force", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -480,7 +480,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         impulse=m*v-m*u
-                    result_label.config(text=f"{impulse}")
+                    result_label.config(text=f"{impulse} N/s")
 
 
                 impulse_label=tk.Label(impulse_frame, text="Impulse", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -520,7 +520,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass or time cannot be negative")
                     else:
                         impulsiveForce=(m*v-m*u)/t
-                    result_label.config(text=f"{impulsiveForce}")
+                    result_label.config(text=f"{impulsiveForce} N")
 
 
                 impulsiveForce_label=tk.Label(impulsiveForce_frame, text="Impulsive Force", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -561,7 +561,7 @@ def PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         weight=m*9.81
-                    result_label.config(text=f"{weight}")
+                    result_label.config(text=f"{weight} N")
 
 
                 weight_label=tk.Label(weight_frame, text="Weight", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -606,8 +606,6 @@ def PhysicsPage(forget_surface,pack_surface):
             impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew",padx=20)    
             weight_button.grid(row=8,column=1,pady=10,sticky="ew",padx=20)              
             
-
-
         f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
         chap2_button=tk.Button(phyf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f4_chap2())
         chap3_button=tk.Button(phyf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
@@ -625,8 +623,112 @@ def PhysicsPage(forget_surface,pack_surface):
         chap5_button.grid(row=2,column=1,padx=20,pady=50)
         chap6_button.grid(row=2,column=3,padx=20)
 
+    def phy_f5():
+        backbutton(phy_frame,phyf5_frame)
+        def phy_f5_chap1():
+            backbutton(phyf5_frame,phyf5c1_frame)
+            def hookesLaw():
+                backbutton(phyf4c2_frame,hookesLaw_frame)
+                def hookesLaw_calc():
+                    k=float(springConstant_entry.get())
+                    x=float(springExtension_entry.get())
+                    if k<0:
+                        messagebox.showerror(title="Error", message="Spring constant cannot be negative")
+                    else:
+                        force=k*x
+                    result_label.config(text=f"{force} N/m")
+
+
+                hookesLaw_label=tk.Label(hookesLaw_frame, text="Force (Hookes' Law)", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                springConstant_label=tk.Label(hookesLaw_frame,text="Spring Constant",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                springExtension_label=tk.Label(hookesLaw_frame,text="Spring Extension",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                result_label=tk.Label(hookesLaw_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                springConstant_entry=tk.Entry(hookesLaw_frame, font=("Helvetica", 16))
+                springExtension_entry=tk.Entry(hookesLaw_frame, font=("Helvetica", 16))
+
+                hookesLaw_back=tk.Button(hookesLaw_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(hookesLaw_frame,phyf5c1_frame,result_label))
+                hookesLaw_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(hookesLaw_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:hookesLaw_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+
+
+                hookesLaw_label.grid(row=0,column=1,pady=10,padx=20)
+                springConstant_label.grid(row=1,column=0,pady=10,padx=20)
+                springExtension_label.grid(row=2,column=0,pady=10,padx=50)
+
+                springConstant_entry.grid(row=1,column=2,padx=20)
+                springExtension_entry.grid(row=2,column=2,padx=50)
+                result_label.grid(row=3,column=1,pady=10)
+
+            def elasPotEn():
+                backbutton(phyf4c2_frame,elasPotEn_frame)
+                def elasPotEn_calc():
+                    k=float(springConstant_entry.get())
+                    x=float(springExtension_entry.get())
+                    if k<0:
+                        messagebox.showerror(title="Error", message="Spring constant cannot be negative")
+                    else:
+                        energy=(1/2)*k*(x**2)
+                    result_label.config(text=f"{energy} J")
+
+
+                elasPotEn_label=tk.Label(elasPotEn_frame, text="Elastic Potential Energy", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                springConstant_label=tk.Label(elasPotEn_frame,text="Spring Constant",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                springExtension_label=tk.Label(elasPotEn_frame,text="Spring Extension",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                result_label=tk.Label(elasPotEn_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                springConstant_entry=tk.Entry(elasPotEn_frame, font=("Helvetica", 16))
+                springExtension_entry=tk.Entry(elasPotEn_frame, font=("Helvetica", 16))
+
+                elasPotEn_back=tk.Button(elasPotEn_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(elasPotEn_frame,phyf5c1_frame,result_label))
+                elasPotEn_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(elasPotEn_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:elasPotEn_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+
+
+                elasPotEn_label.grid(row=0,column=1,pady=10,padx=20)
+                springConstant_label.grid(row=1,column=0,pady=10,padx=20)
+                springExtension_label.grid(row=2,column=0,pady=10,padx=50)
+
+                springConstant_entry.grid(row=1,column=2,padx=20)
+                springExtension_entry.grid(row=2,column=2,padx=50)
+                result_label.grid(row=3,column=1,pady=10)
+
+            f5Chapter1_label=tk.Label(phyf5c1_frame, text="Physics Form 5 Chapter 1", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            hookesLaw_button=tk.Button(phyf5c1_frame,text="Force (Hooke's Law)",bg="#90ee90", font=("Helvetica",24),command=lambda:hookesLaw())
+            elasPotEn_button=tk.Button(phyf5c1_frame,text="Elastic Potential Energy",bg="#90ee90", font=("Helvetica",24),command=lambda:elasPotEn())
+
+            phy_f5c1_back=tk.Button(phyf5c1_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf5c1_frame,phyf5_frame))
+            phy_f5c1_back.grid(row=9,column=1,pady=10)
+
+            f5Chapter1_label.grid(row=0,column=1,padx=20,pady=10)
+            hookesLaw_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
+            elasPotEn_button.grid(row=2,column=1,pady=10,sticky="ew",padx=20) 
+
+        f5Chapter_label=tk.Label(phyf5_frame, text="Physics Form 5", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap1_button=tk.Button(phyf5_frame,text="Chapter 1",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f5_chap1())
+        chap2_button=tk.Button(phyf5_frame,text="Chapter 2",bg="#adb0b4", font=("Helvetica",24))
+        chap3_button=tk.Button(phyf5_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
+        chap4_button=tk.Button(phyf5_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
+        chap5_button=tk.Button(phyf5_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
+        chap6_button=tk.Button(phyf5_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
+        chap7_button=tk.Button(phyf5_frame,text="Chapter 7",bg="#adb0b4", font=("Helvetica",24))
+
+        chem_f4_back=tk.Button(phyf5_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf5_frame,pack_surface))
+        chem_f4_back.grid(row=6,column=2,pady=40)
+
+        f5Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        chap1_button.grid(row=1,column=0,padx=20,pady=50)
+        chap2_button.grid(row=1,column=2,padx=20)
+        chap3_button.grid(row=1,column=4,padx=20)
+        chap4_button.grid(row=2,column=0,padx=20,pady=50)
+        chap5_button.grid(row=2,column=2,padx=20)
+        chap6_button.grid(row=2,column=4,padx=20)
+        chap7_button.grid(row=3,column=2,padx=20,pady=50)
+
     form4_button=tk.Button(phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f4())
-    form5_button=tk.Button(phy_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))
+    form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f5())
     chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
     phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
@@ -744,7 +846,7 @@ def BiologyPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="final or initial mass cannot be negative")
                     else:
                             percentage_difference_in_mass = ((final_mass-initial_mass)/initial_mass)*0.01
-                    result_label.config(text=f"{percentage_difference_in_mass}")
+                    result_label.config(text=f"{percentage_difference_in_mass} %")
                 
                 percentage_diff_in_mass_label = tk.Label(percentage_diff_in_mass_frame, text="Percentage Difference in Mass",bg="#212129",fg="#08edff",font=("Helvetica",34))
                 final_mass_label= tk.Label(percentage_diff_in_mass_frame,text="Final mass",bg="#212129",fg="#f08080", font=("Helvetica", 24))
@@ -782,7 +884,7 @@ def BiologyPage(forget_surface,pack_surface):
                     else:
                          enzyme_reaction_rate = 1/time_taken
                     rounded_rate=round(enzyme_reaction_rate,4)
-                    result_label.config(text=f"{rounded_rate}") 
+                    result_label.config(text=f"{rounded_rate} s") 
                 enzyme_reaction_rate_label=tk.Label(enzyme_reaction_rate_frame, text='Enzyme Reaction Rate',bg="#212129",fg="#08edff",font=("Helvetica",34) )    
                 time_label=tk.Label(enzyme_reaction_rate_frame,text='Time',bg="#212129",fg="#f08080",font=("Helvetica",34))
                 result_label=tk.Label(enzyme_reaction_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
@@ -981,10 +1083,8 @@ def BiologyPage(forget_surface,pack_surface):
     bio_back.grid(row=6,column=1)  
 
 #form 4 only
-
-def f4_PhysicsPage(forget_surface,pack_surface):
-    #backbutton(forget_surface,pack_surface)
-    def f4_phy_f4():
+def f4_PhysicsPage(forget_surface):
+    def phy_f4():
         backbutton(forget_surface,f4_phyf4_frame)
         def phy_f4_chap2():
             backbutton(f4_phyf4_frame,f4_phyf4c2_frame)
@@ -997,7 +1097,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Distance or time cannot be negative")
                     else:
                         speed=abs(distance/time)
-                    result_label.config(text=f"{speed}")
+                    result_label.config(text=f"{speed} m/s")
 
 
                 speed_label=tk.Label(f4_speed_frame, text="Speed", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1032,7 +1132,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Time cannot be negative")
                     if time>0:
                         velocity=displacement/time
-                    result_label.config(text=f"{velocity}")
+                    result_label.config(text=f"{velocity} m/s")
 
 
                 velocity_label=tk.Label(f4_velocity_frame, text="Velocity", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1067,7 +1167,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Time cannot be negative")
                     if t>0:
                         acceleration=(v-u)/t
-                    result_label.config(text=f"{acceleration}")
+                    result_label.config(text=f"{acceleration} m/s^2")
 
 
                 acceleration_label=tk.Label(f4_acceleration_frame, text="Acceleration", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1105,7 +1205,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         momentum=m*v
-                    result_label.config(text=f"{momentum}")
+                    result_label.config(text=f"{momentum} kg m/s")
 
 
                 momentum_label=tk.Label(f4_momentum_frame, text="Momentum", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1139,7 +1239,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         force=m*a
-                    result_label.config(text=f"{force}")
+                    result_label.config(text=f"{force} N")
 
 
                 force_label=tk.Label(f4_force_frame, text="Force", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1174,7 +1274,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         impulse=m*v-m*u
-                    result_label.config(text=f"{impulse}")
+                    result_label.config(text=f"{impulse} N/s")
 
 
                 impulse_label=tk.Label(f4_impulse_frame, text="Impulse", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1214,7 +1314,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass or time cannot be negative")
                     else:
                         impulsiveForce=(m*v-m*u)/t
-                    result_label.config(text=f"{impulsiveForce}")
+                    result_label.config(text=f"{impulsiveForce} N")
 
 
                 impulsiveForce_label=tk.Label(f4_impulsiveForce_frame, text="Impulsive Force", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1255,7 +1355,7 @@ def f4_PhysicsPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="Mass cannot be negative")
                     else:
                         weight=m*9.81
-                    result_label.config(text=f"{weight}")
+                    result_label.config(text=f"{weight} N")
 
 
                 weight_label=tk.Label(f4_weight_frame, text="Weight", bg="#212129",fg="#08edff",font=("Helvetica",34))
@@ -1300,8 +1400,6 @@ def f4_PhysicsPage(forget_surface,pack_surface):
             impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew",padx=20)    
             weight_button.grid(row=8,column=1,pady=10,sticky="ew",padx=20)              
             
-
-
         f4Chapter_label=tk.Label(f4_phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
         chap2_button=tk.Button(f4_phyf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f4_chap2())
         chap3_button=tk.Button(f4_phyf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
@@ -1318,25 +1416,16 @@ def f4_PhysicsPage(forget_surface,pack_surface):
         chap4_button.grid(row=1,column=4,padx=20)
         chap5_button.grid(row=2,column=1,padx=20,pady=50)
         chap6_button.grid(row=2,column=3,padx=20)
-    f4_phy_f4()
-'''
-    form4_button=tk.Button(f4_phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:f4_phy_f4())
-    chooseForm_label=tk.Label(f4_phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
+    phy_f4()
 
-    phy_back = tk.Button(f4_phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
+def f4_ChemistryPage(forget_surface):
 
-    form4_button.grid(row=1,column=0,padx=200,pady=100)
-    chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
-    phy_back.grid(row=6,column=1,pady=40)
-'''
-def ChemistryPage(forget_surface, pack_surface):
-    backbutton(forget_surface, pack_surface)
     def chem_f4():
-        backbutton(chem_frame,chemf4_frame)
+        backbutton(forget_surface,f4_chemf4_frame)
         def chem_f4_chap2():
-            backbutton(chemf4_frame,chemf4c2_frame)
+            backbutton(f4_chemf4_frame,f4_chemf4c2_frame)
             def nucleon_number():
-                backbutton(chemf4c2_frame, nucleon_frame)
+                backbutton(f4_chemf4c2_frame, f4_nucleon_frame)
                 def nucleon_calc():
                     number_of_protons=int(number_of_protons_entry.get())
                     number_of_neutrons=int(number_of_neutrons_entry.get())
@@ -1347,17 +1436,17 @@ def ChemistryPage(forget_surface, pack_surface):
                     result_label.config(text=f"{nucleon}")
 
 
-                nucleon_label=tk.Label(nucleon_frame, text="Nucleon Number", bg="#212129",fg="#08edff",font=("Helvetica",34))
-                number_of_protons_label=tk.Label(nucleon_frame,text="Number of Protons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
-                number_of_neutrons_label=tk.Label(nucleon_frame,text="Number of Neutrons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
-                result_label=tk.Label(nucleon_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                nucleon_label=tk.Label(f4_nucleon_frame, text="Nucleon Number", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                number_of_protons_label=tk.Label(f4_nucleon_frame,text="Number of Protons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                number_of_neutrons_label=tk.Label(f4_nucleon_frame,text="Number of Neutrons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                result_label=tk.Label(f4_nucleon_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
 
-                number_of_protons_entry=tk.Entry(nucleon_frame, font=("Helvetica", 16))
-                number_of_neutrons_entry=tk.Entry(nucleon_frame, font=("Helvetica", 16))
+                number_of_protons_entry=tk.Entry(f4_nucleon_frame, font=("Helvetica", 16))
+                number_of_neutrons_entry=tk.Entry(f4_nucleon_frame, font=("Helvetica", 16))
 
-                nucleon_back=tk.Button(nucleon_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(nucleon_frame,chemf4c2_frame,result_label))
+                nucleon_back=tk.Button(f4_nucleon_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(f4_nucleon_frame,f4_chemf4c2_frame,result_label))
                 nucleon_back.grid(row=9,column=1,pady=10)
-                calculate_button=tk.Button(nucleon_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:nucleon_calc())
+                calculate_button=tk.Button(f4_nucleon_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:nucleon_calc())
                 calculate_button.grid(row=8,column=1,pady=10)
 
                 nucleon_label.grid(row=0,column=1,pady=10,padx=20)
@@ -1368,11 +1457,11 @@ def ChemistryPage(forget_surface, pack_surface):
                 number_of_neutrons_entry.grid(row=2,column=2,padx=20)
                 result_label.grid(row=3,column=1,padx=20)
 
-            f4Chapter2_label=tk.Label(chemf4c2_frame, text="Chemistry Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
-            nucleon_number_button=tk.Button(chemf4c2_frame,text="Nucleon Number",bg="#add8e6", font=("Helvetica",24),command=lambda:nucleon_number())
+            f4Chapter2_label=tk.Label(f4_chemf4c2_frame, text="Chemistry Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            nucleon_number_button=tk.Button(f4_chemf4c2_frame,text="Nucleon Number",bg="#add8e6", font=("Helvetica",24),command=lambda:nucleon_number())
             
 
-            chem_f4c2_back=tk.Button(chemf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(chemf4c2_frame,chemf4_frame))
+            chem_f4c2_back=tk.Button(f4_chemf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(f4_chemf4c2_frame,f4_chemf4_frame))
             chem_f4c2_back.grid(row=9,column=1,pady=10)
 
 
@@ -1380,17 +1469,17 @@ def ChemistryPage(forget_surface, pack_surface):
             nucleon_number_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
                     
 
-        f4Chapter_label=tk.Label(chemf4_frame, text="Chemistry Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
-        chap2_button=tk.Button(chemf4_frame,text="Chapter 2",bg="#add8e6", font=("Helvetica",24),command=lambda:chem_f4_chap2())
-        chap3_button=tk.Button(chemf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
-        chap4_button=tk.Button(chemf4_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
-        chap5_button=tk.Button(chemf4_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
-        chap6_button=tk.Button(chemf4_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
-        chap7_button=tk.Button(chemf4_frame,text="Chapter 7",bg="#adb0b4", font=("Helvetica",24))
-        chap8_button=tk.Button(chemf4_frame,text="Chapter 8",bg="#adb0b4", font=("Helvetica",24))
+        f4Chapter_label=tk.Label(f4_chemf4_frame, text="Chemistry Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap2_button=tk.Button(f4_chemf4_frame,text="Chapter 2",bg="#add8e6", font=("Helvetica",24),command=lambda:chem_f4_chap2())
+        chap3_button=tk.Button(f4_chemf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
+        chap4_button=tk.Button(f4_chemf4_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
+        chap5_button=tk.Button(f4_chemf4_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
+        chap6_button=tk.Button(f4_chemf4_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
+        chap7_button=tk.Button(f4_chemf4_frame,text="Chapter 7",bg="#adb0b4", font=("Helvetica",24))
+        chap8_button=tk.Button(f4_chemf4_frame,text="Chapter 8",bg="#adb0b4", font=("Helvetica",24))
         
 
-        chem_f4_back=tk.Button(chemf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(chemf4_frame,pack_surface))
+        chem_f4_back=tk.Button(f4_chemf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(f4_chemf4_frame,f4_subject_frame))
         chem_f4_back.grid(row=6,column=2,pady=40)
 
         f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
@@ -1401,35 +1490,24 @@ def ChemistryPage(forget_surface, pack_surface):
         chap6_button.grid(row=2,column=2,padx=20)
         chap7_button.grid(row=2,column=4,padx=20)
         chap8_button.grid(row=3,column=2,padx=20,pady=50)
-    
-    
-    form4_button=tk.Button(chem_frame,text="Form 4", bg="#add8e6", font=("Helvetica",24), command=lambda:chem_f4())
-    form5_button=tk.Button(chem_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))
-    chooseForm_label=tk.Label(chem_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
+    chem_f4()
 
-    chem_back = tk.Button(chem_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
-
-    form4_button.grid(row=1,column=0,padx=20,pady=100)
-    form5_button.grid(row=1,column=2,padx=20)
-    chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
-    chem_back.grid(row=6,column=1,pady=40)
-
-def BiologyPage(forget_surface,pack_surface):
-    backbutton(forget_surface,pack_surface)
+def f4_BiologyPage(forget_surface):
+    #backbutton(forget_surface,pack_surface)
     def bio_f4():
-        backbutton(bio_frame,biof4_frame)
+        backbutton(forget_surface,f4_biof4_frame)
         def bio_f4_chap4():
-            backbutton(biof4_frame,biof4c4_frame)
+            backbutton(f4_biof4_frame,f4_biof4c4_frame)
 
-            form_4_chapter_4_label=tk.Label(biof4c4_frame, text='Biology form 4 chapter 2 ', bg="#212129",fg="#08edff",font=("Helvetica",34))
+            form_4_chapter_4_label=tk.Label(f4_biof4c4_frame, text='Biology form 4 chapter 2 ', bg="#212129",fg="#08edff",font=("Helvetica",34))
             form_4_chapter_4_label.grid(row=0,column=1,pady=10,padx=20)
-            percentage_diff_in_mass_button=tk.Button(biof4c4_frame, text='Percentage difference in mass', bg="#f08080", font=("Helvetica",24), command=lambda:percentage_diff_in_mass())
+            percentage_diff_in_mass_button=tk.Button(f4_biof4c4_frame, text='Percentage difference in mass', bg="#f08080", font=("Helvetica",24), command=lambda:percentage_diff_in_mass())
             percentage_diff_in_mass_button.grid(row=1,column=1,pady=10,padx=20,sticky="ew")
-            backbutton_f4c4=tk.Button(biof4c4_frame, text='Back', bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16) ,command=lambda:backbutton(biof4c4_frame,biof4_frame) )
+            backbutton_f4c4=tk.Button(f4_biof4c4_frame, text='Back', bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16) ,command=lambda:backbutton(f4_biof4c4_frame,f4_biof4_frame) )
             backbutton_f4c4.grid(row=9,column=1,pady=10)
 
             def percentage_diff_in_mass():
-                backbutton(biof4c4_frame, percentage_diff_in_mass_frame)
+                backbutton(f4_biof4c4_frame, f4_percentage_diff_in_mass_frame)
                 def percentage_difference_in_mass_calc():
                     final_mass = int(final_mass_entry.get())
                     initial_mass = int(initial_mass_entry.get())
@@ -1437,17 +1515,17 @@ def BiologyPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="final or initial mass cannot be negative")
                     else:
                             percentage_difference_in_mass = ((final_mass-initial_mass)/initial_mass)*0.01
-                    result_label.config(text=f"{percentage_difference_in_mass}")
+                    result_label.config(text=f"{percentage_difference_in_mass} %")
                 
-                percentage_diff_in_mass_label = tk.Label(percentage_diff_in_mass_frame, text="Percentage Difference in Mass",bg="#212129",fg="#08edff",font=("Helvetica",34))
-                final_mass_label= tk.Label(percentage_diff_in_mass_frame,text="Final mass",bg="#212129",fg="#f08080", font=("Helvetica", 24))
-                initial_mass_label = tk.Label(percentage_diff_in_mass_frame,text="Initial mass",bg="#212129",fg="#f08080", font=("Helvetica", 24)) 
-                result_label = tk.Label(percentage_diff_in_mass_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
-                final_mass_entry = tk.Entry(percentage_diff_in_mass_frame, font=("Helvetica", 16))
-                initial_mass_entry = tk.Entry(percentage_diff_in_mass_frame, font=("Helvetica", 16))
-                percentage_diff_in_mass_back = tk.Button(percentage_diff_in_mass_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(percentage_diff_in_mass_frame,biof4c4_frame,result_label))
+                percentage_diff_in_mass_label = tk.Label(f4_percentage_diff_in_mass_frame, text="Percentage Difference in Mass",bg="#212129",fg="#08edff",font=("Helvetica",34))
+                final_mass_label= tk.Label(f4_percentage_diff_in_mass_frame,text="Final mass",bg="#212129",fg="#f08080", font=("Helvetica", 24))
+                initial_mass_label = tk.Label(f4_percentage_diff_in_mass_frame,text="Initial mass",bg="#212129",fg="#f08080", font=("Helvetica", 24)) 
+                result_label = tk.Label(f4_percentage_diff_in_mass_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                final_mass_entry = tk.Entry(f4_percentage_diff_in_mass_frame, font=("Helvetica", 16))
+                initial_mass_entry = tk.Entry(f4_percentage_diff_in_mass_frame, font=("Helvetica", 16))
+                percentage_diff_in_mass_back = tk.Button(f4_percentage_diff_in_mass_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(f4_percentage_diff_in_mass_frame,f4_biof4c4_frame,result_label))
                 percentage_diff_in_mass_back.grid(row=9,column=1,pady=10)
-                calculate_button = tk.Button(percentage_diff_in_mass_frame, text='Calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:percentage_difference_in_mass_calc())
+                calculate_button = tk.Button(f4_percentage_diff_in_mass_frame, text='Calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:percentage_difference_in_mass_calc())
                 calculate_button.grid(row=8,column=1,pady=10)
                 percentage_diff_in_mass_label.grid(row=0, column=1,pady=10)
                 final_mass_label.grid(row=1,column=0, pady=10,padx=20)
@@ -1457,17 +1535,17 @@ def BiologyPage(forget_surface,pack_surface):
                 result_label.grid(row=3,column=1,pady=10,padx=20)
 
         def bio_f4_chap5():
-            backbutton(biof4_frame,biof4c5_frame)
+            backbutton(f4_biof4_frame,f4_biof4c5_frame)
 
-            form_4_chapter_5_label=tk.Label(biof4c5_frame,text='Biology Form 4 Chapter 5' ,bg="#212129",fg="#08edff",font=("Helvetica",34))
+            form_4_chapter_5_label=tk.Label(f4_biof4c5_frame,text='Biology Form 4 Chapter 5' ,bg="#212129",fg="#08edff",font=("Helvetica",34))
             form_4_chapter_5_label.grid(row=0,column=1,pady=10,padx=20)
-            enzyme_reaction_rate_button=tk.Button(biof4c5_frame,text='Enzyme Reaction Rate', bg="#f08080", font=("Helvetica",24),command=lambda:enzyme_reaction_rate())
+            enzyme_reaction_rate_button=tk.Button(f4_biof4c5_frame,text='Enzyme Reaction Rate', bg="#f08080", font=("Helvetica",24),command=lambda:enzyme_reaction_rate())
             enzyme_reaction_rate_button.grid(row=1,column=1,pady=10,padx=20,sticky="ew")
-            backbutton_f4c5=tk.Button(biof4c5_frame, text='Back' , bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:backbutton(biof4c5_frame,biof4_frame))
+            backbutton_f4c5=tk.Button(f4_biof4c5_frame, text='Back' , bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:backbutton(f4_biof4c5_frame,f4_biof4_frame))
             backbutton_f4c5.grid(row=9,column=1,pady=10)
 
             def enzyme_reaction_rate():
-                backbutton(biof4c5_frame, enzyme_reaction_rate_frame)
+                backbutton(f4_biof4c5_frame, f4_enzyme_reaction_rate_frame)
                 def enzyme_reaction_rate_calc():
                     time_taken=int(time_entry.get())    
                     if time_taken<0:
@@ -1475,33 +1553,33 @@ def BiologyPage(forget_surface,pack_surface):
                     else:
                          enzyme_reaction_rate = 1/time_taken
                     rounded_rate=round(enzyme_reaction_rate,4)
-                    result_label.config(text=f"{rounded_rate}") 
-                enzyme_reaction_rate_label=tk.Label(enzyme_reaction_rate_frame, text='Enzyme Reaction Rate',bg="#212129",fg="#08edff",font=("Helvetica",34) )    
-                time_label=tk.Label(enzyme_reaction_rate_frame,text='Time',bg="#212129",fg="#f08080",font=("Helvetica",34))
-                result_label=tk.Label(enzyme_reaction_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
-                time_entry=tk.Entry(enzyme_reaction_rate_frame, font=("Helvetica", 16))
-                enzyme_reaction_rate_back=tk.Button(enzyme_reaction_rate_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(enzyme_reaction_rate_frame,biof4c5_frame,result_label))
+                    result_label.config(text=f"{rounded_rate} s") 
+                enzyme_reaction_rate_label=tk.Label(f4_enzyme_reaction_rate_frame, text='Enzyme Reaction Rate',bg="#212129",fg="#08edff",font=("Helvetica",34) )    
+                time_label=tk.Label(f4_enzyme_reaction_rate_frame,text='Time',bg="#212129",fg="#f08080",font=("Helvetica",34))
+                result_label=tk.Label(f4_enzyme_reaction_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                time_entry=tk.Entry(f4_enzyme_reaction_rate_frame, font=("Helvetica", 16))
+                enzyme_reaction_rate_back=tk.Button(f4_enzyme_reaction_rate_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(f4_enzyme_reaction_rate_frame,f4_biof4c5_frame,result_label))
                 enzyme_reaction_rate_back.grid(row=9, column=1, pady=10)
-                calculate_button=tk.Button(enzyme_reaction_rate_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:enzyme_reaction_rate_calc())
+                calculate_button=tk.Button(f4_enzyme_reaction_rate_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:enzyme_reaction_rate_calc())
                 calculate_button.grid(row=8,column=1,pady=10)
                 enzyme_reaction_rate_label.grid(row=0,column=1,pady=10)
                 time_label.grid(row=1,column=0,pady=10,padx=70)
                 time_entry.grid(row=1,column=2,padx=20)
                 result_label.grid(row=3,column=1,pady=10,padx=20)
         def bio_f4_chap7():
-            backbutton(biof4_frame, biof4c7_frame)
+            backbutton(f4_biof4_frame, f4_biof4c7_frame)
 
-            form_4_chapter_7_label = tk.Label(biof4c7_frame, text='Biology Form 4 Chapter 7', bg="#212129",fg="#08edff",font=("Helvetica",34))
+            form_4_chapter_7_label = tk.Label(f4_biof4c7_frame, text='Biology Form 4 Chapter 7', bg="#212129",fg="#08edff",font=("Helvetica",34))
             form_4_chapter_7_label.grid(row=0,column=1,pady=10,padx=20)
 
-            energy_value_food_sample_button = tk.Button(biof4c7_frame, text='Energy Value Food Sample', bg="#f08080", font=("Helvetica",24), command=lambda: energy_value_food_sample())
+            energy_value_food_sample_button = tk.Button(f4_biof4c7_frame, text='Energy Value Food Sample', bg="#f08080", font=("Helvetica",24), command=lambda: energy_value_food_sample())
             energy_value_food_sample_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)
 
-            backbutton_f4c7 = tk.Button(biof4c7_frame, text='Back',  bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton(biof4c7_frame, biof4_frame))
+            backbutton_f4c7 = tk.Button(f4_biof4c7_frame, text='Back',  bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton(f4_biof4c7_frame, f4_biof4_frame))
             backbutton_f4c7.grid(row=9,column=1,pady=10,padx=20)
 
             def energy_value_food_sample():
-                backbutton(biof4c7_frame, energy_value_food_sample_frame)
+                backbutton(f4_biof4c7_frame, f4_energy_value_food_sample_frame)
                 def energy_value_food_sample_calc():
                     try:
                         mass_water = int(mass_water_entry.get())
@@ -1514,165 +1592,40 @@ def BiologyPage(forget_surface,pack_surface):
                             result_label.config(text=f"Energy Value: {energy_value_food_sample:.2f} J/g")
                     except ValueError:
                         messagebox.showerror(title='Error', message="Please enter valid numbers")
-                energy_value_food_sample_label = tk.Label(energy_value_food_sample_frame, text='Energy Value Food Sample', bg="#212129", fg="#08edff", font=("Helvetica", 34))
+                energy_value_food_sample_label = tk.Label(f4_energy_value_food_sample_frame, text='Energy Value Food Sample', bg="#212129", fg="#08edff", font=("Helvetica", 34))
                 energy_value_food_sample_label.grid(row=0, column=1, pady=10)
-                mass_water_label = tk.Label(energy_value_food_sample_frame, text='Mass Water (g)', bg="#212129", fg="#f08080", font=("Helvetica", 24))
+                mass_water_label = tk.Label(f4_energy_value_food_sample_frame, text='Mass Water (g)', bg="#212129", fg="#f08080", font=("Helvetica", 24))
                 mass_water_label.grid(row=1, column=0, pady=10)
-                mass_water_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica", 16))
+                mass_water_entry = tk.Entry(f4_energy_value_food_sample_frame, font=("Helvetica", 16))
                 mass_water_entry.grid(row=1, column=2, pady=10)
-                temperature_rise_label = tk.Label(energy_value_food_sample_frame, text='Temperature Rise (°C)', bg="#212129", fg="#f08080", font=("Helvetica", 24))
+                temperature_rise_label = tk.Label(f4_energy_value_food_sample_frame, text='Temperature Rise (°C)', bg="#212129", fg="#f08080", font=("Helvetica", 24))
                 temperature_rise_label.grid(row=2, column=0, pady=10,padx=20)
-                temperature_rise_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica", 16))
+                temperature_rise_entry = tk.Entry(f4_energy_value_food_sample_frame, font=("Helvetica", 16))
                 temperature_rise_entry.grid(row=2, column=2, pady=10)
-                mass_food_label = tk.Label(energy_value_food_sample_frame, text='Mass Food (g)', bg="#212129", fg="#f08080", font=("Helvetica", 24))
+                mass_food_label = tk.Label(f4_energy_value_food_sample_frame, text='Mass Food (g)', bg="#212129", fg="#f08080", font=("Helvetica", 24))
                 mass_food_label.grid(row=3, column=0, pady=10)
-                mass_food_entry = tk.Entry(energy_value_food_sample_frame, font=("Helvetica", 16))
+                mass_food_entry = tk.Entry(f4_energy_value_food_sample_frame, font=("Helvetica", 16))
                 mass_food_entry.grid(row=3, column=2, pady=10,padx=50)
-                calculate_button = tk.Button(energy_value_food_sample_frame, text="Calculate", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=energy_value_food_sample_calc)
+                calculate_button = tk.Button(f4_energy_value_food_sample_frame, text="Calculate", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=energy_value_food_sample_calc)
                 calculate_button.grid(row=5, column=1, pady=10)
-                result_label = tk.Label(energy_value_food_sample_frame, text='', bg="#212129", fg="#FFFFFF", font=("Helvetica", 24))
+                result_label = tk.Label(f4_energy_value_food_sample_frame, text='', bg="#212129", fg="#FFFFFF", font=("Helvetica", 24))
                 result_label.grid(row=4, column=1, pady=10)
-                energy_value_food_sample_back = tk.Button(energy_value_food_sample_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton_delresult(energy_value_food_sample_frame, biof4c7_frame,result_label))
+                energy_value_food_sample_back = tk.Button(f4_energy_value_food_sample_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton_delresult(f4_energy_value_food_sample_frame, f4_biof4c7_frame,result_label))
                 energy_value_food_sample_back.grid(row=6, column=1, pady=10)
                 
-        f4Chapter_label=tk.Label(biof4_frame, text="Biology Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
-        chap4_button=tk.Button(biof4_frame,text="Chapter 4",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4_chap4())
-        chap5_button=tk.Button(biof4_frame,text="Chapter 5",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4_chap5())
-        chap7_button=tk.Button(biof4_frame,text="Chapter 7",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4_chap7())
-        bio_f4_back=tk.Button(biof4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(biof4_frame,pack_surface))
+        f4Chapter_label=tk.Label(f4_biof4_frame, text="Biology Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap4_button=tk.Button(f4_biof4_frame,text="Chapter 4",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4_chap4())
+        chap5_button=tk.Button(f4_biof4_frame,text="Chapter 5",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4_chap5())
+        chap7_button=tk.Button(f4_biof4_frame,text="Chapter 7",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4_chap7())
+        bio_f4_back=tk.Button(f4_biof4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(f4_biof4_frame,f4_subject_frame))
         bio_f4_back.grid(row=6,column=2,pady=10)
         
         f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)  
         chap4_button.grid(row=1,column=0,padx=10,pady=50)
         chap5_button.grid(row=1,column=2,padx=10)
         chap7_button.grid(row=1,column=4,padx=10)
-        
-    def bio_f5():
-        backbutton(bio_frame,biof5_frame)
-        def bio_f5_chap9():
-            backbutton(biof5_frame,biof5c9_frame)
 
-            form_5_chapter_9_label = tk.Label(biof5c9_frame, text='Biology Form 5 Chapter 9',bg='#212129',fg='#08edff',font=('Helvetica',34))
-            form_5_chapter_9_label.grid(row=0,column=1,pady=10)
-            percentage_cover_button=tk.Button(biof5c9_frame, text='Percentage Cover', bg='#f08080',font=("Helvetica",24),command=lambda:percentage_cover())
-            percentage_cover_button.grid(row=1,column=1,pady=10,sticky='ew')
-            backbutton_f5c9=tk.Button(biof5c9_frame, text='back',bg='#1c6cc0', fg='#FFFFFF',font=("Helvetica",16), command=lambda:backbutton(biof5c9_frame, biof5_frame))
-            backbutton_f5c9.grid(row=9,column=1,pady=10)
-
-            population_button=tk.Button(biof5c9_frame, text='Population', bg='#f08080',font=("Helvetica",24),command=lambda:population())
-            population_button.grid(row=1,column=2,pady=10,sticky='ew')
-
-            transpiration_rate_button=tk.Button(biof5c9_frame, text='Transpiration Rate', bg='#f08080',font=("Helvetica",24),command=lambda:transpiration_rate())
-            transpiration_rate_button.grid(row=1,column=3,pady=10,sticky='ew')
-            
-            def percentage_cover():
-                backbutton(biof5c9_frame, percentage_cover_frame)
-                def percentage_cover_calc():
-                    number_of_squares_containing_a_species=int(number_of_squares_containing_a_species_entry.get())
-                    total_number_of_squares = int(total_number_of_squares_entry.get())
-                    if number_of_squares_containing_a_species<0 or total_number_of_squares<0:
-                        messagebox.showerror(title='Error',message='input cannot be negative')
-                    else:
-                        percentage_cover=number_of_squares_containing_a_species/total_number_of_squares*100    
-                    result_label.config(text=f"{percentage_cover}")
-                percentage_cover_label=tk.Label(percentage_cover_frame, text='Percentage Cover',  bg="#212129",fg="#08edff",font=("Helvetica",34))
-                number_of_squares_containing_a_species_label=tk.Label(percentage_cover_frame, text='Number of Squares Containing a Species', bg="#212129",fg="#f08080",font=("Helvetica",14))    
-                total_number_of_squares_label =tk.Label(percentage_cover_frame, text='Total Number of Squares Containing a Species',  bg="#212129",fg="#f08080",font=("Helvetica",14))
-                result_label=tk.Label(percentage_cover_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
-                number_of_squares_containing_a_species_entry=tk.Entry(percentage_cover_frame,font=("Helvetica", 16))
-                total_number_of_squares_entry=tk.Entry(percentage_cover_frame, font=("Helvetica", 16))
-                percentage_cover_back=tk.Button(percentage_cover_frame, text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(percentage_cover_frame,biof5c9_frame,result_label))
-                percentage_cover_back.grid(row=9, column=1,pady=10)
-                calculate_button=tk.Button(percentage_cover_frame,text='Calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:percentage_cover_calc())
-                calculate_button.grid(row=8,column=1,pady=10)
-                percentage_cover_label.grid(row=0,column=1,pady=10)
-                number_of_squares_containing_a_species_label.grid(row=1,column=0,pady=10)
-                total_number_of_squares_label.grid(row=2,column=0,pady=10)
-                number_of_squares_containing_a_species_entry.grid(row=1,column=2)
-                total_number_of_squares_entry.grid(row=2,column=2,padx=50)
-                result_label.grid(row=3, column=1,pady=10)
-
-            def population():
-                backbutton(biof5c9_frame, population_frame)
-                def population_calc():
-                    first_catch_number=int(first_catch_number_entry.get())
-                    second_catch_number=int(second_catch_number_entry.get())
-                    marked_second_catch_number = int(marked_second_catch_number_entry.get())
-                    if first_catch_number<0 or second_catch_number<0 or marked_second_catch_number<0: 
-                       messagebox.showerror(title='Error',message='input cannot be negative')
-                    else:
-                        population=first_catch_number*second_catch_number/marked_second_catch_number
-                    result_label.config(text=f"{population}")
-                population_label=tk.Label(population_frame, text='Population',  bg="#212129",fg="#08edff",font=("Helvetica",34))
-                first_catch_number_label=tk.Label(population_frame, text='First Catch Number',bg="#212129",fg="#08edff",font=("Helvetica",24))
-                second_catch_number_label=tk.Label(population_frame, text='Second Catch Number',bg="#212129",fg="#08edff",font=("Helvetica",24))
-                marked_second_catch_number_label=tk.Label(population_frame, text='Marked Second Catch Number',bg="#212129",fg="#08edff",font=("Helvetica",24))
-                result_label=tk.Label(population_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
-                first_catch_number_entry=tk.Entry(population_frame,font=("Helvetica", 16))
-                second_catch_number_entry=tk.Entry(population_frame,font=("Helvetica", 16))
-                marked_second_catch_number_entry=tk.Entry(population_frame,font=("Helvetica", 16))
-                population_back=tk.Button(population_frame, text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(population_frame,biof5c9_frame,result_label))
-                population_back.grid(row=9,column=1,pady=10)
-                calculate_button=tk.Button(population_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:population_calc())
-                calculate_button.grid=tk.Button(row=8,column=1,pady=10)
-                population_label.grid(row=0,column=1,pady=10)
-                first_catch_number_label.grid(row=1,column=0,pady=10)
-                second_catch_number_label.grid(row=2,column=0,pady=10)
-                marked_second_catch_number_label.grid(row=3,column=0,pady=10)
-                first_catch_number_entry.grid(row=1,column=2)
-                second_catch_number_entry.grid(row=2,column=2)
-                marked_second_catch_number_entry.grid(row=3,column=2)
-                result_label.grid(row=3,column=1,pady=10)
-
-            def transpiration_rate():
-                backbutton(biof5c9_frame,transpiration_rate_frame)
-                def transpiration_rate_calc():
-                    distance_moved_by_air_bubble_from_x_to_y = int(distance_moved_by_air_bubble_from_x_to_y_entry.get())
-                    time=int(time_entry.get())
-                    if time<0 or distance_moved_by_air_bubble_from_x_to_y <0:
-                        messagebox.showerror(title="Error", message="input cannot be negative")
-                    else:
-                        transpiration_rate = distance_moved_by_air_bubble_from_x_to_y/time 
-                    result_label.config(text=f"{transpiration_rate}")
-                transpiration_rate_label = tk.Label(transpiration_rate_frame,text="Transpiration Rate",bg="#212129",fg="#08edff",font=("Helvetica",34))
-                distance_moved_by_air_bubble_from_x_to_y_label=tk.Label(transpiration_rate_frame,text="distance moved by air bubble from x to y",bg="#212129",fg="#08edff",font=("Helvetica",24))
-                time_label=tk.Label(transpiration_rate_frame,text="Time",bg="#212129",fg="#08edff",font=("Helvetica",24))     
-                result_label=tk.Label(transpiration_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
-                distance_moved_by_air_bubble_from_x_to_y_entry=tk.Entry(transpiration_rate_frame,font=("Helvetica",16))
-                time_entry=tk.Entry(transpiration_rate_frame,font=("Helvetica",16))
-                transpiration_rate_back=tk.Button(transpiration_rate_frame,text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(population_frame,biof5c9_frame,result_label))
-                transpiration_rate_back.grid(row=9,column=1,pady=10)
-                calculate_button=tk.Button(transpiration_rate_frame,text='Calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:transpiration_rate_calc())      
-                calculate_button.grid(row=8,column=1,pady=10)
-                transpiration_rate_label.grid(row=0,column=1,pady=10)
-                distance_moved_by_air_bubble_from_x_to_y_label.grid(row=1,column=0,pady=10)
-                time_label.grid(row=2,column=0,pady=10)
-                distance_moved_by_air_bubble_from_x_to_y_entry.grid(row=1,column=2)
-                time_entry.grid(row=2,column=2)
-                result_label.grid(row=3,column=1,pady=10)
-
-            
-
-        f5Chapter_label=tk.Label(biof5_frame, text="Biology Form 5", bg="#212129",fg="#08edff",font=("Helvetica",34))
-        chap9_button=tk.Button(biof5_frame,text="Chapter 9",bg="#f08080", font=("Helvetica",24),command=lambda:bio_f5_chap9()) 
-
-        f5Chapter_label.grid(row=0,column=2,padx=10,pady=10)  
-        chap9_button.grid(row=1,column=2,padx=10,pady=50)    
-        bio_f5_back=tk.Button(biof5_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(biof5_frame,pack_surface))
-        bio_f5_back.grid(row=6,column=2,pady=10) 
-
-
-    form4_button=tk.Button(bio_frame,text="Form 4", bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4())
-    form5_button=tk.Button(bio_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))  #nanti add function
-    chooseForm_label=tk.Label(bio_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))   
-  
-    form4_button.grid(row=1,column=0,padx=5,pady=200)
-    form5_button.grid(row=1,column=2,padx=5)
-    chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
-
-    bio_back = tk.Button(bio_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
-    bio_back.grid(row=6,column=1)  
-
+    bio_f4()
 
 
 def admin():
