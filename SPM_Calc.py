@@ -80,7 +80,7 @@ transpiration_rate_frame=tk.Frame(bg="#212129")
 def register(): #function utk kalau click register keluar page register
     global frame
     global register_frame
-    #frame.pack_forget()
+    global form_combobox
 
     student_info_frame=tk.LabelFrame(register_frame, text="Student information",font=("Helvetica", 16),bg="#212129",fg="#FFFFFF")
     student_info_frame.grid(row=0,column=0,padx=20,pady=20)
@@ -185,14 +185,26 @@ def login(): #ni nanti kena connect dgn database sql kot
 
     username=username_entry.get()
     password=password_entry.get()
+    #form=form_combobox.get()
     if username and password:
         conn=sqlite3.connect("data.db")
         cursor=conn.cursor()
         cursor.execute("SELECT * FROM Student_Data WHERE username=? AND password=?",[username,password])
         result=cursor.fetchall()
+        form=result[0][2]
+        print(form)
         if result == []:
             messagebox.showerror(title="Error", message="Account not found")
-        elif result !=[] and username!= "admin" and password!="admin":
+        if result !=[] and username!= "admin" and password!="admin" and form !=5: #means form 4
+            print ("form 4")
+        elif result !=[] and username!= "admin" and password!="admin" and form !=4:  #means form 5
+            '''
+            print(result)
+            print(form)
+            print("form 5")
+            '''
+            #print(result[0][2])
+            #print(len(result))
             backbutton(frame,subject_frame)
             subject_label = tk.Label(subject_frame, text="Choose a subject", bg="#212129",fg="#08edff", font=("Helvetica",34))
 
