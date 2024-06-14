@@ -37,6 +37,8 @@ adminInterface_frame=tk.Frame(bg="#212129")
 phy_frame=tk.Frame(bg="#212129")
 phyf4_frame=tk.Frame(bg="#212129")
 phyf4c2_frame=tk.Frame(bg="#212129")
+phyf5_frame=tk.Frame(bg="#212129")
+phyf5c3_frame=tk.Frame(bg="#212129")
 speed_frame=tk.Frame(bg="#212129")
 velocity_frame=tk.Frame(bg="#212129")
 acceleration_frame=tk.Frame(bg="#212129")
@@ -489,8 +491,68 @@ def PhysicsPage(forget_surface,pack_surface):
                 time_entry.grid(row=4,column=2)
                 result_label.grid(row=5,column=1,pady=10)
 
+           
+            
+            f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
+            velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
+            acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:acceleration())
+            momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24),command=lambda:momentum())
+            force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24),command=lambda:force())
+            impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24),command=lambda:impulse())
+            impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force",bg="#90ee90", font=("Helvetica",24),command=lambda:impulsiveForce())
+            
+
+            phy_f4c2_back=tk.Button(phyf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4c2_frame,phyf4_frame))
+            phy_f4c2_back.grid(row=9,column=1,pady=10)
+
+
+            f4Chapter2_label.grid(row=0,column=1,pady=10)
+            speed_button.grid(row=1,column=1,pady=10,sticky="ew")          
+            velocity_button.grid(row=2,column=1,pady=10,sticky="ew")          
+            acceleration_button.grid(row=3,column=1,pady=10,sticky="ew")       
+            momentum_button.grid(row=4,column=1,pady=10,sticky="ew")      
+            force_button.grid(row=5,column=1,pady=10,sticky="ew")        
+            impulse_button.grid(row=6,column=1,pady=10,sticky="ew")       
+            impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew")    
+                         
+            
+
+
+        f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap2_button=tk.Button(phyf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f4_chap2())
+        chap3_button=tk.Button(phyf4_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24))
+        chap4_button=tk.Button(phyf4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24))
+        chap5_button=tk.Button(phyf4_frame,text="Chapter 5",bg="#90ee90", font=("Helvetica",24))
+        
+
+        phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,pack_surface))
+        phy_f4_back.grid(row=6,column=2,pady=10)
+
+        f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        chap2_button.grid(row=1,column=0,padx=10,pady=50)
+        chap3_button.grid(row=1,column=2,padx=10)
+        chap4_button.grid(row=1,column=4,padx=10)
+        chap5_button.grid(row=2,column=1,padx=10,pady=50)
+        
+
+    #form4_button=tk.Button(phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f4())
+    #form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),command=)
+    #chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
+
+    #phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
+
+    #form4_button.grid(row=1,column=0,padx=5,pady=200)
+    #form5_button.grid(row=1,column=2,padx=5)
+    #chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
+    #phy_back.grid(row=6,column=1)
+
+    def phy_f5():
+        backbutton(phy_frame,phyf5_frame)
+        def phy_f5_chap3():
+            backbutton(phyf5_frame,phyf5c3_frame)
             def weight():
-                backbutton(phyf4c2_frame,weight_frame)
+                backbutton(phyf5c3_frame,weight_frame)
                 def weight_calc():
                     m=float(mass_entry.get())
                     if m<0:
@@ -506,8 +568,8 @@ def PhysicsPage(forget_surface,pack_surface):
 
                 mass_entry=tk.Entry(weight_frame, font=("Helvetica", 16))
 
-                velocity_back=tk.Button(weight_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(weight_frame,phyf4c2_frame,result_label))
-                velocity_back.grid(row=9,column=1,pady=10)
+                weight_back=tk.Button(weight_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(weight_frame,phyf5c3_frame,result_label))
+                weight_back.grid(row=9,column=1,pady=10)
                 calculate_button=tk.Button(weight_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:weight_calc())
                 calculate_button.grid(row=8,column=1,pady=10)
 
@@ -517,52 +579,36 @@ def PhysicsPage(forget_surface,pack_surface):
 
                 mass_entry.grid(row=1,column=2)
                 result_label.grid(row=2,column=1,pady=10)
-            
-            f4Chapter2_label=tk.Label(phyf4c2_frame, text="Physics Form 4 Chapter 2", bg="#212129",fg="#08edff",font=("Helvetica",34))
-            speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
-            velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
-            acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:acceleration())
-            momentum_button=tk.Button(phyf4c2_frame,text="Momentum",bg="#90ee90", font=("Helvetica",24),command=lambda:momentum())
-            force_button=tk.Button(phyf4c2_frame,text="Force",bg="#90ee90", font=("Helvetica",24),command=lambda:force())
-            impulse_button=tk.Button(phyf4c2_frame,text="Impulse",bg="#90ee90", font=("Helvetica",24),command=lambda:impulse())
-            impulsive_force_button=tk.Button(phyf4c2_frame,text="Impulsive Force",bg="#90ee90", font=("Helvetica",24),command=lambda:impulsiveForce())
-            weight_button=tk.Button(phyf4c2_frame,text="Weight",bg="#90ee90", font=("Helvetica",24),command=lambda:weight())
 
-            phy_f4c2_back=tk.Button(phyf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4c2_frame,phyf4_frame))
-            phy_f4c2_back.grid(row=9,column=1,pady=10)
+            f5Chapter3_label=tk.Label(phyf4c2_frame, text="Physics Form 5 Chapter 3", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            f5Chapter3_label.grid(row=0,column=1,pady=10)
+            #speed_button=tk.Button(phyf4c2_frame,text="Speed",bg="#90ee90", font=("Helvetica",24),command=lambda:speed())
+            #velocity_button=tk.Button(phyf4c2_frame,text="Velocity",bg="#90ee90", font=("Helvetica",24),command=lambda:velocity())
+            #acceleration_button=tk.Button(phyf4c2_frame,text="Acceleration",bg="#90ee90", font=("Helvetica",24),command=lambda:acceleration()) 
+            weight_button=tk.Button(phyf5c3_frame,text="weight",bg="#90ee90", font=("Helvetica",24),command=lambda:weight())
+            weight_button.grid(row=1,column=1,pady=10,sticky="ew")   
+            backbutton_weight_c3 = tk.Button(phyf5c3_frame, text='Back',  bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton(phyf5c3_frame, phyf5_frame)) 
+            backbutton_weight_c3.grid(row=6,column=1)
 
-
-            f4Chapter2_label.grid(row=0,column=1,pady=10)
-            speed_button.grid(row=1,column=1,pady=10,sticky="ew")          
-            velocity_button.grid(row=2,column=1,pady=10,sticky="ew")          
-            acceleration_button.grid(row=3,column=1,pady=10,sticky="ew")       
-            momentum_button.grid(row=4,column=1,pady=10,sticky="ew")      
-            force_button.grid(row=5,column=1,pady=10,sticky="ew")        
-            impulse_button.grid(row=6,column=1,pady=10,sticky="ew")       
-            impulsive_force_button.grid(row=7,column=1,pady=10,sticky="ew")    
-            weight_button.grid(row=8,column=1,pady=10,sticky="ew")              
-            
+            f5Chapter3_label=tk.Label(phyf5c3_frame, text="Physics Form 5 Chapter 3", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            f5Chapter3_label.grid(row=0,column=1,pady=10)
 
 
-        f4Chapter_label=tk.Label(phyf4_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
-        chap2_button=tk.Button(phyf4_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f4_chap2())
-        chap3_button=tk.Button(phyf4_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24))
-        chap4_button=tk.Button(phyf4_frame,text="Chapter 4",bg="#90ee90", font=("Helvetica",24))
-        chap5_button=tk.Button(phyf4_frame,text="Chapter 5",bg="#90ee90", font=("Helvetica",24))
-        chap6_button=tk.Button(phyf4_frame,text="Chapter 6",bg="#90ee90", font=("Helvetica",24))
+        f5Chapter_label=tk.Label(phyf5_frame, text="Physics Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap2_button=tk.Button(phyf5_frame,text="Chapter 2",bg="#90ee90", font=("Helvetica",24))
+        chap3_button=tk.Button(phyf5_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f5_chap3())
+        
+        
 
-        phy_f4_back=tk.Button(phyf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf4_frame,pack_surface))
-        phy_f4_back.grid(row=6,column=2,pady=10)
+        phy_f5_back=tk.Button(phyf5_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(phyf5_frame,pack_surface))
+        phy_f5_back.grid(row=6,column=2,pady=10)
 
-        f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        f5Chapter_label.grid(row=0,column=2,padx=10,pady=10)
         chap2_button.grid(row=1,column=0,padx=10,pady=50)
-        chap3_button.grid(row=1,column=2,padx=10)
-        chap4_button.grid(row=1,column=4,padx=10)
-        chap5_button.grid(row=2,column=1,padx=10,pady=50)
-        chap6_button.grid(row=2,column=3,padx=10)
+        chap3_button.grid(row=1,column=2,padx=10)    
 
     form4_button=tk.Button(phy_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24), command=lambda:phy_f4())
-    form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),)
+    form5_button=tk.Button(phy_frame,text="Form 5", bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f5())
     chooseForm_label=tk.Label(phy_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
     phy_back = tk.Button(phy_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
@@ -570,7 +616,7 @@ def PhysicsPage(forget_surface,pack_surface):
     form4_button.grid(row=1,column=0,padx=5,pady=200)
     form5_button.grid(row=1,column=2,padx=5)
     chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
-    phy_back.grid(row=6,column=1)
+    phy_back.grid(row=6,column=1)        
 
 def BiologyPage(forget_surface,pack_surface):
     backbutton(forget_surface,pack_surface)
@@ -740,13 +786,6 @@ def BiologyPage(forget_surface,pack_surface):
         backbutton(bio_frame,biof5_frame)
         def bio_f5_chap9():
             backbutton(biof5_frame,biof5c9_frame)
-
-            form_5_chapter_9_label = tk.Label(biof5c9_frame, text='Biology form 5 chapter 9',bg='#212129',fg='#08edff',font=('Helvetica',34))
-            form_5_chapter_9_label.grid(row=0,column=1,pady=10)
-            percentage_cover_button=tk.Button(percentage_cover_frame, text='percentage cover', bg='#90ee90',font=("Helvetica",34),command=lambda:percentage_cover())
-            percentage_cover_button.grid(row=1,column=1,pady=10,sticky='ew')
-            backbutton_f5c9=tk.Button(biof5c9_frame, text='back',bg='#1c6cc0', fg='#FFFFFF',font=("Helvetica",16), command=lambda:backbutton(biof5c9_frame, biof5_frame))
-            backbutton_f5c9.grid(row=9,column=1,pady=10)
             def percentage_cover():
                 backbutton(biof5c9_frame, percentage_cover_frame)
                 def percentage_cover_calc():
@@ -756,7 +795,7 @@ def BiologyPage(forget_surface,pack_surface):
                         messagebox.showerror(title='Error',message='input cannot be negative')
                     else:
                         percentage_cover=number_of_squares_containing_a_species/total_number_of_squares*100    
-                    result_label.config(text=f"{percentage_cover}")
+                    result_label.config(text=f"{percentage_cover}")       
 
                 percentage_cover_label=tk.Label(percentage_cover_frame, text='percentage cover',  bg="#212129",fg="#08edff",font=("Helvetica",34))
                 number_of_squares_containing_a_species_label=tk.Label(percentage_cover_frame, text='number of squares containing a species', bg="#212129",fg="#08edff",font=("Helvetica",24))    
@@ -766,7 +805,7 @@ def BiologyPage(forget_surface,pack_surface):
                 number_of_squares_containing_a_species_entry=tk.Entry(percentage_cover_frame,font=("Helvetica", 16))
                 total_number_of_squares_entry=tk.Entry(percentage_cover_frame, font=("Helvetica", 16))
 
-                percentage_cover_back=tk.Button(percentage_cover_frame, text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(percentage_cover_frame,biof4c9_frame,result_label))
+                percentage_cover_back=tk.Button(percentage_cover_frame, text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(percentage_cover_frame,biof5c9_frame,result_label))
                 percentage_cover_back.grid(row=0, column=1,pady=10)
                 calculate_button=tk.Button(percentage_cover_frame,tex='calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:percentage_cover_calc())
                 calculate_button.grid(row=8,column=1,pady=10)
@@ -834,7 +873,7 @@ def BiologyPage(forget_surface,pack_surface):
                 distance_moved_by_air_bubble_from_x_to_y_entry=tk.Entry(transpiration_rate_frame,font=("Helvetica",16))
                 time_entry=tk.Entry(transpiration_rate_frame,font=("Helvetica",16))
 
-                transpiration_rate_back=tk.Button(transpiration_rate_frame,text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(population_frame,biof5c9_frame,result_label))
+                transpiration_rate_back=tk.Button(transpiration_rate_frame,text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(transpiration_rate_frame,biof5c9_frame,result_label))
                 transpiration_rate_back.grid(row=9,column=1,pady=10)
                 calculate_button=tk.Button(transpiration_rate_frame,text='calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:transpiration_rate_calc())      
                 calculate_button.grid(row=8,column=1,pady=10)
@@ -845,14 +884,39 @@ def BiologyPage(forget_surface,pack_surface):
                 distance_moved_by_air_bubble_from_x_to_y_entry.grid(row=1,column=2)
                 time_entry.grid(row=2,column=2)
                 result_label.grid(row=3,column=1,pady=10)
+            
+            f5Chapter9_label=tk.Label(biof5c9_frame, text=" Biology Form 5 chapter 9 ", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            f5Chapter9_label.grid(row=0,column=1,pady=10)
+            percentage_cover_button=tk.Button(biof5c9_frame,text="percentage cover",bg="#d13838", font=("Helvetica",24))
+            poulation_button=tk.Button(biof5c9_frame,text="population",bg="#d13838", font=("Helvetica",24))
+            transpiration_rate_button=tk.Button(biof5c9_frame,text="transpiration rate",bg="#90ee90", font=("Helvetica",24),command=lambda:transpiration_rate())
+            
+            percentage_cover_button.grid(row=1,column=1,pady=10,sticky="ew")          
+            poulation_button.grid(row=2,column=1,pady=10,sticky="ew")          
+            transpiration_rate_button.grid(row=3,column=1,pady=10,sticky="ew")
+
+            bio_f5c9_back=tk.Button(biof5c9_frame,text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(biof5c9_frame,biof5_frame))
+            bio_f5c9_back.grid(row=9,column=1,pady=10)
+
 
         f5Chapter_label=tk.Label(biof5_frame, text="Biology Form 5", bg="#212129",fg="#08edff",font=("Helvetica",34))
-        chap9_button=tk.Button(biof5_frame,text="Chapter 9",bg="#90ee90", font=("Helvetica",24)) 
+        chap9_button=tk.Button(biof5_frame,text="Chapter 9",bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f5_chap9()) 
 
         f5Chapter_label.grid(row=0,column=2,padx=10,pady=10)  
         chap9_button.grid(row=1,column=0,padx=10,pady=50)    
         bio_f5_back=tk.Button(biof5_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(biof5_frame,pack_surface))
         bio_f5_back.grid(row=6,column=2,pady=10) 
+        
+        
+
+         
+            
+            
+
+        bio_f5c9_back=tk.Button(phyf4c2_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(biof5c9_frame,biof5_frame))
+        bio_f5c9_back.grid(row=9,column=1,pady=10)
+
+       
         
 
     form4_button=tk.Button(bio_frame,text="Form 4", bg="#90ee90", font=("Helvetica",24),command=lambda:bio_f4())
