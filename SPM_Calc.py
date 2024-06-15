@@ -87,6 +87,8 @@ phyf5_frame=tk.Frame(bg="#212129")
 phyf5c1_frame=tk.Frame(bg="#212129")
 hookesLaw_frame=tk.Frame(bg="#212129")
 elasPotEn_frame=tk.Frame(bg="#212129")
+
+phyf5c3_frame=tk.Frame(bg="#212129")
 #chemistry
 chem_frame=tk.Frame(bg="#212129")
 chemf4_frame=tk.Frame(bg="#212129")
@@ -706,10 +708,48 @@ def PhysicsPage(forget_surface,pack_surface):
             hookesLaw_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
             elasPotEn_button.grid(row=2,column=1,pady=10,sticky="ew",padx=20) 
 
+        def phy_f5_chap3():
+            backbutton(phyf5_frame,phyf5c3_frame)
+            def weight():
+                backbutton(phyf5c3_frame,weight_frame)
+                def weight_calc():
+                    m=float(mass_entry.get())
+                    if m<0:
+                        messagebox.showerror(title="Error", message="Mass cannot be negative")
+                    else:
+                        weight=m*9.81
+                    result_label.config(text=f"{weight}")
+                weight_label=tk.Label(weight_frame, text="Weight", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                mass_label=tk.Label(weight_frame,text="Mass",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                result_label=tk.Label(weight_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                mass_entry=tk.Entry(weight_frame, font=("Helvetica", 16))
+
+                weight_back=tk.Button(weight_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(weight_frame,phyf5c3_frame,result_label))
+                weight_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(weight_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:weight_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+
+
+                weight_label.grid(row=0,column=1,pady=10)
+                mass_label.grid(row=1,column=0,pady=10)
+
+                mass_entry.grid(row=1,column=2)
+                result_label.grid(row=2,column=1,pady=10)
+            f5Chapter3_label=tk.Label(phyf4c2_frame, text="Physics Form 5 Chapter 3", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            f5Chapter3_label.grid(row=0,column=1,pady=10)
+            weight_button=tk.Button(phyf5c3_frame,text="weight",bg="#90ee90", font=("Helvetica",24),command=lambda:weight())
+            weight_button.grid(row=1,column=1,pady=10,sticky="ew")   
+            backbutton_weight_c3 = tk.Button(phyf5c3_frame, text='Back',  bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda: backbutton(phyf5c3_frame, phyf5_frame)) 
+            backbutton_weight_c3.grid(row=6,column=1)
+
+            f5Chapter3_label=tk.Label(phyf5c3_frame, text="Physics Form 5 Chapter 3", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            f5Chapter3_label.grid(row=0,column=1,pady=10)
+
         f5Chapter_label=tk.Label(phyf5_frame, text="Physics Form 5", bg="#212129",fg="#08edff",font=("Helvetica",34))
         chap1_button=tk.Button(phyf5_frame,text="Chapter 1",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f5_chap1())
         chap2_button=tk.Button(phyf5_frame,text="Chapter 2",bg="#adb0b4", font=("Helvetica",24))
-        chap3_button=tk.Button(phyf5_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
+        chap3_button=tk.Button(phyf5_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24),command=lambda:phy_f5_chap3())
         chap4_button=tk.Button(phyf5_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
         chap5_button=tk.Button(phyf5_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
         chap6_button=tk.Button(phyf5_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
