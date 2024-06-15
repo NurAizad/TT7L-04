@@ -89,12 +89,16 @@ hookesLaw_frame=tk.Frame(bg="#212129")
 elasPotEn_frame=tk.Frame(bg="#212129")
 
 phyf5c3_frame=tk.Frame(bg="#212129")
+
 #chemistry
 chem_frame=tk.Frame(bg="#212129")
 chemf4_frame=tk.Frame(bg="#212129")
 chemf4c2_frame=tk.Frame(bg="#212129")
 nucleon_frame=tk.Frame(bg="#212129")
 
+chemf5_frame=tk.Frame(bg="#212129")
+chemf5c3_frame=tk.Frame(bg="#212129")
+fuelValue_frame=tk.Frame(bg="#212129")
 #biology
 bio_frame=tk.Frame(bg="#212129")
 biof4_frame=tk.Frame(bg="#212129")
@@ -851,9 +855,64 @@ def ChemistryPage(forget_surface, pack_surface):
         chap7_button.grid(row=2,column=4,padx=20)
         chap8_button.grid(row=3,column=2,padx=20,pady=50)
     
-    
+    def chem_f5():
+        backbutton(chem_frame,chemf5_frame)
+        def chem_f5_chap3():
+            backbutton(chemf5_frame,chemf5c3_frame)
+            def fuelValue():
+                backbutton(chemf5c3_frame, fuelValue_frame)
+                def fuelValue_calc():
+                    heat=float(heat_entry.get())
+                    molMass=float(molMass_entry.get())
+                    if molMass <0:
+                        messagebox.showerror(title="Error", message="Molar Mass cannot be negative")
+                    else:
+                        fuelValue=heat/molMass
+                    result_label.config(text=f"{fuelValue} kJ/g")
+
+                fuelValue_label=tk.Label(fuelValue_frame, text="Fuel Value", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                heat_label=tk.Label(fuelValue_frame,text="Heat of Combustion",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                molMass_label=tk.Label(fuelValue_frame,text="Molar Mass",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                result_label=tk.Label(fuelValue_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
+                heat_entry=tk.Entry(fuelValue_frame, font=("Helvetica", 16))
+                molMass_entry=tk.Entry(fuelValue_frame, font=("Helvetica", 16))
+
+                nucleon_back=tk.Button(fuelValue_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(fuelValue_frame,chemf5c3_frame,result_label))
+                nucleon_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(fuelValue_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:fuelValue_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+
+                fuelValue_label.grid(row=0,column=1,pady=10,padx=20)
+                heat_label.grid(row=1,column=0,pady=10,padx=10)
+                molMass_label.grid(row=2,column=0,pady=10,padx=10)
+
+                heat_entry.grid(row=1,column=2,padx=20)
+                molMass_entry.grid(row=2,column=2,padx=20)
+                result_label.grid(row=3,column=1,padx=20)
+
+            f5Chapter3_label=tk.Label(chemf5c3_frame, text="Chemistry Form 5 Chapter 3", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            fuelValue_button=tk.Button(chemf5c3_frame,text="Fuel Value",bg="#add8e6", font=("Helvetica",24),command=lambda:fuelValue())
+            
+
+            chem_f4c2_back=tk.Button(chemf5c3_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(chemf5c3_frame,chemf5_frame))
+            chem_f4c2_back.grid(row=9,column=1,pady=10)
+
+
+            f5Chapter3_label.grid(row=0,column=1,padx=20,pady=10)
+            fuelValue_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
+
+        chem_f5_back=tk.Button(chemf5_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(chemf5_frame,pack_surface))
+        chem_f5_back.grid(row=6,column=2,pady=40)
+
+        f5Chapter_label=tk.Label(chemf5_frame, text="Chemistry Form 5", bg="#212129",fg="#08edff",font=("Helvetica",34))
+        chap3_button=tk.Button(chemf5_frame,text="Chapter 3",bg="#add8e6", font=("Helvetica",24),command=lambda:chem_f5_chap3())
+
+        f5Chapter_label.grid(row=0,column=2,padx=10,pady=10)
+        chap3_button.grid(row=1,column=2,padx=20,pady=50)
+
     form4_button=tk.Button(chem_frame,text="Form 4", bg="#add8e6", font=("Helvetica",24), command=lambda:chem_f4())
-    form5_button=tk.Button(chem_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))
+    form5_button=tk.Button(chem_frame,text="Form 5", bg="#add8e6", font=("Helvetica",24), command=lambda:chem_f5())
     chooseForm_label=tk.Label(chem_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))
 
     chem_back = tk.Button(chem_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
@@ -1488,8 +1547,8 @@ def f4_ChemistryPage(forget_surface):
 
 
                 nucleon_label=tk.Label(f4_nucleon_frame, text="Nucleon Number", bg="#212129",fg="#08edff",font=("Helvetica",34))
-                number_of_protons_label=tk.Label(f4_nucleon_frame,text="Number of Protons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
-                number_of_neutrons_label=tk.Label(f4_nucleon_frame,text="Number of Neutrons",bg="#212129",fg="#90ee90", font=("Helvetica", 24))
+                number_of_protons_label=tk.Label(f4_nucleon_frame,text="Number of Protons",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                number_of_neutrons_label=tk.Label(f4_nucleon_frame,text="Number of Neutrons",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
                 result_label=tk.Label(f4_nucleon_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
 
                 number_of_protons_entry=tk.Entry(f4_nucleon_frame, font=("Helvetica", 16))
