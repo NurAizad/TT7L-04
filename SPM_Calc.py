@@ -749,7 +749,7 @@ def PhysicsPage(forget_surface,pack_surface):
         f5Chapter_label=tk.Label(phyf5_frame, text="Physics Form 5", bg="#212129",fg="#08edff",font=("Helvetica",34))
         chap1_button=tk.Button(phyf5_frame,text="Chapter 1",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f5_chap1())
         chap2_button=tk.Button(phyf5_frame,text="Chapter 2",bg="#adb0b4", font=("Helvetica",24))
-        chap3_button=tk.Button(phyf5_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24),command=lambda:phy_f5_chap3())
+        chap3_button=tk.Button(phyf5_frame,text="Chapter 3",bg="#90ee90", font=("Helvetica",24),command=lambda:phy_f5_chap3())
         chap4_button=tk.Button(phyf5_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
         chap5_button=tk.Button(phyf5_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
         chap6_button=tk.Button(phyf5_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
@@ -1003,16 +1003,18 @@ def BiologyPage(forget_surface,pack_surface):
 
             form_5_chapter_9_label = tk.Label(biof5c9_frame, text='Biology Form 5 Chapter 9',bg='#212129',fg='#08edff',font=('Helvetica',34))
             form_5_chapter_9_label.grid(row=0,column=1,pady=10)
+
             percentage_cover_button=tk.Button(biof5c9_frame, text='Percentage Cover', bg='#f08080',font=("Helvetica",24),command=lambda:percentage_cover())
-            percentage_cover_button.grid(row=1,column=1,pady=10,sticky='ew')
-            backbutton_f5c9=tk.Button(biof5c9_frame, text='back',bg='#1c6cc0', fg='#FFFFFF',font=("Helvetica",16), command=lambda:backbutton(biof5c9_frame, biof5_frame))
+            percentage_cover_button.grid(row=3,column=1,pady=10,sticky='ew')
+
+            backbutton_f5c9=tk.Button(biof5c9_frame, text='Back',bg='#1c6cc0', fg='#FFFFFF',font=("Helvetica",16), command=lambda:backbutton(biof5c9_frame, biof5_frame))
             backbutton_f5c9.grid(row=9,column=1,pady=10)
 
             population_button=tk.Button(biof5c9_frame, text='Population', bg='#f08080',font=("Helvetica",24),command=lambda:population())
-            population_button.grid(row=1,column=2,pady=10,sticky='ew')
+            population_button.grid(row=1,column=1,pady=10,sticky='ew')
 
             transpiration_rate_button=tk.Button(biof5c9_frame, text='Transpiration Rate', bg='#f08080',font=("Helvetica",24),command=lambda:transpiration_rate())
-            transpiration_rate_button.grid(row=1,column=3,pady=10,sticky='ew')
+            transpiration_rate_button.grid(row=2,column=1,pady=10,sticky='ew')
             
             def percentage_cover():
                 backbutton(biof5c9_frame, percentage_cover_frame)
@@ -1023,10 +1025,11 @@ def BiologyPage(forget_surface,pack_surface):
                         messagebox.showerror(title='Error',message='input cannot be negative')
                     else:
                         percentage_cover=number_of_squares_containing_a_species/total_number_of_squares*100    
-                    result_label.config(text=f"{percentage_cover}")
+                    result_label.config(text=f"{percentage_cover} %")
+
                 percentage_cover_label=tk.Label(percentage_cover_frame, text='Percentage Cover',  bg="#212129",fg="#08edff",font=("Helvetica",34))
-                number_of_squares_containing_a_species_label=tk.Label(percentage_cover_frame, text='Number of Squares Containing a Species', bg="#212129",fg="#f08080",font=("Helvetica",14))    
-                total_number_of_squares_label =tk.Label(percentage_cover_frame, text='Total Number of Squares Containing a Species',  bg="#212129",fg="#f08080",font=("Helvetica",14))
+                number_of_squares_containing_a_species_label=tk.Label(percentage_cover_frame, text='Number of Squares Containing a Species', bg="#212129",fg="#f08080",font=("Helvetica",16))    
+                total_number_of_squares_label =tk.Label(percentage_cover_frame, text='Total Number of Squares Containing a Species',  bg="#212129",fg="#f08080",font=("Helvetica",16))
                 result_label=tk.Label(percentage_cover_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
                 number_of_squares_containing_a_species_entry=tk.Entry(percentage_cover_frame,font=("Helvetica", 16))
                 total_number_of_squares_entry=tk.Entry(percentage_cover_frame, font=("Helvetica", 16))
@@ -1050,28 +1053,32 @@ def BiologyPage(forget_surface,pack_surface):
                     if first_catch_number<0 or second_catch_number<0 or marked_second_catch_number<0: 
                        messagebox.showerror(title='Error',message='input cannot be negative')
                     else:
-                        population=first_catch_number*second_catch_number/marked_second_catch_number
+                        population=(first_catch_number*second_catch_number)/marked_second_catch_number
                     result_label.config(text=f"{population}")
+
                 population_label=tk.Label(population_frame, text='Population',  bg="#212129",fg="#08edff",font=("Helvetica",34))
-                first_catch_number_label=tk.Label(population_frame, text='First Catch Number',bg="#212129",fg="#08edff",font=("Helvetica",24))
-                second_catch_number_label=tk.Label(population_frame, text='Second Catch Number',bg="#212129",fg="#08edff",font=("Helvetica",24))
-                marked_second_catch_number_label=tk.Label(population_frame, text='Marked Second Catch Number',bg="#212129",fg="#08edff",font=("Helvetica",24))
+                first_catch_number_label=tk.Label(population_frame, text='First Catch Number',bg="#212129",fg="#f08080",font=("Helvetica",24))
+                second_catch_number_label=tk.Label(population_frame, text='Second Catch Number',bg="#212129",fg="#f08080",font=("Helvetica",24))
+                marked_second_catch_number_label=tk.Label(population_frame, text='Marked Second Catch Number',bg="#212129",fg="#f08080",font=("Helvetica",24))
                 result_label=tk.Label(population_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
                 first_catch_number_entry=tk.Entry(population_frame,font=("Helvetica", 16))
                 second_catch_number_entry=tk.Entry(population_frame,font=("Helvetica", 16))
                 marked_second_catch_number_entry=tk.Entry(population_frame,font=("Helvetica", 16))
+
                 population_back=tk.Button(population_frame, text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(population_frame,biof5c9_frame,result_label))
                 population_back.grid(row=9,column=1,pady=10)
                 calculate_button=tk.Button(population_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:population_calc())
-                calculate_button.grid=tk.Button(row=8,column=1,pady=10)
+                calculate_button.grid(row=8,column=1,pady=10)
+
                 population_label.grid(row=0,column=1,pady=10)
                 first_catch_number_label.grid(row=1,column=0,pady=10)
                 second_catch_number_label.grid(row=2,column=0,pady=10)
                 marked_second_catch_number_label.grid(row=3,column=0,pady=10)
-                first_catch_number_entry.grid(row=1,column=2)
+                first_catch_number_entry.grid(row=1,column=2,padx=70)
                 second_catch_number_entry.grid(row=2,column=2)
                 marked_second_catch_number_entry.grid(row=3,column=2)
-                result_label.grid(row=3,column=1,pady=10)
+                result_label.grid(row=4,column=1,pady=10)
 
             def transpiration_rate():
                 backbutton(biof5c9_frame,transpiration_rate_frame)
@@ -1082,22 +1089,26 @@ def BiologyPage(forget_surface,pack_surface):
                         messagebox.showerror(title="Error", message="input cannot be negative")
                     else:
                         transpiration_rate = distance_moved_by_air_bubble_from_x_to_y/time 
-                    result_label.config(text=f"{transpiration_rate}")
+                    result_label.config(text=f"{transpiration_rate} cm/min")
+
                 transpiration_rate_label = tk.Label(transpiration_rate_frame,text="Transpiration Rate",bg="#212129",fg="#08edff",font=("Helvetica",34))
-                distance_moved_by_air_bubble_from_x_to_y_label=tk.Label(transpiration_rate_frame,text="distance moved by air bubble from x to y",bg="#212129",fg="#08edff",font=("Helvetica",24))
-                time_label=tk.Label(transpiration_rate_frame,text="Time",bg="#212129",fg="#08edff",font=("Helvetica",24))     
+                distance_moved_by_air_bubble_from_x_to_y_label=tk.Label(transpiration_rate_frame,text="Distance Moved by Air Bubble From x to y",bg="#212129",fg="#f08080",font=("Helvetica",16))
+                time_label=tk.Label(transpiration_rate_frame,text="Time",bg="#212129",fg="#f08080",font=("Helvetica",16))     
                 result_label=tk.Label(transpiration_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+
                 distance_moved_by_air_bubble_from_x_to_y_entry=tk.Entry(transpiration_rate_frame,font=("Helvetica",16))
                 time_entry=tk.Entry(transpiration_rate_frame,font=("Helvetica",16))
-                transpiration_rate_back=tk.Button(transpiration_rate_frame,text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(population_frame,biof5c9_frame,result_label))
+
+                transpiration_rate_back=tk.Button(transpiration_rate_frame,text='Back',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(transpiration_rate_frame,biof5c9_frame,result_label))
                 transpiration_rate_back.grid(row=9,column=1,pady=10)
                 calculate_button=tk.Button(transpiration_rate_frame,text='Calculate',bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:transpiration_rate_calc())      
                 calculate_button.grid(row=8,column=1,pady=10)
+
                 transpiration_rate_label.grid(row=0,column=1,pady=10)
                 distance_moved_by_air_bubble_from_x_to_y_label.grid(row=1,column=0,pady=10)
                 time_label.grid(row=2,column=0,pady=10)
                 distance_moved_by_air_bubble_from_x_to_y_entry.grid(row=1,column=2)
-                time_entry.grid(row=2,column=2)
+                time_entry.grid(row=2,column=2,padx=50)
                 result_label.grid(row=3,column=1,pady=10)
 
             
@@ -1112,11 +1123,11 @@ def BiologyPage(forget_surface,pack_surface):
 
 
     form4_button=tk.Button(bio_frame,text="Form 4", bg="#f08080", font=("Helvetica",24),command=lambda:bio_f4())
-    form5_button=tk.Button(bio_frame,text="Form 5", bg="#adb0b4", font=("Helvetica",24))  #nanti add function
+    form5_button=tk.Button(bio_frame,text="Form 5", bg="#f08080", font=("Helvetica",24),command=lambda:bio_f5())
     chooseForm_label=tk.Label(bio_frame,text="Choose which form:",bg="#212129",fg="#08edff", font=("Helvetica",34))   
   
-    form4_button.grid(row=1,column=0,padx=5,pady=200)
-    form5_button.grid(row=1,column=2,padx=5)
+    form4_button.grid(row=1,column=0,padx=20,pady=200)
+    form5_button.grid(row=1,column=2,padx=20)
     chooseForm_label.grid(row=0,column=1,sticky="ew",padx=10,pady=10)
 
     bio_back = tk.Button(bio_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(pack_surface,forget_surface))
