@@ -67,14 +67,6 @@ def ChemistryPage(forget_surface, pack_surface):
                     
         def chem_f4_chap6():
             backbutton(chemf4_frame,chemf4c6_frame)
-
-            #f4Chapter6_label=tk.Label(chemf4c6_frame,text='Chemistry Form 4 Chapter 6' ,bg="#212129",fg="#08edff",font=("Helvetica",34))
-            #f4Chapter6_label.grid(row=0,column=1,pady=10,padx=20)
-            #pH_button=tk.Button(chemf4c6_frame,text='pH Value', bg="#add8e6", font=("Helvetica",24),command=lambda:pH())
-            #pH_button.grid(row=1,column=1,pady=10,padx=20,sticky="ew")
-            #chem_f4c6_back=tk.Button(chemf4c6_frame, text='Back' , bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:backbutton(chemf4c6_frame,chemf4_frame))
-            #chem_f4c6_back.grid(row=9,column=1,pady=10)
-
             def pH():
                 backbutton(chemf4c6_frame,pH_frame)
                 def pH_calc():
@@ -126,9 +118,38 @@ def ChemistryPage(forget_surface, pack_surface):
                 volume_solution_entry.grid(row=2,column=2,padx=20)
                 result_label.grid(row=3,column=1,padx=20)
 
+            def molarity():
+                backbutton(chemf4c6_frame,molarity_frame)
+                def molarity_calc():
+                    number_moles_solute=float(number_moles_solute_entry.get())
+                    volume_solution=float(volume_solution_entry.get())
+                    if volume_solution<0:
+                        messagebox.showerror(title="Error", message="Volume of solution cannot be negative")
+                    else:
+                        molarity=number_moles_solute/volume_solution
+                    result_label.config(text=f"{molarity} mol d/m^3")
+
+                molarity_label=tk.Label(molarity_frame, text="Molarity", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                number_moles_solute_label=tk.Label(molarity_frame,text="Number of moles of solute",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                volume_solution_label=tk.Label(molarity_frame,text="Volume of Solution",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                result_label=tk.Label(molarity_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                number_moles_solute_entry=tk.Entry(molarity_frame, font=("Helvetica", 16))
+                volume_solution_entry=tk.Entry(molarity_frame, font=("Helvetica", 16))
+                molarity_back=tk.Button(molarity_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(molarity_frame,chemf4c6_frame,result_label))
+                molarity_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(molarity_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:molarity_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+                molarity_label.grid(row=0,column=1,pady=10,padx=20)
+                number_moles_solute_label.grid(row=1,column=0,pady=10,padx=10)
+                volume_solution_label.grid(row=2,column=0,pady=10,padx=10)
+                number_moles_solute_entry.grid(row=1,column=2,padx=20)
+                volume_solution_entry.grid(row=2,column=2,padx=20)
+                result_label.grid(row=3,column=1,padx=20)
+
             f4Chapter6_label=tk.Label(chemf4c6_frame, text="Chemsitry Form 4 Chapter 6", bg="#212129",fg="#08edff",font=("Helvetica",34))
             pH_button=tk.Button(chemf4c6_frame,text="pH Value",bg="#add8e6", font=("Helvetica",24),command=lambda:pH())
             concentration_button=tk.Button(chemf4c6_frame, text="Concentration",bg='#add8e6', font=("Helvetica", 24),command=lambda:concentration())
+            molarity_button=tk.Button(chemf4c6_frame,text="Molarity",bg="#add8e6", font=("Helvetica",24),command=lambda:molarity())
 
             chem_f4c6_back=tk.Button(chemf4c6_frame, text='Back' , bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:backbutton(chemf4c6_frame,chemf4_frame))
             chem_f4c6_back.grid(row=9,column=1,pady=10)
@@ -136,6 +157,7 @@ def ChemistryPage(forget_surface, pack_surface):
             f4Chapter6_label.grid(row=0,column=1,padx=20,pady=10)
             pH_button.grid(row=1,column=1,pady=10,padx=20,sticky="ew")  
             concentration_button.grid(row=2,column=1,pady=10,sticky="ew",padx=20)     
+            molarity_button.grid(row=3,column=1,pady=10,sticky="ew",padx=20)
            
 
         f4Chapter_label=tk.Label(chemf4_frame, text="Chemistry Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
