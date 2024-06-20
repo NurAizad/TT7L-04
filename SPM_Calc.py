@@ -1127,7 +1127,7 @@ def BiologyPage(forget_surface,pack_surface):
                     else:
                          enzyme_reaction_rate = 1/time_taken
                     rounded_rate=round(enzyme_reaction_rate,4)
-                    result_label.config(text=f"{rounded_rate} s") 
+                    result_label.config(text=f"{rounded_rate} /s") 
                 enzyme_reaction_rate_label=tk.Label(enzyme_reaction_rate_frame, text='Enzyme Reaction Rate',bg="#212129",fg="#08edff",font=("Helvetica",34) )    
                 time_label=tk.Label(enzyme_reaction_rate_frame,text='Time',bg="#212129",fg="#f08080",font=("Helvetica",34))
                 result_label=tk.Label(enzyme_reaction_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
@@ -1163,7 +1163,7 @@ def BiologyPage(forget_surface,pack_surface):
                             messagebox.showerror(title='Error', message="Mass of water, food, and temperature rise cannot be negative")
                         else:
                             energy_value_food_sample = (4.2 * mass_water * temperature_rise) / mass_food * 1000
-                            result_label.config(text=f"Energy Value: {energy_value_food_sample:.2f} J/g")
+                            result_label.config(text=f"{energy_value_food_sample:.2f} J/g")
                     except ValueError:
                         messagebox.showerror(title='Error', message="Please enter valid numbers")
                 energy_value_food_sample_label = tk.Label(energy_value_food_sample_frame, text='Energy Value Food Sample', bg="#212129", fg="#08edff", font=("Helvetica", 34))
@@ -1721,29 +1721,111 @@ def f4_ChemistryPage(forget_surface):
 
             f4Chapter2_label.grid(row=0,column=1,padx=20,pady=10)
             nucleon_number_button.grid(row=1,column=1,pady=10,sticky="ew",padx=20)          
-                    
+
+        def chem_f4_chap6():
+            backbutton(f4_chemf4_frame,f4_chemf4c6_frame)
+            def pH():
+                backbutton(f4_chemf4c6_frame,f4_pH_frame)
+                def pH_calc():
+                    pH_value=float(pH_value_entry.get())
+                    if pH_value <0:
+                        messagebox.showerror(title="Error", message="pH value cannot be negative")
+                    else:
+                        pH = -math.log10(pH_value)
+                    result_label.config(text=f"{pH}")
+                pH_label=tk.Label(f4_pH_frame, text='pH Value',bg="#212129",fg="#08edff",font=("Helvetica",34) ) 
+                pH_value_label=tk.Label(f4_pH_frame,text='H ions',bg="#212129",fg="#add8e6",font=("Helvetica",34))
+                result_label=tk.Label(f4_pH_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                pH_value_entry=tk.Entry(f4_pH_frame, font=("Helvetica", 16))
+                pH_back=tk.Button(f4_pH_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(f4_pH_frame,f4_chemf4c6_frame,result_label))
+                pH_back.grid(row=9, column=1, pady=10)
+                calculate_button=tk.Button(f4_pH_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:pH_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+                pH_label.grid(row=0,column=1,pady=10)
+                pH_value_label.grid(row=1,column=0,pady=10,padx=70)
+                pH_value_entry.grid(row=1,column=2,padx=20)
+                result_label.grid(row=3,column=1,pady=10,padx=20)
+
+            def concentration():
+                backbutton(f4_chemf4c6_frame,f4_concentration_frame)
+                def concentration_calc():
+                    mass_solute=float(mass_solute_entry.get())
+                    volume_solution=float(volume_solution_entry.get())
+                    if volume_solution<0:
+                        messagebox.showerror(title="Error", message="Volume of solution cannot be negative")
+                    else:
+                        concentration=mass_solute/volume_solution
+                    result_label.config(text=f"{concentration} g d/m^3")
+
+                concentration_label=tk.Label(f4_concentration_frame, text="Concentration", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                mass_solute_label=tk.Label(f4_concentration_frame,text="Mass of Solute",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                volume_solution_label=tk.Label(f4_concentration_frame,text="Volume of Solution",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                result_label=tk.Label(f4_concentration_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                mass_solute_entry=tk.Entry(f4_concentration_frame, font=("Helvetica", 16))
+                volume_solution_entry=tk.Entry(f4_concentration_frame, font=("Helvetica", 16))
+                concentration_back=tk.Button(f4_concentration_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(f4_concentration_frame,f4_chemf4c6_frame,result_label))
+                concentration_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(f4_concentration_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:concentration_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+                concentration_label.grid(row=0,column=1,pady=10,padx=20)
+                mass_solute_label.grid(row=1,column=0,pady=10,padx=10)
+                volume_solution_label.grid(row=2,column=0,pady=10,padx=10)
+                mass_solute_entry.grid(row=1,column=2,padx=20)
+                volume_solution_entry.grid(row=2,column=2,padx=20)
+                result_label.grid(row=3,column=1,padx=20)
+
+            def molarity():
+                backbutton(f4_chemf4c6_frame,f4_molarity_frame)
+                def molarity_calc():
+                    number_moles_solute=float(number_moles_solute_entry.get())
+                    volume_solution=float(volume_solution_entry.get())
+                    if volume_solution<0:
+                        messagebox.showerror(title="Error", message="Volume of solution cannot be negative")
+                    else:
+                        molarity=number_moles_solute/volume_solution
+                    result_label.config(text=f"{molarity} mol d/m^3")
+
+                molarity_label=tk.Label(f4_molarity_frame, text="Molarity", bg="#212129",fg="#08edff",font=("Helvetica",34))
+                number_moles_solute_label=tk.Label(f4_molarity_frame,text="Number of moles of solute",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                volume_solution_label=tk.Label(f4_molarity_frame,text="Volume of Solution",bg="#212129",fg="#add8e6", font=("Helvetica", 24))
+                result_label=tk.Label(f4_molarity_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
+                number_moles_solute_entry=tk.Entry(f4_molarity_frame, font=("Helvetica", 16))
+                volume_solution_entry=tk.Entry(f4_molarity_frame, font=("Helvetica", 16))
+                molarity_back=tk.Button(f4_molarity_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton_delresult(f4_molarity_frame,f4_chemf4c6_frame,result_label))
+                molarity_back.grid(row=9,column=1,pady=10)
+                calculate_button=tk.Button(f4_molarity_frame,text="Calculate",bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:molarity_calc())
+                calculate_button.grid(row=8,column=1,pady=10)
+                molarity_label.grid(row=0,column=1,pady=10,padx=20)
+                number_moles_solute_label.grid(row=1,column=0,pady=10,padx=10)
+                volume_solution_label.grid(row=2,column=0,pady=10,padx=10)
+                number_moles_solute_entry.grid(row=1,column=2,padx=20)
+                volume_solution_entry.grid(row=2,column=2,padx=20)
+                result_label.grid(row=3,column=1,padx=20)
+
+            f4Chapter6_label=tk.Label(f4_chemf4c6_frame, text="Chemsitry Form 4 Chapter 6", bg="#212129",fg="#08edff",font=("Helvetica",34))
+            pH_button=tk.Button(f4_chemf4c6_frame,text="pH Value",bg="#add8e6", font=("Helvetica",24),command=lambda:pH())
+            concentration_button=tk.Button(f4_chemf4c6_frame, text="Concentration",bg='#add8e6', font=("Helvetica", 24),command=lambda:concentration())
+            molarity_button=tk.Button(f4_chemf4c6_frame,text="Molarity",bg="#add8e6", font=("Helvetica",24),command=lambda:molarity())
+
+            chem_f4c6_back=tk.Button(f4_chemf4c6_frame, text='Back' , bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16),command=lambda:backbutton(f4_chemf4c6_frame,f4_chemf4_frame))
+            chem_f4c6_back.grid(row=9,column=1,pady=10)
+
+            f4Chapter6_label.grid(row=0,column=1,padx=20,pady=10)
+            pH_button.grid(row=1,column=1,pady=10,padx=20,sticky="ew")  
+            concentration_button.grid(row=2,column=1,pady=10,sticky="ew",padx=20)     
+            molarity_button.grid(row=3,column=1,pady=10,sticky="ew",padx=20)
 
         f4Chapter_label=tk.Label(f4_chemf4_frame, text="Chemistry Form 4", bg="#212129",fg="#08edff",font=("Helvetica",34))
         chap2_button=tk.Button(f4_chemf4_frame,text="Chapter 2",bg="#add8e6", font=("Helvetica",24),command=lambda:chem_f4_chap2())
-        chap3_button=tk.Button(f4_chemf4_frame,text="Chapter 3",bg="#adb0b4", font=("Helvetica",24))
-        chap4_button=tk.Button(f4_chemf4_frame,text="Chapter 4",bg="#adb0b4", font=("Helvetica",24))
-        chap5_button=tk.Button(f4_chemf4_frame,text="Chapter 5",bg="#adb0b4", font=("Helvetica",24))
-        chap6_button=tk.Button(f4_chemf4_frame,text="Chapter 6",bg="#adb0b4", font=("Helvetica",24))
-        chap7_button=tk.Button(f4_chemf4_frame,text="Chapter 7",bg="#adb0b4", font=("Helvetica",24))
-        chap8_button=tk.Button(f4_chemf4_frame,text="Chapter 8",bg="#adb0b4", font=("Helvetica",24))
+        chap6_button=tk.Button(f4_chemf4_frame,text="Chapter 6",bg="#add8e6", font=("Helvetica",24),command=lambda:chem_f4_chap6())
         
 
         chem_f4_back=tk.Button(f4_chemf4_frame, text="Back", bg="#1c6cc0", fg="#FFFFFF", font=("Helvetica", 16), command=lambda:backbutton(f4_chemf4_frame,f4_subject_frame))
         chem_f4_back.grid(row=6,column=2,pady=40)
 
         f4Chapter_label.grid(row=0,column=2,padx=10,pady=10)
-        chap2_button.grid(row=1,column=0,padx=20,pady=50)
-        chap3_button.grid(row=1,column=2,padx=20)
-        chap4_button.grid(row=1,column=4,padx=20)
-        chap5_button.grid(row=2,column=0,padx=20,pady=50)
+        chap2_button.grid(row=1,column=2,padx=20,pady=50)
         chap6_button.grid(row=2,column=2,padx=20)
-        chap7_button.grid(row=2,column=4,padx=20)
-        chap8_button.grid(row=3,column=2,padx=20,pady=50)
     chem_f4()
 
 def f4_BiologyPage(forget_surface):
@@ -1807,7 +1889,7 @@ def f4_BiologyPage(forget_surface):
                     else:
                          enzyme_reaction_rate = 1/time_taken
                     rounded_rate=round(enzyme_reaction_rate,4)
-                    result_label.config(text=f"{rounded_rate} s") 
+                    result_label.config(text=f"{rounded_rate} /s") 
                 enzyme_reaction_rate_label=tk.Label(f4_enzyme_reaction_rate_frame, text='Enzyme Reaction Rate',bg="#212129",fg="#08edff",font=("Helvetica",34) )    
                 time_label=tk.Label(f4_enzyme_reaction_rate_frame,text='Time',bg="#212129",fg="#f08080",font=("Helvetica",34))
                 result_label=tk.Label(f4_enzyme_reaction_rate_frame,text="",bg="#212129",fg="#FFFFFF", font=("Helvetica", 24))
@@ -1843,7 +1925,7 @@ def f4_BiologyPage(forget_surface):
                             messagebox.showerror(title='Error', message="Mass of water, food, and temperature rise cannot be negative")
                         else:
                             energy_value_food_sample = (4.2 * mass_water * temperature_rise) / mass_food * 1000
-                            result_label.config(text=f"Energy Value: {energy_value_food_sample:.2f} J/g")
+                            result_label.config(text=f"{energy_value_food_sample:.2f} J/g")
                     except ValueError:
                         messagebox.showerror(title='Error', message="Please enter valid numbers")
                 energy_value_food_sample_label = tk.Label(f4_energy_value_food_sample_frame, text='Energy Value Food Sample', bg="#212129", fg="#08edff", font=("Helvetica", 34))
